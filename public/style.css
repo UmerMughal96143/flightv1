@@ -1067,7 +1067,7 @@ body #staticBackdrop{
     }
  }
  input.error {
-    border-color: red;
+    border-color: red !important;
   }
 
 .input-feedback {

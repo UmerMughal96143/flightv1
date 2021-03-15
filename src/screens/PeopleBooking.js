@@ -38,6 +38,10 @@ const PeopleBooking = (props) => {
   const dispatch = useDispatch();
   const [sex, setSex] = useState("");
   const [checkboxStatus, setCheckBoxStatus] = useState(false);
+  const [copyDetailObject, setCopyDetailObject] = useState({
+    email: "",
+    mobile: "",
+  });
   const [NumberOfPersonsLimit, setNumberOfPersonsLimit] = useState(1);
   const onChangeFormHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -61,24 +65,17 @@ const PeopleBooking = (props) => {
     values.id = Math.floor(100000 + Math.random() * 900000);
 
     dispatch(peopleBookingAction(values));
-    // let peoplesData = []
-    // peoplesData.unshift(data)
-    // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
 
-    resetForm();
     setNumberOfPersonsLimit(NumberOfPersonsLimit + 1);
     localStorage.setItem("limit", NumberOfPersonsLimit + 1);
-    // setCheckBoxStatus(false);
+    setCheckBoxStatus(false);
     window.scrollTo(0, 0);
+    resetForm();
   };
 
   const updatePersonHandler = (values) => {
-    console.log(
-      "🚀 ~ file: PeopleBooking.js ~ line 76 ~ updatePersonHandler ~ values",
-      values
-    );
-    values.Person = values.firstName
-    values.id = editMan.id
+    values.Person = values.firstName;
+    values.id = editMan.id;
     dispatch(updatePersonAction(values));
     props.history.push("/appointmentsummary");
     // let peoplesData = []
@@ -88,43 +85,12 @@ const PeopleBooking = (props) => {
 
   useEffect(() => {
     if (checkboxStatus) {
-      setFormData({
+      setCopyDetailObject({
         email: peoplesData[0].email,
-
         mobile: peoplesData[0].mobile,
       });
     }
   }, [checkboxStatus]);
-
-  useEffect(() => {
-    if (editMan) {
-      setFormData({
-        firstName: editMan.firstName,
-        lastName: editMan.lastName,
-        dob: editMan.dob,
-        ethnicity: editMan.ethnicity,
-        email: editMan.email,
-        confirmEmail: editMan.confirmEmail,
-        mobile: editMan.mobile,
-        confirmMobile: editMan.confirmMobile,
-        passportIdCard: editMan.passportIdCard,
-        confIrmpassportIdCard: editMan.confIrmpassportIdCard,
-      });
-      setSex(editMan.sex);
-    }
-  }, [editMan]);
-
-  useEffect(() => {
-    if (isValidSubmitCheckout) {
-      console.log("Submit To Checkout ");
-    }
-  }, [isValidSubmitCheckout]);
-
-  useEffect(() => {
-    if (isValidNextPerson) {
-      console.log("NextPerson ");
-    }
-  }, [isValidNextPerson]);
 
   useEffect(() => {
     return () => {
@@ -135,14 +101,23 @@ const PeopleBooking = (props) => {
   return (
     <div class="container-fluid mb-4 p-0">
       <Formik
+        enableReinitialize
         initialValues={{
           firstName: editMan?.firstName ? editMan.firstName : "",
           lastName: editMan?.lastName ? editMan.lastName : "",
           dob: editMan?.dob ? editMan.dob : "",
           ethnicity: editMan?.ethnicity ? editMan.ethnicity : "",
-          email: editMan?.email ? editMan.email : "",
+          email: copyDetailObject.email
+            ? copyDetailObject.email
+            : editMan?.email
+            ? editMan.email
+            : "",
           confirmEmail: editMan?.confirmEmail ? editMan.confirmEmail : "",
-          mobile: editMan?.mobile ? editMan.mobile : "",
+          mobile: copyDetailObject.mobile
+            ? copyDetailObject.mobile
+            : editMan?.mobile
+            ? editMan.mobile
+            : "",
           confirmMobile: editMan?.confirmMobile ? editMan.confirmMobile : "",
           passportIdCard: editMan?.passportIdCard ? editMan.passportIdCard : "",
           confIrmpassportIdCard: editMan?.confIrmpassportIdCard
@@ -208,9 +183,15 @@ const PeopleBooking = (props) => {
             handleSubmit,
             isValid,
           } = props;
-          if (isValid) {
-            setIsValidSubmitCheckout(true);
-          }
+          console.log(
+            "🚀 ~ file: PeopleBooking.js ~ line 192 ~ PeopleBooking ~ isValid",
+            isValid
+          );
+          console.log(
+            "🚀 ~ file: PeopleBooking.js ~ line 192 ~ PeopleBooking ~ values",
+            values
+          );
+
           return (
             <Form>
               <section>
@@ -254,7 +235,11 @@ const PeopleBooking = (props) => {
                           <label for="inputEmail4">First name*</label>
                           <input
                             type="text"
-                            class="form-control"
+                            class={
+                              errors.firstName && touched.firstName
+                                ? "form-control error"
+                                : `form-control`
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
                             name="firstName"
@@ -270,7 +255,11 @@ const PeopleBooking = (props) => {
                           <label for="inputPassword4">Last name*</label>
                           <input
                             type="text"
-                            class="form-control"
+                            class={
+                              errors.lastName && touched.lastName
+                                ? "form-control error"
+                                : `form-control`
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
                             name="lastName"
@@ -287,7 +276,11 @@ const PeopleBooking = (props) => {
                         <label for="inputAddress">DOB*</label>
                         <input
                           type="date"
-                          class="form-control"
+                          class={
+                            errors.dob && touched.dob
+                              ? "form-control error"
+                              : `form-control`
+                          }
                           onChange={handleChange}
                           onBlur={handleBlur}
                           name="dob"
@@ -307,11 +300,16 @@ const PeopleBooking = (props) => {
                             onBlur={handleBlur}
                             name="sex"
                           >
-                            <option>---Please Select your sex---</option>
+                            <option value="">
+                              ---Please Select your sex---
+                            </option>
                             {sexArray.map((se) => {
                               return <option>{se}</option>;
                             })}
                           </select>
+                          {errors.sex && touched.sex && (
+                            <div className="input-feedback">{errors.sex}</div>
+                          )}
                         </div>
                       </div>
                       <div>
@@ -325,11 +323,18 @@ const PeopleBooking = (props) => {
                               onChange={handleChange}
                               onBlur={handleBlur}
                             >
-                              <option>---Please Select your sex---</option>
+                              <option value="">
+                                ---Please Select your sex---
+                              </option>
                               {sexArray.map((se) => {
                                 return <option>{se}</option>;
                               })}
                             </select>
+                            {errors.ethnicity && touched.ethnicity && (
+                              <div className="input-feedback">
+                                {errors.ethnicity}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -338,7 +343,11 @@ const PeopleBooking = (props) => {
                           <label for="inputCity">Email*</label>
                           <input
                             type="email"
-                            class="form-control"
+                            class={
+                              errors.email && touched.email
+                                ? "form-control error"
+                                : `form-control`
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
                             name="email"
@@ -355,7 +364,11 @@ const PeopleBooking = (props) => {
                           <label for="inputCity">Confirm Email*</label>
                           <input
                             type="emai"
-                            class="form-control"
+                            class={
+                              errors.confirmEmail && touched.confirmEmail
+                                ? "form-control error"
+                                : `form-control`
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.confirmEmail}
@@ -371,7 +384,11 @@ const PeopleBooking = (props) => {
                           <label for="inputCity">Mobile Number*</label>
                           <input
                             type="number"
-                            class="form-control"
+                            class={
+                              errors.mobile && touched.mobile
+                                ? "form-control error"
+                                : `form-control`
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
                             name="mobile"
@@ -390,7 +407,11 @@ const PeopleBooking = (props) => {
                           <label for="inputCity">Confirm Mobile Number*</label>
                           <input
                             type="number"
-                            class="form-control"
+                            class={
+                              errors.confirmMobile && touched.confirmMobile
+                                ? "form-control error"
+                                : `form-control`
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
                             name="confirmMobile"
@@ -406,7 +427,11 @@ const PeopleBooking = (props) => {
                           <label for="inputZip">Passport/ID card number*</label>
                           <input
                             type="text"
-                            class="form-control"
+                            class={
+                              errors.passportIdCard && touched.passportIdCard
+                                ? "form-control error"
+                                : `form-control`
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
                             name="passportIdCard"
@@ -425,7 +450,11 @@ const PeopleBooking = (props) => {
                         </label>
                         <input
                           type="text"
-                          class="form-control"
+                          class={
+                            errors.confIrmpassportIdCard && touched.confIrmpassportIdCard
+                              ? "form-control error"
+                              : `form-control`
+                          }
                           onChange={handleChange}
                           onBlur={handleBlur}
                           name="confIrmpassportIdCard"
@@ -447,33 +476,26 @@ const PeopleBooking = (props) => {
                       <div className="row">
                         {!editMan ? (
                           <>
-                            {NumberOfPersonsLimit ==
-                            localStorage.getItem("numberOfUsers") ? (
-                              ""
-                            ) : (
-                              <>
-                                <div class="col-6">
-                                  <button type="submit" class="Back-btn">
-                                    Back
-                                  </button>
-                                </div>
-                                <div class="col-6">
-                                  <button
-                                    type="submit"
-                                    onClick={() => {
-                                      handleSubmit();
-                                      localStorage.setItem(
-                                        "submitType",
-                                        "nextPerson"
-                                      );
-                                    }}
-                                    class="Next-btn"
-                                  >
-                                    Next Person
-                                  </button>
-                                </div>
-                              </>
-                            )}
+                            <div class="col-6">
+                              <button type="submit" class="Back-btn">
+                                Back
+                              </button>
+                            </div>
+                            <div class="col-6">
+                              <button
+                                type="submit"
+                                onClick={() => {
+                                  handleSubmit();
+                                  localStorage.setItem(
+                                    "submitType",
+                                    "nextPerson"
+                                  );
+                                }}
+                                class="Next-btn"
+                              >
+                                Next Person
+                              </button>
+                            </div>
 
                             <div class="col-12">
                               <button
