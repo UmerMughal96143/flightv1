@@ -25,7 +25,7 @@ const BookingCOmplete = () => {
         <section>
           <div class="Booking-Complete-wrapper">
             <PDFDownloadLink
-              document={<PdfDocument peoples={postedData.savedform.peoples} />}
+              document={<PdfDocument peoples={postedData?.savedform?.peoples} />}
               fileName="flight_details.pdf"
               style={{
                 textDecoration: "none",
@@ -77,7 +77,7 @@ const BookingCOmplete = () => {
               </div>
               <div class="Booking-Complete-person-data">
                 {postedData &&
-                  postedData.savedform.peoples.map((peo) => {
+                  postedData?.savedform?.peoples.map((peo) => {
                     return (
                       <div class="Booking-Complete-person-data-box">
                         <div class="Booking-Complete-person-data-box-header">

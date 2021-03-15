@@ -1123,3 +1123,22 @@ body #staticBackdrop{
     color: red;
     margin-top: .25rem
   }
+
+
+  .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #1E9190;
+    box-shadow:0 0 3px #1E9190;
+}
+.custom-checkbox .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow:0 0 3px red;
+}
+.custom-checkbox .custom-control-input:active ~ .custom-control-label::before {
+    box-shadow:0 0 3px red;
+}
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0.25rem;
+}
+.custom-control-label::before {
+    background-color:#fff;
+    border:1px solid #1E9190;
+}
