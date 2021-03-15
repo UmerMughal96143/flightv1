@@ -56,98 +56,34 @@ const PeopleBooking = (props) => {
     props.history.push("/termsconditions");
   };
 
-  const nextPersonHandler = (values,resetForm) => {
+  const nextPersonHandler = (values, resetForm) => {
+    values.Person = values.firstName;
+    values.id = Math.floor(100000 + Math.random() * 900000);
 
-     
-      dispatch(peopleBookingAction(values));
-      // let peoplesData = []
-      // peoplesData.unshift(data)
-      // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
+    dispatch(peopleBookingAction(values));
+    // let peoplesData = []
+    // peoplesData.unshift(data)
+    // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
 
-      resetForm()
-      setNumberOfPersonsLimit(NumberOfPersonsLimit + 1);
-      localStorage.setItem("limit", NumberOfPersonsLimit + 1);
-      // setCheckBoxStatus(false);
-      window.scrollTo(0, 0);
-    
+    resetForm();
+    setNumberOfPersonsLimit(NumberOfPersonsLimit + 1);
+    localStorage.setItem("limit", NumberOfPersonsLimit + 1);
+    // setCheckBoxStatus(false);
+    window.scrollTo(0, 0);
   };
 
-  const updatePersonHandler = () => {
-    if (email) {
-      var validator = require("validator");
-      if (!validator.isEmail(email)) {
-        errorNotification("Enter Valid Email");
-        return;
-      }
-    }
-    if (
-      firstName &&
-      lastName &&
-      dob &&
-      sex &&
-      email &&
-      confirmEmail &&
-      mobile &&
-      confirmMobile &&
-      passportIdCard &&
-      confIrmpassportIdCard &&
-      sex
-    ) {
-      let data = {
-        firstName,
-        lastName,
-        dob,
-        sex,
-        email,
-        confirmEmail,
-        mobile,
-        confirmMobile,
-        passportIdCard,
-        confIrmpassportIdCard,
-        sex,
-        Person: editMan.Person,
-        id: editMan.id,
-      };
-      dispatch(updatePersonAction(data));
-      props.history.push("/appointmentsummary");
-      // let peoplesData = []
-      // peoplesData.unshift(data)
-      // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
-    } else {
-      if (!firstName || !lastName || !dob || !sex) {
-        errorNotification("Fill Required Fields");
-        return;
-      }
-      if (sex == "---Please Select your sex---") {
-        errorNotification("Select Sex");
-        return;
-      }
-      if (!email) {
-        errorNotification("Enter Email");
-        return;
-      }
-
-      if (email !== confirmEmail) {
-        errorNotification("Email does not match");
-        return;
-      }
-      if (!mobile) {
-        errorNotification("Enter Mobile Number");
-        return;
-      }
-      if (mobile !== confirmMobile) {
-        errorNotification("Mobile does not match");
-        return;
-      }
-      if (!passportIdCard) {
-        errorNotification("Enter Id Number");
-        return;
-      }
-      if (passportIdCard !== confIrmpassportIdCard) {
-        errorNotification("Id number does not match");
-        return;
-      }
-    }
+  const updatePersonHandler = (values) => {
+    console.log(
+      "🚀 ~ file: PeopleBooking.js ~ line 76 ~ updatePersonHandler ~ values",
+      values
+    );
+    values.Person = values.firstName
+    values.id = editMan.id
+    dispatch(updatePersonAction(values));
+    props.history.push("/appointmentsummary");
+    // let peoplesData = []
+    // peoplesData.unshift(data)
+    // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
   };
 
   useEffect(() => {
@@ -191,35 +127,39 @@ const PeopleBooking = (props) => {
   }, [isValidNextPerson]);
 
   useEffect(() => {
-    
     return () => {
-      localStorage.removeItem('submitType')
-    }
-  }, [])
+      localStorage.removeItem("submitType");
+    };
+  }, []);
 
   return (
     <div class="container-fluid mb-4 p-0">
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
-          dob: "",
-          ethnicity: "",
+          firstName: editMan?.firstName ? editMan.firstName : "",
+          lastName: editMan?.lastName ? editMan.lastName : "",
+          dob: editMan?.dob ? editMan.dob : "",
+          ethnicity: editMan?.ethnicity ? editMan.ethnicity : "",
           email: editMan?.email ? editMan.email : "",
-          confirmEmail: "",
+          confirmEmail: editMan?.confirmEmail ? editMan.confirmEmail : "",
           mobile: editMan?.mobile ? editMan.mobile : "",
-          confirmMobile: "",
-          passportIdCard: "",
-          confIrmpassportIdCard: "",
-          sex: "",
-          ethnicity: "",
+          confirmMobile: editMan?.confirmMobile ? editMan.confirmMobile : "",
+          passportIdCard: editMan?.passportIdCard ? editMan.passportIdCard : "",
+          confIrmpassportIdCard: editMan?.confIrmpassportIdCard
+            ? editMan.confIrmpassportIdCard
+            : "",
+          sex: editMan?.sex ? editMan.sex : "",
+          ethnicity: editMan?.ethnicity ? editMan.ethnicity : "",
         }}
         onSubmit={async (values, { resetForm }) => {
           if (localStorage.getItem("submitType") == "nextPerson") {
-            nextPersonHandler(values,resetForm)
+            nextPersonHandler(values, resetForm);
           }
           if (localStorage.getItem("submitType") == "proceedToCheckout") {
             submitCheckout(values);
+          }
+          if (localStorage.getItem("submitType") == "updatePerson") {
+            updatePersonHandler(values);
           }
 
           // console.log("object1");
@@ -268,10 +208,6 @@ const PeopleBooking = (props) => {
             handleSubmit,
             isValid,
           } = props;
-          console.log(
-            "🚀 ~ file: PeopleBooking.js ~ line 410 ~ PeopleBooking ~ values",
-            values
-          );
           if (isValid) {
             setIsValidSubmitCheckout(true);
           }
@@ -560,7 +496,7 @@ const PeopleBooking = (props) => {
                             <button
                               class="Submit-to-checkout"
                               onClick={() => {
-                                updatePersonHandler();
+                                handleSubmit();
                                 localStorage.setItem(
                                   "submitType",
                                   "updatePerson"

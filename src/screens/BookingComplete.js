@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import Pdf from "react-to-pdf";
+import Pdf from "react-to-pdf";
 
 const BookingCOmplete = () => {
   const ref = React.createRef();
@@ -28,19 +28,14 @@ const BookingCOmplete = () => {
             <div class="subheading">
               <p>Appointment Confirmation</p>
               <div class="Save-PDF">
-                {/* <Pdf targetRef={ref} filename="flight.pdf">
+                <Pdf targetRef={ref} filename="flight.pdf">
                   {({ toPdf }) => (
-                    <button
-                      type="submit"
-                      class="Save-PDF-btn"
-                      onClick={toPdf}
-                     
-                    >
+                    <button type="submit" class="Save-PDF-btn" onClick={toPdf}>
                       <i class="fas fa-file-pdf"></i> Save booking confirmation
                       as a PDF
                     </button>
                   )}
-                </Pdf> */}
+                </Pdf>
               </div>
             </div>
             <div class="Booking-Complete-Inner-wrapper" ref={ref}>
