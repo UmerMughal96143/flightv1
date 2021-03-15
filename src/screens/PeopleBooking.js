@@ -43,9 +43,7 @@ const PeopleBooking = (props) => {
     mobile: "",
   });
   const [NumberOfPersonsLimit, setNumberOfPersonsLimit] = useState(1);
-  const onChangeFormHandler = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+ 
 
   const { peoplesData, editMan } = useSelector((state) => state.Form);
 
