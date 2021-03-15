@@ -66,8 +66,12 @@ export const postAllFormsData = (data , history) => async (dispatch) => {
     
   try {
     const res =  await axios.post('http://localhost:3008/flight/api/v1/form' , data)
-    dispatch({ type: "UPDATE_PERSON", payload: data });
+    dispatch({ type: "POST_FORM_DATA_SUCCESS", payload: res.data });
+    localStorage.setItem('postedData' , JSON.stringify(res.data))
     history.push("/bookingcomplete");
-
+    localStorage.removeItem("limit")
+    localStorage.removeItem("peoples")
+    localStorage.removeItem("numberOfUsers")
+    localStorage.removeItem("form")
   } catch (error) {}
 };

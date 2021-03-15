@@ -15,8 +15,6 @@ import TestLocation from "./screens/TestLocation";
 import UserDetail from "./screens/UserDetail";
 
 const App = () => {
-  
-
   return (
     <>
       <Router>

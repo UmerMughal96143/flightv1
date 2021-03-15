@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { errorNotification } from "../utils/notification";
 
@@ -21,6 +21,11 @@ const TermsConditions = ({history}) => {
     }
     history.push('/appointmentsummary')
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+  },[])
   return (
     <div>
       <section>

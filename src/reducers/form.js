@@ -7,6 +7,9 @@ const iniitialState = {
     ? JSON.parse(localStorage.getItem("peoples"))
     : [],
   editMan: null,
+  postedData: localStorage.getItem("postedData")
+    ? JSON.parse(localStorage.getItem("postedData"))
+    : null,
 };
 
 export const Form = (state = iniitialState, action) => {
@@ -93,6 +96,11 @@ export const Form = (state = iniitialState, action) => {
         editMan: null,
       };
 
+    case "POST_FORM_DATA_SUCCESS":
+      return {
+        ...state,
+        postedData: action.payload,
+      };
     default:
       return {
         ...state,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -50,6 +50,11 @@ const Suggestions = ({ history }) => {
   const datValueFromPicker = (data) => {
     setStartDate(data.valueText);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+  },[])
   return (
     <div>
       <div className="wrapper">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { errorNotification } from "../utils/notification";
 import { removePersons, searchPersonForEdit } from "../actions/form";
@@ -36,6 +36,11 @@ const AppointmentSummary = ({ history }) => {
     dispatch(searchPersonForEdit(id))
     history.push('/peoplebooking')
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+  },[])
   return (
     <div>
       <section class="Appointment-Summary">

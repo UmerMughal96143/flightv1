@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import {useDispatch} from 'react-redux'
-import {testlocation} from '../actions/form'
-
+import { useDispatch } from "react-redux";
+import { testlocation } from "../actions/form";
 
 const TestLocation = () => {
-  const dispatch = useDispatch() ;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -32,9 +35,12 @@ const TestLocation = () => {
                 from <span class="Location-amount">£99</span>
               </p>
               <div class="see-location-btn-div">
-              <Link to='/appointment' onClick={() => dispatch(testlocation('Home Visit'))}>
-                <button class="Submit-to-checkout">Select Home Visit</button>
-              </Link>
+                <Link
+                  to="/appointment"
+                  onClick={() => dispatch(testlocation("Home Visit"))}
+                >
+                  <button class="Submit-to-checkout">Select Home Visit</button>
+                </Link>
               </div>
             </div>
             <div class="Location-box">
@@ -52,9 +58,14 @@ const TestLocation = () => {
                 from <span class="Location-amount">£66</span>
               </p>
               <div class="see-location-btn-div">
-              <Link to='/appointment' onClick={() => dispatch(testlocation('Drive through'))}>
-                <button class="Submit-to-checkout">Select Drive through</button>
-              </Link>
+                <Link
+                  to="/appointment"
+                  onClick={() => dispatch(testlocation("Drive through"))}
+                >
+                  <button class="Submit-to-checkout">
+                    Select Drive through
+                  </button>
+                </Link>
               </div>
               <div class="drive-gide">
                 <p>
@@ -62,10 +73,10 @@ const TestLocation = () => {
                   locations
                 </p>
               </div>
-              
+
               <div class="see-location-modle">
                 {/* <!-- Button trigger modal --> */}
-                
+
                 <button
                   type="button"
                   class="Submit-to-checkout"
