@@ -143,7 +143,7 @@ const Appointment = ({ history }) => {
             </div>
           )}
 
-          <div class="form-group mt-5">
+          <div class="form-group">
             <p class="appointment-form-heading">
               How many people will require a PCR test at the appointment?
             </p>
@@ -166,7 +166,7 @@ const Appointment = ({ history }) => {
             </div>
           </div>
           <div class="row form_buttons">
-            <div class="col-md-4 col-12 ml-auto">
+            <div class="col-md-4 col-12 ml-auto appointment">
               <button
                 type="submit"
                 onClick={(e) => continueHandler(e)}

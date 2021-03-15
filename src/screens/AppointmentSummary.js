@@ -178,7 +178,7 @@ const AppointmentSummary = ({ history }) => {
               <div class="accept-turm-condition col-md-8 col-12 footer-btn pl-0">
                 <button
                   type="button"
-                  class="Submit-to-checkout" onClick={(e) => proceedToSummaryHandler(e)} > Continue to Payment  </button>
+                  class="Submit-to-checkout appointmentsummary" onClick={(e) => proceedToSummaryHandler(e)} > Continue to Payment  </button>
               </div>
               <div class="back-btn-div col-md-4 col-12 footer-btn pr-0">
                 <button type="submit" class="Back-btn">

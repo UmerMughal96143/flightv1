@@ -87,12 +87,12 @@ const TermsConditions = ({history}) => {
               <div className="col-md-8 col-12 ml-auto flight-time-footer-buttons p-0">
                 <div className="row m-0">
                 <div class="accept-turm-condition col-md-9 col-12 p-0">
-                    <button class="Submit-to-checkout" onClick={(e) => proceedToSummaryHandler(e)}>
+                    <button class="Submit-to-checkout terms" onClick={(e) => proceedToSummaryHandler(e)}>
                       Accept and proceed to summary
                     </button>
                 </div>
                 <div class="back-btn-div col-md-3 col-12 pr-0">
-                  <button type="submit" class="Back-btn">
+                  <button type="submit" class="Back-btn terms">
                     Back
                   </button>
                 </div>

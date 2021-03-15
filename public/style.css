@@ -40,8 +40,16 @@ button:active{
 .row{
     align-items: baseline;
 }
-.toggles-bars{
+/* .toggles-bars{
     left: 34px;
+} */
+img.dark-logo {
+    margin-bottom: 11px;
+    margin-top: 20px;
+}
+.toggles-bars {
+    left: 25px;
+    bottom: 36px;
 }
 .toggles-bars i{
     color: white;
@@ -69,9 +77,9 @@ header .main-navbar {
     max-width: 666px;
     margin: 0 auto;
 }
-body .container-fluid{
+/* body .container-fluid{
     padding: 26px 25px;
-}
+} */
 body input,select:focus{
     outline: none;
 }
@@ -169,17 +177,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-image: linear-gradient(90deg, #0491A5, #8DCCBE);
     height: 98px;
 }
+.main-navbar-1 {
+    background: #fff;
+}
 .main-navbar button{
     margin-top: -15px;
 }
-/* .main-logo img{
-    height: 100px;
-} */
-body .main-logo{
+body .main-logo {
+    margin: 0 auto;
+    width: 230px;
+    padding: 0px;
+    text-align: center;
+}
+/* body .main-logo{
     margin: 0 auto;
     width: 41%;
     text-align: center;
-}
+} */
 .header-white{
     background-color: white;
 }
@@ -350,6 +364,9 @@ body .main-logo{
     border: 1px solid #1E9190;
     width: 100%;
     padding: 10px 0px;
+    background-image: linear-gradient(
+45deg
+, #018195, #7CC1B1);
 }
 .Next-btn:hover{
     border: 1px solid #1E9190;
@@ -395,11 +412,12 @@ body form select{
     text-align: center;
 }
 .appointment-form-heading{
-    font-family: "Poppins-SemiBold";
+    /* font-family: "Poppins-SemiBold"; */
+    font-weight: 600;
     font-size: 14px;
 }
 .Find-Address-btn .tickets-button{
-    padding: 9px 12px;
+    padding: 9px 5px;
     margin: 0px !important;
 }
 .appointment-user-address-row .Find-Address-btn {
@@ -536,7 +554,7 @@ body .modal-content {
     background-color: #1e9190;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.2);
-    border-radius: .3rem;
+    border-radius: 12px;
     outline: 0;
     color: white;
     text-align: left;
@@ -547,10 +565,10 @@ body #staticBackdrop{
 .modal-title{
     color:  white;
     font-size: 18px;
-    font-family: "Poppins-Bold";
+    /* font-family: "Poppins-Bold"; */
 }
 .modal-body ul li{
-    font-family: "Poppins-Medium";
+    /* font-family: "Poppins-Medium"; */
     font-size: 16px;
 }
 /* Test-Location */
@@ -1038,6 +1056,37 @@ body #staticBackdrop{
     }
 }
 @media screen and (max-width:375px){
+    .appointment-header{
+        margin: 20px 0px;
+    }
+    .Find-Address-btn .tickets-button{
+        padding: 9px 5px;
+    }
+    .appointment-heading{
+        margin-bottom: 70px;
+        margin-top: 70px;
+    }
+    .Next-btn {
+        width: 100%;
+    }
+    .appointment .Next-btn {
+        width: 50%;
+    }
+    .form_buttons {
+        text-align: end;
+    }
+    .appointment-form-heading{
+        max-width: 250px;
+    }
+    .Submit-to-checkout.terms {
+        width: 80%;
+    }
+     .Back-btn.terms {
+        width: 50%;
+    }
+    .user-detail-footer-btns {
+        margin: 0px;
+    }
     .Location-block-wrapper {
         padding: 12px 0 0;
     }
