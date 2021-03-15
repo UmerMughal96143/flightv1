@@ -49,105 +49,27 @@ const PeopleBooking = (props) => {
 
   const submitCheckout = (values, resetForm) => {
     values.Person = values.firstName;
+    values.id = Math.floor(100000 + Math.random() * 900000);
     dispatch(peopleBookingAction(values));
-    // resetForm()
+    setNumberOfPersonsLimit(NumberOfPersonsLimit + 1);
+    localStorage.setItem("limit", NumberOfPersonsLimit);
     props.history.push("/termsconditions");
   };
 
-  const nextPersonHandler = (e) => {
-    e.preventDefault();
-    if (email) {
-      var validator = require("validator");
-      if (!validator.isEmail(email)) {
-        errorNotification("Enter Valid Email");
-        return;
-      }
-    }
-    if (
-      firstName &&
-      lastName &&
-      dob &&
-      sex &&
-      email &&
-      confirmEmail &&
-      mobile &&
-      confirmMobile &&
-      passportIdCard &&
-      confIrmpassportIdCard &&
-      sex
-    ) {
-      let data = {
-        firstName,
-        lastName,
-        dob,
-        sex,
-        email,
-        confirmEmail,
-        mobile,
-        confirmMobile,
-        passportIdCard,
-        confIrmpassportIdCard,
-        sex,
-        Person: firstName,
-        id: Math.floor(100000 + Math.random() * 900000),
-      };
-      dispatch(peopleBookingAction(data));
+  const nextPersonHandler = (values,resetForm) => {
+
+     
+      dispatch(peopleBookingAction(values));
       // let peoplesData = []
       // peoplesData.unshift(data)
       // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
 
-      setFormData({
-        firstName: "",
-        lastName: "",
-        dob: "",
-        ethnicity: "",
-        email: "",
-        confirmEmail: "",
-        mobile: "",
-        confirmMobile: "",
-        passportIdCard: "",
-        confIrmpassportIdCard: "",
-      });
-      setSex("---Please Select your sex---");
+      resetForm()
       setNumberOfPersonsLimit(NumberOfPersonsLimit + 1);
       localStorage.setItem("limit", NumberOfPersonsLimit + 1);
-      setCheckBoxStatus(false);
+      // setCheckBoxStatus(false);
       window.scrollTo(0, 0);
-    } else {
-      if (!firstName || !lastName || !dob || !sex) {
-        errorNotification("Fill Required Fields");
-        return;
-      }
-      if (sex == "---Please Select your sex---") {
-        errorNotification("Select Sex");
-        return;
-      }
-      if (!email) {
-        errorNotification("Enter Email");
-        return;
-      }
-
-      if (email !== confirmEmail) {
-        errorNotification("Email does not match");
-        return;
-      }
-      if (!mobile) {
-        errorNotification("Enter Mobile Number");
-        return;
-      }
-      if (mobile !== confirmMobile) {
-        errorNotification("Mobile does not match");
-        return;
-      }
-      if (!passportIdCard) {
-        errorNotification("Enter Id Number");
-        return;
-      }
-      if (passportIdCard !== confIrmpassportIdCard) {
-        errorNotification("Id number does not match");
-        return;
-      }
-    }
+    
   };
 
   const updatePersonHandler = () => {
@@ -268,6 +190,13 @@ const PeopleBooking = (props) => {
     }
   }, [isValidNextPerson]);
 
+  useEffect(() => {
+    
+    return () => {
+      localStorage.removeItem('submitType')
+    }
+  }, [])
+
   return (
     <div class="container-fluid mb-4 p-0">
       <Formik
@@ -286,14 +215,12 @@ const PeopleBooking = (props) => {
           ethnicity: "",
         }}
         onSubmit={async (values, { resetForm }) => {
-          if(localStorage.getItem('submitType') == 'nextPerson'){
-            console.log('next Person')
+          if (localStorage.getItem("submitType") == "nextPerson") {
+            nextPersonHandler(values,resetForm)
           }
-          if(localStorage.getItem('submitType') == 'proceedToCheckout'){
-            console.log('proceedToCheckout')
+          if (localStorage.getItem("submitType") == "proceedToCheckout") {
             submitCheckout(values);
           }
-
 
           // console.log("object1");
         }}
