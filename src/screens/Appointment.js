@@ -165,19 +165,39 @@ const Appointment = ({ history }) => {
               </select>
             </div>
           </div>
+          <div className="form-group ">
+              <p className="mb-0">
+                <label>Street Address Line 1</label>
+              </p>
+              <input className="form-control" type="" value="" />
+          </div>
           <div className="form-group">
-              <div className="select-wrapper">
-                <label>Sex</label>
-                <div className="selectdiv">
-                    <select>
-                        <option>---Please Select Sex---</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                    </select> 
-                </div>
-                <small>Required by Public Health Authorities</small>
-              </div>
+              <p className="mb-0">
+                  <label>Street Address Line 2</label>
+              </p>
+              <input className="form-control" type="" value="" />
+          </div>
+          <div className="form-group">
+              <p className="mb-0">
+                  <label>Street Address Line 3</label>
+              </p>
+              <input className="form-control" type="" value="" />
+          </div>
+          <div className="form-group">
+              <p className="mb-0">
+                <label>City</label>
+              </p>
+              <input className="form-control" type="" value="" />
+          </div>
+          <div className="form-group">
+              <p className="mb-0"><label>Country</label></p>
+              <input className="form-control" type="" value="" />
+          </div>
+          <div className="form-group">
+              <p className="mb-0">
+                <label>Postcode</label>
+              </p>
+              <input className="form-control" type="" value="" />
           </div>
           <div class="row form_buttons">
             <div class="col-md-4 col-6 mt-2 ml-auto appointment">
