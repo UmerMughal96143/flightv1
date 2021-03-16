@@ -80,9 +80,7 @@ const Appointment = ({ history }) => {
         address3: finalAddressArrayyy[dropDownAddressIndex].line_3
           ? finalAddressArrayyy[dropDownAddressIndex].line_3
           : "",
-        city: finalAddressArrayyy[dropDownAddressIndex].line_2
-          ? finalAddressArrayyy[dropDownAddressIndex].line_2
-          : "",
+        city: addressResult.town ? addressResult.town : "",
         country: finalAddressArrayyy[dropDownAddressIndex].country
           ? finalAddressArrayyy[dropDownAddressIndex].country
           : "",
