@@ -101,12 +101,7 @@ const TestLocation = () => {
                         <h5 class="modal-title" id="staticBackdropLabel">
                           Drive Through Test Centres
                         </h5>
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
+                        <i type="button" class="fas fa-times" data-bs-dismiss="modal" aria-label="Close"></i>
                       </div>
                       <div class="modal-body">
                         <ul>

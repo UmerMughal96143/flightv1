@@ -19,7 +19,7 @@
     src: url(asstes/Poppins/Poppins-Regular.ttf);
 }
 footer{
-    position: fixed;
+    position: sticky;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -30,9 +30,6 @@ footer{
 }
 footer .site-container{
     margin: 0px auto;
-}
-.wrapper{
-    margin-bottom: 100px;
 }
 button:active{
     outline: none !important;
@@ -370,12 +367,24 @@ body .main-logo {
 }
 .Next-btn:hover{
     border: 1px solid #1E9190;
-    color: #1E9190;
+    color: #ffffff;
     border-radius: 5px;
     width: 100%;
     padding: 10px 0px;
     background-color: white;
 }
+
+.mbsc-ios.mbsc-form-control-wrapper.mbsc-ltr:after, .mbsc-ios.mbsc-form-control-wrapper.mbsc-ltr:before {
+    right: 0;
+    left: 1em;
+    border: none;
+}
+
+input.mbsc-ios.mbsc-ltr.mbsc-textfield.mbsc-textfield-underline {
+    border-radius: 6px;
+    width: 100%;
+}
+
 form label{
     font-family: "Poppins-Medium";
     font-size: 16px;
@@ -388,7 +397,7 @@ body form select{
     border: 1px solid #1e9190 !important;
 }
 .Submit-to-checkout{
-    border: 1px solid white;
+    border: 2.5px solid white;
     color: white;
     border-radius: 5px;
     width: 100%;
@@ -1007,6 +1016,9 @@ body #staticBackdrop{
 /* Booking Complete */
 
 @media screen and (max-width:768px){
+    .amount-due-points{
+        padding: 0px 0px;
+    }
     .breaking-news-box {
         background-color: #1E9190;
         padding: 26px 25px;
@@ -1069,9 +1081,6 @@ body #staticBackdrop{
     .Next-btn {
         width: 100%;
     }
-    .appointment .Next-btn {
-        width: 50%;
-    }
     .form_buttons {
         text-align: end;
     }
@@ -1079,7 +1088,7 @@ body #staticBackdrop{
         max-width: 250px;
     }
     .Submit-to-checkout.terms {
-        width: 80%;
+        width: 100%;
     }
      .Back-btn.terms {
         width: 50%;

@@ -180,12 +180,12 @@ const AppointmentSummary = ({ history }) => {
         <div className="site-container form_buttons">
           <div class="Appointment-modle-footer col-md-6 col-12 ml-auto pl-0 pr-0">
             <div className="row flight-time-footer-buttons ml-0">
-              <div class="accept-turm-condition col-md-8 col-12 footer-btn pl-0">
+              <div class="accept-turm-condition col-md-8 col-8 footer-btn pl-0 m-auto">
                 <button
                   type="button"
                   class="Submit-to-checkout appointmentsummary" onClick={(e) => proceedToSummaryHandler(e)} > Continue to Payment  </button>
               </div>
-              <div class="back-btn-div col-md-4 col-12 footer-btn pr-0">
+              <div class="back-btn-div col-md-4 col-6 footer-btn pr-0 m-auto">
                 <button type="submit" class="Back-btn">
                   Back
                 </button>

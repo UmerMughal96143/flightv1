@@ -73,7 +73,7 @@ const Suggestions = ({ history }) => {
               <p class="appointment-form-heading">
                 What is your departure date?
               </p>
-              <div class="suggestion-date-row row">
+              <div class="suggestion-date-row">
                 {/* <div class="form-group col-12 site-input">
                   <DatePicker
                     selected={startDate}

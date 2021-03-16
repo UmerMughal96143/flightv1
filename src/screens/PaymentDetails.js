@@ -117,12 +117,17 @@ const PaymentDetails = ({ history }) => {
         </div>
       </div>
       <footer>
-        <div className="site-container">
-          <div className="row form_buttons flight-time-footer-buttons">
-            <div className="col-md-6 col-12 row ml-auto">
-              <div class="col-md-7 col-12 ml-auto pr-0">
+        <div className="site-container form_buttons">
+          <div className="Appointment-modle-footer col-md-6 col-12 ml-auto pl-0 pr-0">
+            <div className="row flight-time-footer-buttons ml-0">
+              <div class="accept-turm-condition col-md-8 col-8 footer-btn pl-0 m-auto">
                 <button class="Submit-to-checkout" onClick={paymentHandler}>
                   Complete Payment
+                </button>
+              </div>
+              <div className="back-btn-div col-md-4 col-6 footer-btn pr-0 m-auto">
+                <button type="submit" class="Back-btn">
+                  Back
                 </button>
               </div>
             </div>

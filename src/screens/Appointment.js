@@ -86,7 +86,7 @@ const Appointment = ({ history }) => {
             Please Select which address you would like to have appointed
           </p>
           <div class="appointment-user-address-row row">
-            <div class="form-group col-md-7 col-8">
+            <div class="form-group col-md-8 col-7">
               <input
                 type="text"
                 class="form-control"
@@ -96,7 +96,7 @@ const Appointment = ({ history }) => {
                 value={postcode.toUpperCase()}
               />
             </div>
-            <div class="form-group col-md-4 col-4 Find-Address-btn">
+            <div class="form-group col-md-4 col-5 Find-Address-btn pl-2">
               <button
                 class="tickets-button"
                 onClick={(e) => findAddressHandler(e)}
@@ -131,7 +131,7 @@ const Appointment = ({ history }) => {
 
           {isDropDownAddressSelected && (
             <div class="appointment-user-address-row row">
-              <div class="form-group col-8">
+              <div class="form-group col-12 mt-2">
                 <input
                   type="text"
                   class="form-control"
@@ -166,7 +166,7 @@ const Appointment = ({ history }) => {
             </div>
           </div>
           <div class="row form_buttons">
-            <div class="col-md-4 col-12 ml-auto appointment">
+            <div class="col-md-4 col-6 mt-2 ml-auto appointment">
               <button
                 type="submit"
                 onClick={(e) => continueHandler(e)}
