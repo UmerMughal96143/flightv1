@@ -7,10 +7,9 @@ import { errorNotification } from "../utils/notification";
 
 const Appointment = ({ history }) => {
   const [addressResult, setAddressResult] = useState("");
-  const [dropDownAddress, setDropdownAddress] = useState("");
-  const [isDropDownAddressSelected, setIsDropDownAddressSelected] = useState(
-    false
-  );
+
+  const [dropDownAddressIndex, setDropdownAddressIndex] = useState("");
+
   const [isAddressSuccess, setAddressSuccess] = useState(false);
 
   const [numberOfPeoples, setNumberOfPeoples] = useState("");
@@ -18,6 +17,20 @@ const Appointment = ({ history }) => {
   const [finalAddressArrayyy, setFinalAddressArray] = useState([]);
 
   const [postcode, setPostCode] = useState("");
+
+  const [formData, setFormData] = useState({
+    address1: "",
+    address2: "",
+    address3: "",
+    city: "",
+    country: "",
+    postCode: "",
+  });
+  const { address1, address2, address3, city, country, postCode } = formData;
+
+  const onFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const dispatch = useDispatch();
 
@@ -28,6 +41,7 @@ const Appointment = ({ history }) => {
       finalAddressArray = addressResult.delivery_points.map((add) => ({
         ...add,
         townCity: addressResult.town + addressResult.traditional_county,
+        country: addressResult.traditional_county,
       }));
 
       setFinalAddressArray(finalAddressArray);
@@ -54,11 +68,34 @@ const Appointment = ({ history }) => {
     }
   };
 
+  useEffect(() => {
+    if (dropDownAddressIndex) {
+      setFormData({
+        address1: finalAddressArrayyy[dropDownAddressIndex].line_1
+          ? finalAddressArrayyy[dropDownAddressIndex].line_1
+          : "",
+        address2: finalAddressArrayyy[dropDownAddressIndex].line_2
+          ? finalAddressArrayyy[dropDownAddressIndex].line_2
+          : "",
+        address3: finalAddressArrayyy[dropDownAddressIndex].line_3
+          ? finalAddressArrayyy[dropDownAddressIndex].line_3
+          : "",
+        city: finalAddressArrayyy[dropDownAddressIndex].line_2
+          ? finalAddressArrayyy[dropDownAddressIndex].line_2
+          : "",
+        country: finalAddressArrayyy[dropDownAddressIndex].country
+          ? finalAddressArrayyy[dropDownAddressIndex].country
+          : "",
+        postCode: postcode ? postcode : "",
+      });
+    }
+  }, [dropDownAddressIndex]);
+
   const continueHandler = (e) => {
     e.preventDefault();
-    if (dropDownAddress && postcode && numberOfPeoples) {
+    if (dropDownAddressIndex && postcode && numberOfPeoples) {
       let formData = {
-        address: dropDownAddress,
+        address: dropDownAddressIndex,
         postcode: postcode,
         numberOfPeoples: numberOfPeoples,
       };
@@ -110,16 +147,15 @@ const Appointment = ({ history }) => {
             <div class="selectdiv">
               <select
                 onChange={(e) => {
-                  setDropdownAddress(e.target.value);
-                  setIsDropDownAddressSelected(true);
+                  setDropdownAddressIndex(e.target.value);
                 }}
                 required
               >
                 <option>---Please Select your address---</option>
                 {finalAddressArrayyy &&
-                  finalAddressArrayyy.map((state) => {
+                  finalAddressArrayyy.map((state, index) => {
                     return (
-                      <option>
+                      <option key={index} value={index}>
                         {state.line_1} {state.line_2} {state.organisation_name}{" "}
                         {state.townCity}{" "}
                       </option>
@@ -129,19 +165,9 @@ const Appointment = ({ history }) => {
             </div>
           )}
 
-          {isDropDownAddressSelected && (
-            <div class="appointment-user-address-row row">
-              <div class="form-group col-12 mt-2">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Address"
-                  value={dropDownAddress.toUpperCase()}
-                  onChange={(e) => setDropdownAddress(e.target.value)}
-                />
-              </div>
-            </div>
-          )}
+          {/* {isDropDownAddressSelected && (
+            
+          )} */}
 
           <div class="form-group">
             <p class="appointment-form-heading">
@@ -155,7 +181,7 @@ const Appointment = ({ history }) => {
                 }}
                 required
               >
-                <option>---Please Select number of people---</option>
+                <option value="">---Please Select number of people---</option>
                 {numberOfPeoplesData.map((peo) => {
                   return <option>{peo}</option>;
                 })}
@@ -166,38 +192,70 @@ const Appointment = ({ history }) => {
             </div>
           </div>
           <div className="form-group ">
-              <p className="mb-0">
-                <label>Street Address Line 1</label>
-              </p>
-              <input className="form-control" type="" value="" />
+            <p className="mb-0">
+              <label>Street Address Line 1</label>
+            </p>
+            <input
+              className="form-control"
+              name="address1"
+              value={address1}
+              onChange={(e) => onFormChange(e)}
+            />
           </div>
           <div className="form-group">
-              <p className="mb-0">
-                  <label>Street Address Line 2</label>
-              </p>
-              <input className="form-control" type="" value="" />
+            <p className="mb-0">
+              <label>Street Address Line 2</label>
+            </p>
+            <input
+              className="form-control"
+              name="address2"
+              value={address2}
+              onChange={(e) => onFormChange(e)}
+            />
           </div>
           <div className="form-group">
-              <p className="mb-0">
-                  <label>Street Address Line 3</label>
-              </p>
-              <input className="form-control" type="" value="" />
+            <p className="mb-0">
+              <label>Street Address Line 3</label>
+            </p>
+            <input
+              className="form-control"
+              name="address3"
+              value={address3}
+              onChange={(e) => onFormChange(e)}
+            />
           </div>
           <div className="form-group">
-              <p className="mb-0">
-                <label>City</label>
-              </p>
-              <input className="form-control" type="" value="" />
+            <p className="mb-0">
+              <label>City</label>
+            </p>
+            <input
+              className="form-control"
+              name="city"
+              value={city}
+              onChange={(e) => onFormChange(e)}
+            />
           </div>
           <div className="form-group">
-              <p className="mb-0"><label>Country</label></p>
-              <input className="form-control" type="" value="" />
+            <p className="mb-0">
+              <label>Country</label>
+            </p>
+            <input
+              className="form-control"
+              name="country"
+              value={country}
+              onChange={(e) => onFormChange(e)}
+            />
           </div>
           <div className="form-group">
-              <p className="mb-0">
-                <label>Postcode</label>
-              </p>
-              <input className="form-control" type="" value="" />
+            <p className="mb-0">
+              <label>Postcode</label>
+            </p>
+            <input
+              className="form-control"
+              name="postCode"
+              value={postCode}
+              onChange={(e) => onFormChange(e)}
+            />
           </div>
           <div class="row form_buttons">
             <div class="col-md-4 col-6 mt-2 ml-auto appointment">

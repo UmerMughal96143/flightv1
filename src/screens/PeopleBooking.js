@@ -82,6 +82,11 @@ const PeopleBooking = (props) => {
   };
 
   useEffect(() => {
+
+    window.scroll(0,0)
+  },[])
+
+  useEffect(() => {
     if (checkboxStatus) {
       setCopyDetailObject({
         email: peoplesData[0].email,

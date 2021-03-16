@@ -25,14 +25,23 @@ const BookingCOmplete = () => {
         <section>
           <div class="Booking-Complete-wrapper">
             <PDFDownloadLink
-              document={<PdfDocument peoples={postedData?.savedform?.peoples} />}
+              document={
+                <PdfDocument peoples={postedData?.savedform?.peoples} />
+              }
               fileName="flight_details.pdf"
               style={{
-                textDecoration: "none",
-                padding: "10px",
-                color: "#4a4a4a",
-                backgroundColor: "#f2f2f2",
-                border: "1px solid #4a4a4a",
+                fontSize: "14px",
+                padding: "10px 15px",
+                color: "white",
+                border: "none",
+                borderRradius: "6px",
+                display: "flex",
+                margin: "0 auto",
+                cursor: "pointer",
+                alignItems: "center",
+                fontFamily: "Poppins-Regular",
+                justifyContent: "center",
+                backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
               }}
             >
               {({ blob, url, loading, error }) =>

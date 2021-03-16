@@ -27,39 +27,31 @@ export const Form = (state = iniitialState, action) => {
       };
 
     case "TEST_LOCATION":
+
       let tesLocation = {
         testLocation: action.payload,
       };
-      localStorage.setItem(
-        "form",
-        JSON.stringify([...state.data, tesLocation])
-      );
+      state.data[1] = tesLocation
+      localStorage.setItem('form' , JSON.stringify(state.data))
       return {
         ...state,
-        data: [...state.data, tesLocation],
       };
 
     case "ADDRESS_APPOINMENT":
       // let addressAppointment = {
       //   testLocation: action.payload,
       // };
-      localStorage.setItem(
-        "form",
-        JSON.stringify([...state.data, action.payload])
-      );
+      state.data[2] = action.payload
+      localStorage.setItem('form' , JSON.stringify(state.data))
       return {
         ...state,
-        data: [...state.data, action.payload],
       };
 
     case "SUGGESTIONS":
-      localStorage.setItem(
-        "form",
-        JSON.stringify([...state.data, action.payload])
-      );
+      state.data[3] = action.payload
+      localStorage.setItem('form' , JSON.stringify(state.data))
       return {
         ...state,
-        data: [...state.data, action.payload],
       };
     case "PEOPLE_BOOKING":
       localStorage.setItem(
