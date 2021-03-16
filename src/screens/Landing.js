@@ -20,7 +20,7 @@ const Landing = () => {
           </p>
         </div>
       </section>
-      <div class="container mb-4">
+      <div class="container">
         <section>
           <div class="travelling-tickets-wrapper">
             <h3 class="travelling-tickets-mainheading">What test do I need?</h3>

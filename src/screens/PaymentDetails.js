@@ -46,7 +46,7 @@ const PaymentDetails = ({ history }) => {
         </div>
       </section>
       <div className="wrapper">
-        <div class="site-container mt-5 mb-4">
+        <div class="site-container mt-5">
           <section>
             <div class="Payment-Details-wrapper">
               <p class="Payment-Details-heading">

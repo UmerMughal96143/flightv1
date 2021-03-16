@@ -26,7 +26,7 @@ footer{
     background-color: white;
     color: white;
     text-align: center;
-    padding: 10px 0px;
+    padding: 10px 0px 5px 0px;
 }
 footer .site-container{
     margin: 0px auto;
@@ -1130,9 +1130,23 @@ body #staticBackdrop{
 
 .input-feedback {
     color: red;
-    margin-top: .25rem
+    background-color: #E4E4E4;
+    font-family: "Poppins-SemiBold";
+    padding: 10px 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+    font-size: 14px;
   }
-
+.input-result p{
+    color: black;
+    background-color: #E4E4E4;
+    font-family: "Poppins-SemiBold";
+    padding: 10px 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
 
   .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     background-color: #1E9190;

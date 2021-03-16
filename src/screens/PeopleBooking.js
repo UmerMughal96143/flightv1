@@ -97,7 +97,7 @@ const PeopleBooking = (props) => {
   }, []);
 
   return (
-    <div class="container-fluid mb-4 p-0">
+    <div class="container-fluid p-0">
       <Formik
         enableReinitialize
         initialValues={{
@@ -226,7 +226,7 @@ const PeopleBooking = (props) => {
               </section>
               <section>
                 <div className="wrapper">
-                  <div className="site-container mb-4">
+                  <div className="site-container">
                     <form>
                       <div class="form-row">
                         <div class="form-group col-md-12">
@@ -354,6 +354,9 @@ const PeopleBooking = (props) => {
                           {errors.email && touched.email && (
                             <div className="input-feedback">{errors.email}</div>
                           )}
+                          <div className="input-result"> 
+                            <p>Your results will be Sent to you via email</p>
+                          </div>
                         </div>
                         {/* <div class="drive-gide people-email-booking">
                     <p>Your results will be Sent to you via email</p>
@@ -397,6 +400,9 @@ const PeopleBooking = (props) => {
                               {errors.mobile}
                             </div>
                           )}
+                          <div className="input-result"> 
+                            <p>Your results will be Sent to you via sms</p>
+                          </div>
                         </div>
                         {/* <div class="drive-gide people-email-booking">
                     <p>Your results will be Sent to you via email</p>

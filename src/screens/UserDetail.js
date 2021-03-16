@@ -8,7 +8,7 @@ const UserDetail = () => {
 
   },[])
   return (
-    <div class="container-fluid mb-4">
+    <div class="container-fluid">
       <section>
         <div class="flite-time">
           <h4 class="PRC-flite-heading">PCR Fit to Fly</h4>

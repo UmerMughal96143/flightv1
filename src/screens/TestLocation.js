@@ -17,7 +17,7 @@ const TestLocation = () => {
           <h3>Test Location</h3>
         </div>
       </section>
-      <div class="site-container mb-4">
+      <div class="site-container">
         <section>
           <div class="Location-block-wrapper">
             <div class="Location-box">

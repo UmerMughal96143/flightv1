@@ -58,7 +58,7 @@ const Suggestions = ({ history }) => {
   return (
     <div>
       <div className="wrapper">
-        <div class="site-container mb-4">
+        <div class="site-container">
           <section>
             <div class="appointment-header">
               <h4 class="appointment-heading">
