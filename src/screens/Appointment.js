@@ -106,157 +106,163 @@ const Appointment = ({ history }) => {
   };
 
   return (
-    <div class="site-container">
-      <section>
-        <div class="appointment-header">
-          <h4 class="appointment-heading">
-            All swabs are taken at your home address. Your are required to be at
-            home from 8am till 4pm on the day of your appointment.
-          </h4>
-        </div>
-      </section>
-      <section>
-        <form class="appointment-form">
-          <p class="appointment-form-heading">
-            Please Select which address you would like to have appointed
-          </p>
-          <div class="appointment-user-address-row row">
-            <div class="form-group col-md-8 col-7">
+    <div>
+      <div class="site-container">
+        <section>
+          <div class="appointment-header">
+            <h4 class="appointment-heading">
+              All swabs are taken at your home address. Your are required to be at
+              home from 8am till 4pm on the day of your appointment.
+            </h4>
+          </div>
+        </section>
+        <section className="position-relative">
+          <form class="appointment-form">
+            <p class="appointment-form-heading">
+              Please Select which address you would like to have appointed
+            </p>
+            <div class="appointment-user-address-row row">
+              <div class="form-group col-md-8 col-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Postal Code"
+                  onChange={(e) => setPostCode(e.target.value)}
+                  required
+                  value={postcode.toUpperCase()}
+                />
+              </div>
+              <div class="form-group col-md-4 col-5 Find-Address-btn pl-2">
+                <button
+                  class="tickets-button"
+                  onClick={(e) => findAddressHandler(e)}
+                  disabled={isAddressSuccess}
+                >
+                  Find Address
+                </button>
+              </div>
+            </div>
+            {isAddressSuccess && (
+              <div class="selectdiv mb-3">
+                <select
+                  onChange={(e) => {
+                    setDropdownAddressIndex(e.target.value);
+                  }}
+                  required
+                >
+                  <option>---Please Select your address---</option>
+                  {finalAddressArrayyy &&
+                    finalAddressArrayyy.map((state, index) => {
+                      return (
+                        <option key={index} value={index}>
+                          {state.line_1} {state.line_2} {state.organisation_name}{" "}
+                          {state.townCity}{" "}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+            )}
+
+            {/* {isDropDownAddressSelected && (
+              
+            )} */}
+
+            <div class="form-group">
+              <p class="appointment-form-heading">
+                How many people will require a PCR test at the appointment?
+              </p>
+              <div class="selectdiv">
+                <select
+                  onChange={(e) => {
+                    setNumberOfPeoples(e.target.value);
+                    localStorage.setItem("numberOfUsers", e.target.value);
+                  }}
+                  required
+                >
+                  <option value="">---Please Select number of people---</option>
+                  {numberOfPeoplesData.map((peo) => {
+                    return <option>{peo}</option>;
+                  })}
+                  {/* 
+                  <option>Option 2</option>
+                  <option>Last long option</option> */}
+                </select>
+              </div>
+            </div>
+            <div className="form-group ">
+              <p className="mb-0">
+                <label>Street Address Line 1</label>
+              </p>
               <input
-                type="text"
-                class="form-control"
-                placeholder="Postal Code"
-                onChange={(e) => setPostCode(e.target.value)}
-                required
-                value={postcode.toUpperCase()}
+                className="form-control"
+                name="address1"
+                value={address1}
+                onChange={(e) => onFormChange(e)}
               />
             </div>
-            <div class="form-group col-md-4 col-5 Find-Address-btn pl-2">
-              <button
-                class="tickets-button"
-                onClick={(e) => findAddressHandler(e)}
-                disabled={isAddressSuccess}
-              >
-                Find Address
-              </button>
+            <div className="form-group">
+              <p className="mb-0">
+                <label>Street Address Line 2</label>
+              </p>
+              <input
+                className="form-control"
+                name="address2"
+                value={address2}
+                onChange={(e) => onFormChange(e)}
+              />
             </div>
-          </div>
-          {isAddressSuccess && (
-            <div class="selectdiv">
-              <select
-                onChange={(e) => {
-                  setDropdownAddressIndex(e.target.value);
-                }}
-                required
-              >
-                <option>---Please Select your address---</option>
-                {finalAddressArrayyy &&
-                  finalAddressArrayyy.map((state, index) => {
-                    return (
-                      <option key={index} value={index}>
-                        {state.line_1} {state.line_2} {state.organisation_name}{" "}
-                        {state.townCity}{" "}
-                      </option>
-                    );
-                  })}
-              </select>
+            <div className="form-group">
+              <p className="mb-0">
+                <label>Street Address Line 3</label>
+              </p>
+              <input
+                className="form-control"
+                name="address3"
+                value={address3}
+                onChange={(e) => onFormChange(e)}
+              />
             </div>
-          )}
-
-          {/* {isDropDownAddressSelected && (
-            
-          )} */}
-
-          <div class="form-group">
-            <p class="appointment-form-heading">
-              How many people will require a PCR test at the appointment?
-            </p>
-            <div class="selectdiv">
-              <select
-                onChange={(e) => {
-                  setNumberOfPeoples(e.target.value);
-                  localStorage.setItem("numberOfUsers", e.target.value);
-                }}
-                required
-              >
-                <option value="">---Please Select number of people---</option>
-                {numberOfPeoplesData.map((peo) => {
-                  return <option>{peo}</option>;
-                })}
-                {/* 
-                <option>Option 2</option>
-                <option>Last long option</option> */}
-              </select>
+            <div className="form-group">
+              <p className="mb-0">
+                <label>City</label>
+              </p>
+              <input
+                className="form-control"
+                name="city"
+                value={city}
+                onChange={(e) => onFormChange(e)}
+              />
             </div>
-          </div>
-          <div className="form-group ">
-            <p className="mb-0">
-              <label>Street Address Line 1</label>
-            </p>
-            <input
-              className="form-control"
-              name="address1"
-              value={address1}
-              onChange={(e) => onFormChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <p className="mb-0">
-              <label>Street Address Line 2</label>
-            </p>
-            <input
-              className="form-control"
-              name="address2"
-              value={address2}
-              onChange={(e) => onFormChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <p className="mb-0">
-              <label>Street Address Line 3</label>
-            </p>
-            <input
-              className="form-control"
-              name="address3"
-              value={address3}
-              onChange={(e) => onFormChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <p className="mb-0">
-              <label>City</label>
-            </p>
-            <input
-              className="form-control"
-              name="city"
-              value={city}
-              onChange={(e) => onFormChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <p className="mb-0">
-              <label>Country</label>
-            </p>
-            <input
-              className="form-control"
-              name="country"
-              value={country}
-              onChange={(e) => onFormChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <p className="mb-0">
-              <label>Postcode</label>
-            </p>
-            <input
-              className="form-control"
-              name="postCode"
-              value={postCode}
-              onChange={(e) => onFormChange(e)}
-            />
-          </div>
+            <div className="form-group">
+              <p className="mb-0">
+                <label>Country</label>
+              </p>
+              <input
+                className="form-control"
+                name="country"
+                value={country}
+                onChange={(e) => onFormChange(e)}
+              />
+            </div>
+            <div className="form-group">
+              <p className="mb-0">
+                <label>Postcode</label>
+              </p>
+              <input
+                className="form-control"
+                name="postCode"
+                value={postCode}
+                onChange={(e) => onFormChange(e)}
+              />
+            </div>
+          </form>
+        </section>
+      </div>
+      <footer>
+      <div className="site-container">
           <div class="row form_buttons">
-            <div class="col-md-4 col-6 mt-2 ml-auto appointment">
+            <div class="col-md-4 col-6 mt-2 ml-auto appointment mb-2">
               <button
                 type="submit"
                 onClick={(e) => continueHandler(e)}
@@ -274,8 +280,8 @@ const Appointment = ({ history }) => {
               required to re-book your appointment via the website.
             </p>
           </div>
-        </form>
-      </section>
+          </div>
+        </footer>
     </div>
   );
 };

@@ -13,7 +13,7 @@ function Modall({ showModal, closeModal, personRemoveHandler }) {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton >
           <Modal.Title>Confirm Remove !</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are u want to remove this Person ?</Modal.Body>

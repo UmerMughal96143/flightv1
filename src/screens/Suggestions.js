@@ -154,7 +154,7 @@ const Suggestions = ({ history }) => {
           </section>
         </div>
       </div>
-      <footer>
+      <footer className="position-absolute">
         <div class="site-container">
           <div className="pl-0 pr-0 col-md-6 col-12 row ml-auto flight-time-footer-buttons mt-0 mb-2 mr-0">
             <div class="col-md-6 col-6 footer-btn">

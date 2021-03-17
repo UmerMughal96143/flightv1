@@ -229,7 +229,7 @@ const PeopleBooking = (props) => {
                   </div>
                 )}
               </section>
-              <section>
+              <section className="position-relative">
                 <div className="wrapper">
                   <div className="site-container">
                     <form>
@@ -481,7 +481,7 @@ const PeopleBooking = (props) => {
                 </div>
                 <footer>
                   <div className="site-container">
-                    <div class="col-md-6 col-12 p-0 pr-0 pl-0 ml-auto mt-0 mb-2">
+                    <div class="col-md-6 col-12 p-0 pr-0 pl-0 ml-auto mt-0">
                       <div className="row">
                         {!editMan ? (
                           <>
@@ -508,7 +508,7 @@ const PeopleBooking = (props) => {
 
                             <div class="col-12">
                               <button
-                                class="Submit-to-checkout"
+                                class="Submit-to-checkout mb-0"
                                 type="submit"
                                 onClick={(e) => {
                                   handleSubmit();
