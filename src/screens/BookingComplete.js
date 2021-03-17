@@ -24,38 +24,36 @@ const BookingCOmplete = () => {
       <div class="site-container">
         <section>
           <div class="Booking-Complete-wrapper">
-            <PDFDownloadLink
-              document={
-                <PdfDocument peoples={postedData?.savedform?.peoples} />
-              }
-              fileName="flight_details.pdf"
-              style={{
-                fontSize: "14px",
-                padding: "10px 15px",
-                color: "white",
-                border: "none",
-                borderRradius: "6px",
-                display: "flex",
-                margin: "0 auto",
-                cursor: "pointer",
-                alignItems: "center",
-                fontFamily: "Poppins-Regular",
-                justifyContent: "center",
-                backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
-              }}
-            >
-              {({ blob, url, loading, error }) =>
-                loading ? "Loading document..." : "Download Pdf"
-              }
-            </PDFDownloadLink>
+            
             <div class="subheading">
               <p>Appointment Confirmation</p>
-              <div class="Save-PDF">
-                <button type="submit" class="Save-PDF-btn">
-                  <i class="fas fa-file-pdf"></i> Save booking confirmation as a
-                  PDF
-                </button>
-              </div>
+              <div className="Save-PDF-new-btn">
+              <PDFDownloadLink
+                document={
+              <PdfDocument peoples={postedData?.savedform?.peoples} />
+                }
+                fileName="flight_details.pdf"
+                style={{
+                  fontSize: "14px",
+                  padding: "18px 15px",
+                  color: "white",
+                  border: "none",
+                  borderRradius: "6px",
+                  display: "flex",
+                  margin: "0 auto",
+                  cursor: "pointer",
+                  alignItems: "center",
+                  fontFamily: "Poppins-Regular",
+                  justifyContent: "center",
+                  borderRadius: "6px",
+                  backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
+                }}
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? "Loading document..." : <span className="new-pdf-btn"><i class="fas fa-file-pdf PDF_ICON"></i>  Save booking confirmation as a PDF</span>
+                }
+              </PDFDownloadLink>
+            </div>
             </div>
             <div class="Booking-Complete-Inner-wrapper" id="capture" ref={ref}>
               <div class="Booking-Complete-details">
@@ -110,6 +108,66 @@ const BookingCOmplete = () => {
                     );
                   })}
               </div>
+              <div className="Save-PDF-new-btn">
+              <PDFDownloadLink
+                document={
+              <PdfDocument peoples={postedData?.savedform?.peoples} />
+                }
+                fileName="flight_details.pdf"
+                style={{
+                  fontSize: "14px",
+                  padding: "18px 15px",
+                  color: "white",
+                  border: "none",
+                  borderRradius: "6px",
+                  display: "flex",
+                  margin: "0 auto",
+                  cursor: "pointer",
+                  alignItems: "center",
+                  fontFamily: "Poppins-Regular",
+                  justifyContent: "center",
+                  borderRadius: "6px",
+                  backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
+                }}
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? "Loading document..." : <span className="new-pdf-btn"><i class="fas fa-file-pdf PDF_ICON"></i>  Save booking confirmation as a PDF</span>
+                }
+              </PDFDownloadLink>
+            </div>
+                            <div class="Booking-person-FAQ">
+                                <h4 class="Booking-person-question-heading">Do you have any questions?</h4>
+                                <p>
+                                    We have client service agents waiting on hand to help you 24 hours a day.
+                                </p>
+                               <div class="Booking-person-chat-type">
+                                    <div class="Save-PDF">
+                                        <button type="submit" class="Save-PDF-btn"><i class="fas fa-file-pdf"></i> Contact via webchat</button>
+                                    </div>
+                                    <div class="Save-PDF Booking-ml">
+                                        <button type="submit" class="Save-PDF-btn"><i class="fas fa-envelope"></i> Contact via email</button>
+                                    </div>
+                                    <div class="Save-PDF">
+                                        <button type="submit" class="Save-PDF-btn"><i class="fas fa-phone-alt phono-min-size"></i> Contact via telephone</button>
+                                    </div>
+                               </div>
+                                <p class="Booking-person-content-tagline">We have agents online right now</p>
+                            </div>
+                            <div class="invite-frinds-box">
+                                <h3 class="invite-frinds-heading">Invite your friends to book test with Atehcy Health</h3>
+                                <p>
+                                    Became a brand ambassador of Atehcy Health and earn £10 per appointment booked through your own affiliate link
+                                </p>
+                                <div class="w-75 m-auto">
+                                    <button class="Submit-to-checkout">Apply now</button>
+                                </div>
+                            </div> 
+                            <div class="invite-frinds-box">
+                                <h3 class="invite-frinds-heading">Want to change your appointment date?</h3>
+                                <p>
+                                    Appointment dates can be changedanywhere up to 2 days. If you need to change your appointment within 48 hours, you will need to book a new appointment
+                                </p>
+                            </div>
             </div>
           </div>
         </section>
