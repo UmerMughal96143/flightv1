@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { paymentDetails, postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
 import { Link } from "react-router-dom";
+import { Form, Field } from "react-final-form";
+import Card from "../components/Card";
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
@@ -19,6 +21,26 @@ const PaymentDetails = ({ history }) => {
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  function clearNumber(value = "") {
+    return value.replace(/\D+/g, "");
+  }
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const onSubmit = async (values) => {
+  console.log("🚀 ~ file: PaymentDetails.js ~ line 30 ~ onSubmit ~ values", values)
+    await sleep(300);
+    window.alert(JSON.stringify(values, 0, 2));
+  };
+
+  function formatExpirationDate(value) {
+    const clearValue = clearNumber(value)
+  
+    if (clearValue.length >= 3) {
+      return `${clearValue.slice(0, 2)}/${clearValue.slice(2, 4)}`
+    }
+  
+    return clearValue
+  }
 
   const paymentHandler = (e) => {
     e.preventDefault();
@@ -68,7 +90,6 @@ const PaymentDetails = ({ history }) => {
                 <h3>
                   Payment due: <span>£298.00</span>
                 </h3>
-                <form>
                   <div class="Payment-form-row">
                     <p>Card number*</p>
                     <input
@@ -79,16 +100,40 @@ const PaymentDetails = ({ history }) => {
                       value={cardNumber}
                     />
                   </div>
-                  <div class="Payment-form-row">
-                    <p>Expiry Date*</p>
-                    <input
-                      type="date"
-                      class="form-control"
-                      name="expiryDate"
-                      onChange={(e) => onFormChange(e)}
-                      value={expiryDate}
-                    />
-                  </div>
+                  <Form
+                    onSubmit={onSubmit}
+                    render={({
+                      handleSubmit,
+                      form,
+                      submitting,
+                      pristine,
+                      values,
+                      active,
+                    }) => {
+                      
+
+                      return (
+                        <form onSubmit={handleSubmit}>
+                          <div>
+                            <Field
+                              name="expiry"
+                              component="input"
+                              type="text"
+                              pattern="\d\d/\d\d"
+                              placeholder="Valid Thru"
+                              format={formatExpirationDate}
+                            />
+                          </div>
+                          <div className="buttons">
+                            <button type="submit" disabled={submitting}>
+                              Submit
+                            </button>
+                            
+                          </div>
+                        </form>
+                      );
+                    }}
+                  />
                   <div class="Payment-form-row">
                     <p>Cardholder name*</p>
                     <input
@@ -123,12 +168,12 @@ const PaymentDetails = ({ history }) => {
                     <div class="travelling-tickets">
                       <p>
                         {" "}
-                        {data[2]?.address1} {data[2]?.address2} {data[2]?.address3}{" "}
-                        {data[2]?.city} {data[2]?.country} {data[2]?.postCode}{" "}
+                        {data[2]?.address1} {data[2]?.address2}{" "}
+                        {data[2]?.address3} {data[2]?.city} {data[2]?.country}{" "}
+                        {data[2]?.postCode}{" "}
                       </p>
                     </div>
                   </div>
-                </form>
               </div>
             </div>
           </section>
@@ -138,7 +183,7 @@ const PaymentDetails = ({ history }) => {
         <div className="site-container form_buttons">
           <div className="Appointment-modle-footer col-md-6 col-12 ml-auto pl-0 pr-0">
             <div className="row flight-time-footer-buttons ml-0">
-            <div className="back-btn-div col-md-4 col-5 footer-btn pr-0 m-auto">
+              <div className="back-btn-div col-md-4 col-5 footer-btn pr-0 m-auto">
                 <Link to="appointmentsummary">
                   <button type="submit" class="Back-btn">
                     Back

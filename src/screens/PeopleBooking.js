@@ -376,7 +376,7 @@ const PeopleBooking = (props) => {
                             }
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.confirmEmail}
+                            value={values.confirmEmail.toLowerCase()}
                             name="confirmEmail"
                           />
                           {errors.confirmEmail && touched.confirmEmail && (

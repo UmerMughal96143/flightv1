@@ -71,18 +71,18 @@ const Appointment = ({ history }) => {
   useEffect(() => {
     if (dropDownAddressIndex) {
       setFormData({
-        address1: finalAddressArrayyy[dropDownAddressIndex].line_1
-          ? finalAddressArrayyy[dropDownAddressIndex].line_1
+        address1: finalAddressArrayyy[dropDownAddressIndex]?.line_1
+          ? finalAddressArrayyy[dropDownAddressIndex]?.line_1
           : "",
-        address2: finalAddressArrayyy[dropDownAddressIndex].line_2
-          ? finalAddressArrayyy[dropDownAddressIndex].line_2
+        address2: finalAddressArrayyy[dropDownAddressIndex]?.line_2
+          ? finalAddressArrayyy[dropDownAddressIndex]?.line_2
           : "",
-        address3: finalAddressArrayyy[dropDownAddressIndex].line_3
-          ? finalAddressArrayyy[dropDownAddressIndex].line_3
+        address3: finalAddressArrayyy[dropDownAddressIndex]?.line_3
+          ? finalAddressArrayyy[dropDownAddressIndex]?.line_3
           : "",
         city: addressResult.town ? addressResult.town : "",
-        country: finalAddressArrayyy[dropDownAddressIndex].country
-          ? finalAddressArrayyy[dropDownAddressIndex].country
+        country: finalAddressArrayyy[dropDownAddressIndex]?.country
+          ? finalAddressArrayyy[dropDownAddressIndex]?.country
           : "",
         postCode: postcode ? postcode : "",
       });
@@ -168,7 +168,6 @@ const Appointment = ({ history }) => {
                 <button
                   class="tickets-button"
                   onClick={(e) => findAddressHandler(e)}
-                  disabled={isAddressSuccess}
                 >
                   Find Address
                 </button>
@@ -182,7 +181,7 @@ const Appointment = ({ history }) => {
                   }}
                   required
                 >
-                  <option>---Please Select your address---</option>
+                  <option value="" defaultValue>---Please Select your address---</option>
                   {finalAddressArrayyy &&
                     finalAddressArrayyy.map((state, index) => {
                       return (
