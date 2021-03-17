@@ -9,7 +9,7 @@ function Date({datValueFromPicker}) {
   
   return (
     <Page>
-      <Datepicker display="anchored" touchUi={true} onChange={(e) => datValueFromPicker(e)}/>
+      <Datepicker display="anchored" touchUi={true} onChange={(e) => datValueFromPicker(e)} inputProps={{placeholder : 'dd/mm/yyyy'}}/>
     </Page>
   );
 }

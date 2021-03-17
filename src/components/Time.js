@@ -22,7 +22,7 @@ function Time({valueFromPicker}) {
   };
   return (
     <Page>
-      <Datepicker display="anchored"  controls={["time"]} timeFormat="h:mm A" touchUi={true} onChange={(e) => valueFromPicker(e)} />
+      <Datepicker display="anchored"  controls={["time"]} timeFormat="h:mm A" touchUi={true} onChange={(e) => valueFromPicker(e)} inputProps={{placeholder : '---Please Select your flight time---'}}/>
     </Page>
   );
 }
