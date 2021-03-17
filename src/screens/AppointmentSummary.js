@@ -152,9 +152,9 @@ const AppointmentSummary = ({ history }) => {
       <section className="site-container">
         <div class="amount-due-points">
           <label>
-            <input
-              type="checkbox"
-              onChange={(e) => setCondition1(e.target.checked)}
+            <input type="checkbox" 
+            className="check-box-input" 
+            onChange={(e) => setCondition1(e.target.checked)} 
             />
             <p>
               I confirm I have checked the above and information and this is
@@ -163,7 +163,8 @@ const AppointmentSummary = ({ history }) => {
           </label>
           <label>
             <input
-              type="checkbox"
+              type="checkbox" 
+              className="check-input-extra-big"
               onChange={(e) => setCondition2(e.target.checked)}
             />
             <p>

@@ -256,6 +256,14 @@ const Appointment = ({ history }) => {
                 onChange={(e) => onFormChange(e)}
               />
             </div>
+            <div class="appointment-footer-content">
+            <p class="travelling-tickets-footer-contentsubheading">
+              *You will be reqiured to wear a face mask when the swabber arrives
+              at your home. If you're not at home on the day of your
+              appointment, you will not be entitled to a refund. You will be
+              required to re-book your appointment via the website.
+            </p>
+          </div>
           </form>
         </section>
       </div>
@@ -271,14 +279,6 @@ const Appointment = ({ history }) => {
                 Continue
               </button>
             </div>
-          </div>
-          <div class="appointment-footer-content">
-            <p class="travelling-tickets-footer-contentsubheading">
-              *You will be reqiured to wear a face mask when the swabber arrives
-              at your home. If you're not at home on the day of your
-              appointment, you will not be entitled to a refund. You will be
-              required to re-book your appointment via the website.
-            </p>
           </div>
           </div>
         </footer>

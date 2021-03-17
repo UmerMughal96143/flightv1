@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
+import { Link } from "react-router-dom";
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
@@ -120,14 +121,16 @@ const PaymentDetails = ({ history }) => {
         <div className="site-container form_buttons">
           <div className="Appointment-modle-footer col-md-6 col-12 ml-auto pl-0 pr-0">
             <div className="row flight-time-footer-buttons ml-0">
-              <div class="accept-turm-condition col-md-8 col-8 footer-btn pl-0 m-auto">
+            <div className="back-btn-div col-md-4 col-5 footer-btn pr-0 m-auto">
+                <Link to="appointmentsummary">
+                  <button type="submit" class="Back-btn">
+                    Back
+                  </button>
+                </Link>
+              </div>
+              <div class="accept-turm-condition col-md-8 col-6 footer-btn pl-0 m-auto">
                 <button class="Submit-to-checkout" onClick={paymentHandler}>
                   Complete Payment
-                </button>
-              </div>
-              <div className="back-btn-div col-md-4 col-6 footer-btn pr-0 m-auto">
-                <button type="submit" class="Back-btn">
-                  Back
                 </button>
               </div>
             </div>

@@ -18,6 +18,14 @@
     font-family: "Poppins-Regular";
     src: url(asstes/Poppins/Poppins-Regular.ttf);
 }
+body .check-input-extra-big{
+    width: 100px !important;
+    height: 25px;
+}
+.site-container .amount-due-points label{
+    display: flex;
+    align-items: flex-start;
+}
 footer{
     position: sticky;
     left: 0;
