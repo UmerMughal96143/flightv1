@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postAllFormsData } from "../actions/form";
+import { paymentDetails, postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
 
 const PaymentDetails = ({ history }) => {
@@ -12,7 +12,6 @@ const PaymentDetails = ({ history }) => {
     cardHolderName: "",
     cvv: "",
   });
-
 
   const { cardNumber, expiryDate, cardHolderName, cvv } = formData;
 
@@ -26,11 +25,18 @@ const PaymentDetails = ({ history }) => {
       errorNotification("Fill Required Fields");
       return;
     }
+    let paymentData = {
+      cardNumber,
+      expiryDate,
+      cardHolderName,
+      cvv,
+    };
+    dispatch(paymentDetails(paymentData));
     let formData = {
       peoplesData,
       data,
     };
-    dispatch(postAllFormsData(formData,history));
+    dispatch(postAllFormsData(formData, history));
     // history.push("/bookingcomplete");
   };
 
@@ -104,10 +110,21 @@ const PaymentDetails = ({ history }) => {
                   </div>
                   <div class="Payment-form-row Billing-address">
                     <p>
-                      Billing address <i class="fas fa-pen"></i>
+                      Billing address{" "}
+                      <i
+                        class="fas fa-pen"
+                        onClick={() => {
+                          localStorage.setItem("editaddress", true);
+                          history.push("/appointment");
+                        }}
+                      ></i>
                     </p>
                     <div class="travelling-tickets">
-                      <p>14 Fernview Drive, Ramsbottom, BL0 9XB UK, England.</p>
+                      <p>
+                        {" "}
+                        {data[2]?.address1} {data[2]?.address2} {data[2]?.address3}{" "}
+                        {data[2]?.city} {data[2]?.country} {data[2]?.postCode}{" "}
+                      </p>
                     </div>
                   </div>
                 </form>

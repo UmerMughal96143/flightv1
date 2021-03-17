@@ -7,8 +7,6 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-import { useSelector } from "react-redux";
-
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "red",
@@ -91,14 +89,14 @@ const PdfDocument = ({ peoples }) => {
   return (
     <Document>
       <Page style={styles.page}>
+        {/* <View>
+        <Image object-fit="fill" src={pic} alt="image" />
+        </View> */}
         {peoples &&
           peoples.map((peo) => {
             return (
               <View style={styles.movieContainer}>
-                <Image
-                  style={styles.image}
-                  source="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brandsoftheworld.com%2Flogo%2Fsvg-0&psig=AOvVaw2SpAGjZyrHYYaPCeT2RkyA&ust=1616014247853000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiy0azYte8CFQAAAAAdAAAAABAD"
-                />
+                
                 <View style={styles.movieDetails}>
                   <Text
                     style={styles.movieTitle}

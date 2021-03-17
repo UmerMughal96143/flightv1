@@ -369,6 +369,18 @@ body .main-logo {
 45deg
 , #018195, #7CC1B1);
 }
+.Next-btn-disabled{
+    background-color: #1E9190;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #1E9190;
+    width: 100%;
+    padding: 10px 0px;
+    background-image: linear-gradient(
+45deg
+, #018195, #7CC1B1);
+opacity: 0.4;
+}
 .Next-btn:hover{
     border: 1px solid #1E9190;
     color: #ffffff;
@@ -408,6 +420,16 @@ body form select{
     padding: 10px 0px;
     background-image: linear-gradient(45deg, #018195, #7CC1B1);
     margin: 9px 0px;
+}
+.Submit-to-checkout-disabled{
+    border: 2.5px solid white;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px 0px;
+    background-image: linear-gradient(45deg, #018195, #7CC1B1);
+    margin: 9px 0px;
+    opacity: 0.4;
 }
 .user-detail-footer-btns{
     margin: 50px 0px;
@@ -1198,4 +1220,9 @@ body .check-box-input {
 .close{
     color: white !important;
     opacity: 1 !important;
+}
+
+
+.disable-color{
+    color: gray !important;
 }

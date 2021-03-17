@@ -60,6 +60,14 @@ export const updatePersonAction = (id) => async (dispatch) => {
   } catch (error) {}
 };
 
+export const paymentDetails = (data) => async (dispatch) => {
+    
+  try {
+    dispatch({ type: "PAYMENT_DETAILS", payload: data });
+
+  } catch (error) {}
+};
+
 
 
 export const postAllFormsData = (data , history) => async (dispatch) => {

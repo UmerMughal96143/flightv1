@@ -41,9 +41,10 @@ const PeopleBooking = (props) => {
   const [copyDetailObject, setCopyDetailObject] = useState({
     email: "",
     mobile: "",
+    confirmEmail: "",
+    confirmMobile: "",
   });
   const [NumberOfPersonsLimit, setNumberOfPersonsLimit] = useState(1);
- 
 
   const { peoplesData, editMan } = useSelector((state) => state.Form);
 
@@ -82,15 +83,16 @@ const PeopleBooking = (props) => {
   };
 
   useEffect(() => {
-
-    window.scroll(0,0)
-  },[])
+    window.scroll(0, 0);
+  }, []);
 
   useEffect(() => {
     if (checkboxStatus) {
       setCopyDetailObject({
         email: peoplesData[0].email,
         mobile: peoplesData[0].mobile,
+        confirmEmail: peoplesData[0].confirmEmail,
+        confirmMobile: peoplesData[0].mobile,
       });
     }
   }, [checkboxStatus]);
@@ -115,13 +117,21 @@ const PeopleBooking = (props) => {
             : editMan?.email
             ? editMan.email
             : "",
-          confirmEmail: editMan?.confirmEmail ? editMan.confirmEmail : "",
+          confirmEmail: copyDetailObject.confirmEmail
+            ? copyDetailObject.confirmEmail
+            : editMan?.confirmEmail
+            ? editMan.confirmEmail
+            : "",
           mobile: copyDetailObject.mobile
             ? copyDetailObject.mobile
             : editMan?.mobile
             ? editMan.mobile
             : "",
-          confirmMobile: editMan?.confirmMobile ? editMan.confirmMobile : "",
+          confirmMobile: copyDetailObject.confirmMobile
+            ? copyDetailObject.confirmMobile
+            : editMan?.confirmMobile
+            ? editMan.confirmMobile
+            : "",
           passportIdCard: editMan?.passportIdCard ? editMan.passportIdCard : "",
           confIrmpassportIdCard: editMan?.confIrmpassportIdCard
             ? editMan.confIrmpassportIdCard
@@ -139,8 +149,6 @@ const PeopleBooking = (props) => {
           if (localStorage.getItem("submitType") == "updatePerson") {
             updatePersonHandler(values);
           }
-
-          // console.log("object1");
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string().email().required("Required"),
@@ -186,14 +194,6 @@ const PeopleBooking = (props) => {
             handleSubmit,
             isValid,
           } = props;
-          console.log(
-            "🚀 ~ file: PeopleBooking.js ~ line 192 ~ PeopleBooking ~ isValid",
-            isValid
-          );
-          console.log(
-            "🚀 ~ file: PeopleBooking.js ~ line 192 ~ PeopleBooking ~ values",
-            values
-          );
 
           return (
             <Form>
@@ -204,13 +204,12 @@ const PeopleBooking = (props) => {
                     You are booking for 3 people <br /> 12th February 2021
                     between 8am - 4pm
                   </p>
-                  {localStorage.getItem("limit") < 1 && (
+                  {!localStorage.getItem("addperson") && (
                     <button class="passenger-btn">
                       Person{" "}
                       {`${NumberOfPersonsLimit}  of ${localStorage.getItem(
                         "numberOfUsers"
                       )}`}
-                      {/* {NumberOfPersonsLimit  {"of"} {localStorage.getItem("numberOfUsers")} } */}
                     </button>
                   )}
                 </div>
@@ -354,12 +353,12 @@ const PeopleBooking = (props) => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             name="email"
-                            value={values.email}
+                            value={values.email.toLowerCase()}
                           />
                           {errors.email && touched.email && (
                             <div className="input-feedback">{errors.email}</div>
                           )}
-                          <div className="input-result"> 
+                          <div className="input-result">
                             <p>Your results will be Sent to you via email</p>
                           </div>
                         </div>
@@ -399,13 +398,14 @@ const PeopleBooking = (props) => {
                             onBlur={handleBlur}
                             name="mobile"
                             value={values.mobile}
+                            pattern="\d*"
                           />
                           {errors.mobile && touched.mobile && (
                             <div className="input-feedback">
                               {errors.mobile}
                             </div>
                           )}
-                          <div className="input-result"> 
+                          <div className="input-result">
                             <p>Your results will be Sent to you via sms</p>
                           </div>
                         </div>
@@ -425,6 +425,7 @@ const PeopleBooking = (props) => {
                             onBlur={handleBlur}
                             name="confirmMobile"
                             value={values.confirmMobile}
+                            pattern="\d*"
                           />
                           {errors.confirmMobile && touched.confirmMobile && (
                             <div className="input-feedback">
@@ -460,7 +461,8 @@ const PeopleBooking = (props) => {
                         <input
                           type="text"
                           class={
-                            errors.confIrmpassportIdCard && touched.confIrmpassportIdCard
+                            errors.confIrmpassportIdCard &&
+                            touched.confIrmpassportIdCard
                               ? "form-control error"
                               : `form-control`
                           }
@@ -485,32 +487,55 @@ const PeopleBooking = (props) => {
                       <div className="row">
                         {!editMan ? (
                           <>
-                            <div class="col-6">
-                              <Link to="/suggestions">
-                              <button type="submit" class="Back-btn">
-                                Back
-                              </button>
-                              </Link>
-                            </div>
-                            <div class="col-6">
-                              <button
-                                type="submit"
-                                onClick={() => {
-                                  handleSubmit();
-                                  localStorage.setItem(
-                                    "submitType",
-                                    "nextPerson"
-                                  );
-                                }}
-                                class="Next-btn"
-                              >
-                                Next Person
-                              </button>
-                            </div>
+                            {localStorage.getItem("numberOfUsers") ==
+                            localStorage.getItem("limit") ? (
+                              <div class="col-6">
+                                <Link to="/suggestions">
+                                  <button type="submit" class="Back-btn">
+                                    Back
+                                  </button>
+                                </Link>
+                              </div>
+                            ) : (
+                              <>
+                                <div class="col-6">
+                                  <Link to="/suggestions">
+                                    <button type="submit" class="Back-btn">
+                                      Back
+                                    </button>
+                                  </Link>
+                                </div>
+                                {!localStorage.getItem("addperson") && (
+                                  <div class="col-6">
+                                    <button
+                                      type="submit"
+                                      onClick={() => {
+                                        handleSubmit();
+                                        localStorage.setItem(
+                                          "submitType",
+                                          "nextPerson"
+                                        );
+                                      }}
+                                      class={`${
+                                        isValid
+                                          ? "Next-btn"
+                                          : "Next-btn-disabled"
+                                      }`}
+                                    >
+                                      Next Person
+                                    </button>
+                                  </div>
+                                )}
+                              </>
+                            )}
 
                             <div class="col-12">
                               <button
-                                class="Submit-to-checkout mb-0"
+                                class={`${
+                                  isValid
+                                    ? "Submit-to-checkout mb-0"
+                                    : "Submit-to-checkout-disabled"
+                                }`}
                                 type="submit"
                                 onClick={(e) => {
                                   handleSubmit();
@@ -535,6 +560,7 @@ const PeopleBooking = (props) => {
                                   "updatePerson"
                                 );
                               }}
+                              disabled={isValid}
                             >
                               Update Person
                             </button>

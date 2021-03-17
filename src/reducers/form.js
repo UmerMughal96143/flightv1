@@ -27,12 +27,11 @@ export const Form = (state = iniitialState, action) => {
       };
 
     case "TEST_LOCATION":
-
       let tesLocation = {
         testLocation: action.payload,
       };
-      state.data[1] = tesLocation
-      localStorage.setItem('form' , JSON.stringify(state.data))
+      state.data[1] = tesLocation;
+      localStorage.setItem("form", JSON.stringify(state.data));
       return {
         ...state,
       };
@@ -41,15 +40,15 @@ export const Form = (state = iniitialState, action) => {
       // let addressAppointment = {
       //   testLocation: action.payload,
       // };
-      state.data[2] = action.payload
-      localStorage.setItem('form' , JSON.stringify(state.data))
+      state.data[2] = action.payload;
+      localStorage.setItem("form", JSON.stringify(state.data));
       return {
         ...state,
       };
 
     case "SUGGESTIONS":
-      state.data[3] = action.payload
-      localStorage.setItem('form' , JSON.stringify(state.data))
+      state.data[3] = action.payload;
+      localStorage.setItem("form", JSON.stringify(state.data));
       return {
         ...state,
       };
@@ -88,6 +87,15 @@ export const Form = (state = iniitialState, action) => {
         editMan: null,
       };
 
+    case "PAYMENT_DETAILS":
+      localStorage.setItem(
+        "form",
+        JSON.stringify([...state.data, action.payload])
+      );
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+      };
     case "POST_FORM_DATA_SUCCESS":
       return {
         ...state,

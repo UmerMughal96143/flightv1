@@ -91,14 +91,37 @@ const Appointment = ({ history }) => {
 
   const continueHandler = (e) => {
     e.preventDefault();
-    if (dropDownAddressIndex && postcode && numberOfPeoples) {
+    if (address1 && address2 && city && country && postCode) {
       let formData = {
-        address: dropDownAddressIndex,
-        postcode: postcode,
-        numberOfPeoples: numberOfPeoples,
+        address1: address1,
+        address2: address2,
+        address3: address3 ? address3 : "",
+        city: city,
+        country: country,
+        postCode: postcode,
       };
       dispatch(addressesAppointment(formData));
       history.push("/suggestions");
+    } else {
+      errorNotification("Please fill all fields");
+      return;
+    }
+  };
+
+  const updateHandler = (e) => {
+    e.preventDefault();
+    if (address1 && address2 && city && country && postCode) {
+      let formData = {
+        address1: address1,
+        address2: address2,
+        address3: address3 ? address3 : "",
+        city: city,
+        country: country,
+        postCode: postcode,
+      };
+      dispatch(addressesAppointment(formData));
+      localStorage.removeItem("editaddress");
+      history.push("/paymentdetails");
     } else {
       errorNotification("Please fill all fields");
       return;
@@ -109,18 +132,27 @@ const Appointment = ({ history }) => {
     <div>
       <div class="site-container">
         <section>
-          <div class="appointment-header">
-            <h4 class="appointment-heading">
-              All swabs are taken at your home address. Your are required to be at
-              home from 8am till 4pm on the day of your appointment.
-            </h4>
-          </div>
+          {!localStorage.getItem("editaddress") && (
+            <div class="appointment-header">
+              <h4 class="appointment-heading">
+                All swabs are taken at your home address. Your are required to
+                be at home from 8am till 4pm on the day of your appointment.
+              </h4>
+            </div>
+          )}
         </section>
         <section className="position-relative">
           <form class="appointment-form">
-            <p class="appointment-form-heading">
-              Please Select which address you would like to have appointed
-            </p>
+            {localStorage.getItem("editaddress") ? (
+              <p class="appointment-form-heading">
+                Please Select your billing address
+              </p>
+            ) : (
+              <p class="appointment-form-heading">
+                Please Select which address you would like to have appointed
+              </p>
+            )}
+
             <div class="appointment-user-address-row row">
               <div class="form-group col-md-8 col-7">
                 <input
@@ -155,8 +187,8 @@ const Appointment = ({ history }) => {
                     finalAddressArrayyy.map((state, index) => {
                       return (
                         <option key={index} value={index}>
-                          {state.line_1} {state.line_2} {state.organisation_name}{" "}
-                          {state.townCity}{" "}
+                          {state.line_1} {state.line_2}{" "}
+                          {state.organisation_name} {state.townCity}{" "}
                         </option>
                       );
                     })}
@@ -168,120 +200,146 @@ const Appointment = ({ history }) => {
               
             )} */}
 
-            <div class="form-group">
-              <p class="appointment-form-heading">
-                How many people will require a PCR test at the appointment?
-              </p>
-              <div class="selectdiv">
-                <select
-                  onChange={(e) => {
-                    setNumberOfPeoples(e.target.value);
-                    localStorage.setItem("numberOfUsers", e.target.value);
-                  }}
-                  required
-                >
-                  <option value="">---Please Select number of people---</option>
-                  {numberOfPeoplesData.map((peo) => {
-                    return <option>{peo}</option>;
-                  })}
-                  {/* 
+            {!localStorage.getItem("editaddress") && (
+              <div class="form-group">
+                <p class="appointment-form-heading">
+                  How many people will require a PCR test at the appointment?
+                </p>
+                <div class="selectdiv">
+                  <select
+                    onChange={(e) => {
+                      setNumberOfPeoples(e.target.value);
+                      localStorage.setItem("numberOfUsers", e.target.value);
+                    }}
+                    required
+                  >
+                    <option value="">
+                      ---Please Select number of people---
+                    </option>
+                    {numberOfPeoplesData.map((peo) => {
+                      return <option>{peo}</option>;
+                    })}
+                    {/* 
                   <option>Option 2</option>
                   <option>Last long option</option> */}
-                </select>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div className="form-group ">
-              <p className="mb-0">
-                <label>Street Address Line 1</label>
-              </p>
-              <input
-                className="form-control"
-                name="address1"
-                value={address1}
-                onChange={(e) => onFormChange(e)}
-              />
-            </div>
-            <div className="form-group">
-              <p className="mb-0">
-                <label>Street Address Line 2</label>
-              </p>
-              <input
-                className="form-control"
-                name="address2"
-                value={address2}
-                onChange={(e) => onFormChange(e)}
-              />
-            </div>
-            <div className="form-group">
-              <p className="mb-0">
-                <label>Street Address Line 3</label>
-              </p>
-              <input
-                className="form-control"
-                name="address3"
-                value={address3}
-                onChange={(e) => onFormChange(e)}
-              />
-            </div>
-            <div className="form-group">
-              <p className="mb-0">
-                <label>City</label>
-              </p>
-              <input
-                className="form-control"
-                name="city"
-                value={city}
-                onChange={(e) => onFormChange(e)}
-              />
-            </div>
-            <div className="form-group">
-              <p className="mb-0">
-                <label>Country</label>
-              </p>
-              <input
-                className="form-control"
-                name="country"
-                value={country}
-                onChange={(e) => onFormChange(e)}
-              />
-            </div>
-            <div className="form-group">
-              <p className="mb-0">
-                <label>Postcode</label>
-              </p>
-              <input
-                className="form-control"
-                name="postCode"
-                value={postCode}
-                onChange={(e) => onFormChange(e)}
-              />
-            </div>
+            )}
+
+            {dropDownAddressIndex && (
+              <>
+                <div className="form-group ">
+                  <p className="mb-0">
+                    <label>Street Address Line 1</label>
+                  </p>
+                  <input
+                    className="form-control"
+                    name="address1"
+                    value={address1}
+                    onChange={(e) => onFormChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <p className="mb-0">
+                    <label>Street Address Line 2</label>
+                  </p>
+                  <input
+                    className="form-control"
+                    name="address2"
+                    value={address2}
+                    onChange={(e) => onFormChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <p className="mb-0">
+                    <label>Street Address Line 3</label>
+                  </p>
+                  <input
+                    className="form-control"
+                    name="address3"
+                    value={address3}
+                    onChange={(e) => onFormChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <p className="mb-0">
+                    <label>City</label>
+                  </p>
+                  <input
+                    className="form-control"
+                    name="city"
+                    value={city}
+                    onChange={(e) => onFormChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <p className="mb-0">
+                    <label>Country</label>
+                  </p>
+                  <input
+                    className="form-control"
+                    name="country"
+                    value={country}
+                    onChange={(e) => onFormChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <p className="mb-0">
+                    <label>Postcode</label>
+                  </p>
+                  <input
+                    className="form-control"
+                    name="postCode"
+                    value={postCode}
+                    onChange={(e) => onFormChange(e)}
+                  />
+                </div>
+              </>
+            )}
           </form>
         </section>
       </div>
       <footer>
-      <div className="site-container">
-          <div class="row form_buttons">
-            <div class="col-md-4 col-6 mt-2 ml-auto appointment mb-2">
-              <button
-                type="submit"
-                onClick={(e) => continueHandler(e)}
-                class="Next-btn"
-              >
-                Continue
-              </button>
+        <div className="site-container">
+          {localStorage.getItem("editaddress") ? (
+            <div class="row form_buttons">
+              <div class="col-md-4 col-6 mt-2 ml-auto appointment mb-2">
+                <button
+                  type="submit"
+                  onClick={(e) => updateHandler(e)}
+                  class="Next-btn"
+                >
+                  Update
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="appointment-footer-content">
-            <p class="travelling-tickets-footer-contentsubheading">
-              *You will be reqiured to wear a face mask when the swabber arrives
-              at your home. If you're not at home on the day of your
-              appointment, you will not be entitled to a refund. You will be
-              required to re-book your appointment via the website.
-            </p>
-          </div>
-          </div>
-        </footer>
+          ) : (
+            <div class="row form_buttons">
+              <div class="col-md-4 col-6 mt-2 ml-auto appointment mb-2">
+                <button
+                  type="submit"
+                  onClick={(e) => continueHandler(e)}
+                  class="Next-btn"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!localStorage.getItem("editaddress") && (
+            <div class="appointment-footer-content">
+              <p class="travelling-tickets-footer-contentsubheading">
+                *You will be reqiured to wear a face mask when the swabber
+                arrives at your home. If you're not at home on the day of your
+                appointment, you will not be entitled to a refund. You will be
+                required to re-book your appointment via the website.
+              </p>
+            </div>
+          )}
+        </div>
+      </footer>
     </div>
   );
 };
