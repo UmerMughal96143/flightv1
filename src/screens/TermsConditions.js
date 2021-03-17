@@ -62,23 +62,23 @@ const TermsConditions = ({history}) => {
                 </p>
               </div>
               <div class="user-agree-conditions">
-                <label>
-                  <input type="checkbox" onChange={(e) => setCondition1(e.target.checked)} />
+                <label className="check-box-label">
+                  <input className="check-box-input" type="checkbox" onChange={(e) => setCondition1(e.target.checked)} />
                   <h3>
                     By ticking I acknowledge I have read and accept the above
                     statement.
                   </h3>
                 </label>
-                <label>
+                <label className="check-box-label">
                   <input type="checkbox" onChange={(e) => setCondition2(e.target.checked)}/>
                   <h3>I have read and accept the Terms and Conditions.</h3>
                 </label>
-                <label>
+                <label className="check-box-label">
                   <input type="checkbox" onChange={(e) => setCondition3(e.target.checked)}/>
                   <h3>I have read and agree to the Fair Processing Notice.</h3>
                 </label>
-                <label>
-                  <input type="checkbox" onChange={(e) => setCondition4(e.target.checked)}/>
+                <label className="check-box-label">
+                  <input className="check-box-input" type="checkbox" onChange={(e) => setCondition4(e.target.checked)}/>
                   <h3>
                     I accept the no refund policy unless in the event of an
                     airline cancellation.
