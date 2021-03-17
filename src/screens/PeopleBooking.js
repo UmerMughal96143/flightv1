@@ -486,9 +486,11 @@ const PeopleBooking = (props) => {
                         {!editMan ? (
                           <>
                             <div class="col-6">
+                              <Link to="/suggestions">
                               <button type="submit" class="Back-btn">
                                 Back
                               </button>
+                              </Link>
                             </div>
                             <div class="col-6">
                               <button

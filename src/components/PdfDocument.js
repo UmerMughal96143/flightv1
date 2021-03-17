@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "red",
   },
   section: {
     margin: 10,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   movieContainer: {
-    backgroundColor: "#f6f6f5",
+    backgroundColor: "red",
     display: "flex",
     flexDirection: "row",
     padding: 5,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   vote: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
   },
   rating: {
     height: 10,
@@ -95,6 +95,10 @@ const PdfDocument = ({ peoples }) => {
           peoples.map((peo) => {
             return (
               <View style={styles.movieContainer}>
+                <Image
+                  style={styles.image}
+                  source="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.brandsoftheworld.com%2Flogo%2Fsvg-0&psig=AOvVaw2SpAGjZyrHYYaPCeT2RkyA&ust=1616014247853000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiy0azYte8CFQAAAAAdAAAAABAD"
+                />
                 <View style={styles.movieDetails}>
                   <Text
                     style={styles.movieTitle}

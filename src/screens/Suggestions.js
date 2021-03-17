@@ -158,9 +158,11 @@ const Suggestions = ({ history }) => {
         <div class="site-container">
           <div className="pl-0 pr-0 col-md-6 col-12 row ml-auto flight-time-footer-buttons mt-0 mb-2 mr-0">
             <div class="col-md-6 col-6 footer-btn">
+              <Link to="/appointment">
               <button type="submit" class="Back-btn">
                 Back
               </button>
+              </Link>
             </div>
             <div class="col-md-6 col-6 footer-btn pl-2 pr-0">
               <Link to="/peoplebooking">
