@@ -229,8 +229,8 @@ const Appointment = ({ history }) => {
             {dropDownAddressIndex && (
               <>
                 <div className="form-group ">
-                  <p className="mb-0">
-                    <label>Street Address Line 1</label>
+                  <p className="mb-2 appointment-form-heading">
+                    Street Address Line 1
                   </p>
                   <input
                     className="form-control"
@@ -240,8 +240,8 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-0">
-                    <label>Street Address Line 2</label>
+                  <p className="mb-2 appointment-form-heading">
+                    Street Address Line 2
                   </p>
                   <input
                     className="form-control"
@@ -251,8 +251,8 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-0">
-                    <label>Street Address Line 3</label>
+                  <p className="mb-2 appointment-form-heading">
+                    Street Address Line 3
                   </p>
                   <input
                     className="form-control"
@@ -262,8 +262,8 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-0">
-                    <label>City</label>
+                  <p className="mb-2 appointment-form-heading">
+                   City
                   </p>
                   <input
                     className="form-control"
@@ -273,8 +273,8 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-0">
-                    <label>Country</label>
+                  <p className="mb-2 appointment-form-heading">
+                    Country 
                   </p>
                   <input
                     className="form-control"
@@ -284,8 +284,8 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-0">
-                    <label>Postcode</label>
+                  <p className="mb-2 appointment-form-heading">
+                    Postcode
                   </p>
                   <input
                     className="form-control"
@@ -294,6 +294,16 @@ const Appointment = ({ history }) => {
                     onChange={(e) => onFormChange(e)}
                   />
                 </div>
+                {!localStorage.getItem("editaddress") && (
+                  <div class="appointment-footer-content pt-3">
+                    <p class="travelling-tickets-footer-contentsubheading">
+                      *You will be reqiured to wear a face mask when the swabber
+                      arrives at your home. If you're not at home on the day of your
+                      appointment, you will not be entitled to a refund. You will be
+                      required to re-book your appointment via the website.
+                    </p>
+                  </div>
+                )}
               </>
             )}
           </form>
@@ -324,17 +334,6 @@ const Appointment = ({ history }) => {
                   Continue
                 </button>
               </div>
-            </div>
-          )}
-
-          {!localStorage.getItem("editaddress") && (
-            <div class="appointment-footer-content">
-              <p class="travelling-tickets-footer-contentsubheading">
-                *You will be reqiured to wear a face mask when the swabber
-                arrives at your home. If you're not at home on the day of your
-                appointment, you will not be entitled to a refund. You will be
-                required to re-book your appointment via the website.
-              </p>
             </div>
           )}
         </div>

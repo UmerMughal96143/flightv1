@@ -75,7 +75,7 @@ const AppointmentSummary = ({ history }) => {
                       </div>
                       <div class="person-personal-detail">
                         <div class="d-flex person-detail-flex-box">
-                          <div class="col-6">
+                          <div class="col-6 pl-0">
                             <div class="person-heading-icon">
                               <h3 class="person-heading">Details</h3>
                               <i
@@ -85,7 +85,7 @@ const AppointmentSummary = ({ history }) => {
                             </div>
                           </div>
                           <div class="col-6 Remove-appointment-modle">
-                            <button
+                            {/* <button
                               type="button"
                               class="remove-btn "
                               data-bs-toggle="modal"
@@ -95,9 +95,13 @@ const AppointmentSummary = ({ history }) => {
                               Remove
                             </button>
 
+
+
+
+                              
                             {/* <!-- Modal --> */}
 
-                            {modal && (
+                            {/* {modal && (
                               <Modall
                                 showModal={true}
                                 closeModal={() => setModal(false)}
@@ -105,7 +109,52 @@ const AppointmentSummary = ({ history }) => {
                                   personRemoveHandler(data.Person)
                                 }
                               />
-                            )}
+                            )}  */}
+                            <button type="button" 
+                            class="remove-btn"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#staticBackdrop">
+                            Remove
+                            </button>
+                    
+                    {/* <!-- Modal --> */}
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <p>
+                                        Are you sure you what to remove <br /> "jammer smith" from the appointment ?
+                                    </p>
+                                    <div class="Appointment-model-footer-btns">
+                                        {/* <button type="button" class="btn">YES</button> */}
+                                        <button type="button" 
+                                          class="btn"
+                                          data-bs-toggle="modal" 
+                                          data-bs-target="#staticBackdrop-new">
+                                          YES
+                                          </button>
+                    
+                    {/* <!-- Modal --> */}
+                                        <div class="modal fade" id="staticBackdrop-new" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <div class="modal-content">
+                                                  <div class="modal-header border-0 pb-0 Appointment-yes-model">
+                                                      <i type="button" class="fas fa-times text-right" data-bs-dismiss="modal" aria-label="Close"></i>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <p>
+                                                      "jammer smith" has been removed from the appointment
+                                                      </p>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn ml-2" data-bs-dismiss="modal">NO</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                           </div>
                         </div>
                         <div class="Person-details-info">
@@ -164,6 +213,7 @@ const AppointmentSummary = ({ history }) => {
             <label>
               <input
                 type="checkbox"
+                className="check-box-input"
                 onChange={(e) => setCondition1(e.target.checked)}
               />
               <p>
@@ -174,6 +224,7 @@ const AppointmentSummary = ({ history }) => {
             <label>
               <input
                 type="checkbox"
+                className="check-input-extra-big"
                 onChange={(e) => setCondition2(e.target.checked)}
               />
               <p>
