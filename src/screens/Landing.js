@@ -8,8 +8,13 @@ const Landing = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    localStorage.removeItem("limit");
+    localStorage.removeItem("peoples");
+    localStorage.removeItem("numberOfUsers");
+    localStorage.removeItem("form");
 
   },[])
+
   return (
     <div>
       <section>

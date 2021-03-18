@@ -317,7 +317,7 @@ const PeopleBooking = (props) => {
                       </div>
                       <div>
                         <div className=" mt-3">
-                          <label for="inputAddress"> Ehitinicity*</label>
+                          <label for="inputAddress"> Ethnicity*</label>
                           <div class="selectdiv">
                             <select
                               onChange={(e) => setSex(e.target.value)}
@@ -327,7 +327,7 @@ const PeopleBooking = (props) => {
                               onBlur={handleBlur}
                             >
                               <option value="">
-                                ---Please Select your sex---
+                                ---Please Select your ethnicity---
                               </option>
                               {ethinicityArray.map((se) => {
                                 return <option>{se}</option>;

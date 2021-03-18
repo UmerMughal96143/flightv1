@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { paymentDetails, postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
 import { Link, Redirect } from "react-router-dom";
-import Countdown from "react-countdown";
-import $ from "jquery";
+import Countdown, { formatTimeDelta } from "react-countdown";
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const PaymentDetails = ({ history }) => {
     cvv: "",
   });
 
-  const { cardNumber, expiryMonth,expiryYear, cardHolderName, cvv } = formData;
+  const { cardNumber, expiryMonth, expiryYear, cardHolderName, cvv } = formData;
 
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +30,7 @@ const PaymentDetails = ({ history }) => {
     }
     let paymentData = {
       cardNumber,
-      expiryDate : `${expiryMonth} / ${expiryYear}`,
+      expiryDate: `${expiryMonth} / ${expiryYear}`,
       cardHolderName,
       cvv,
     };
@@ -49,12 +48,20 @@ const PaymentDetails = ({ history }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  const Completionist = () => {
-    localStorage.removeItem("limit");
-    localStorage.removeItem("peoples");
-    localStorage.removeItem("numberOfUsers");
-    localStorage.removeItem("form");
-    history.push("/");
+
+
+  const renderer = ({ minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      return <Redirect to='/' />
+    } else {
+      // Render a countdown
+      return (
+        <span>
+          {minutes}:{seconds}
+        </span>
+      );
+    }
   };
 
   return (
@@ -76,9 +83,10 @@ const PaymentDetails = ({ history }) => {
               <p class="Payment-Details-subheading">
                 Your appointment will be held for{" "}
                 <Countdown
-                  zeroPadTime={1}
+                  zeroPadTime={2}
                   date={Date.now() + 600000}
-                  onComplete={Completionist}
+                  // onComplete={Completionist}
+                  renderer={renderer}
                 />
               </p>
               <div class="Payment-Details-form">
