@@ -52,6 +52,15 @@ export const searchPersonForEdit = (id) => async (dispatch) => {
   } catch (error) {}
 };
 
+  
+export const searchPersonForRemove = (id) => async (dispatch) => {
+    
+  try {
+    dispatch({ type: "SEARCHE_PERSON_FOR_REMOVING", payload: id });
+
+  } catch (error) {}
+};
+
 export const updatePersonAction = (id) => async (dispatch) => {
     
   try {

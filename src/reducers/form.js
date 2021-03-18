@@ -10,6 +10,7 @@ const iniitialState = {
   postedData: localStorage.getItem("postedData")
     ? JSON.parse(localStorage.getItem("postedData"))
     : null,
+    personForRemove : null
 };
 
 export const Form = (state = iniitialState, action) => {
@@ -65,7 +66,7 @@ export const Form = (state = iniitialState, action) => {
       return {
         ...state,
         peoplesData: [
-          ...state.peoplesData.filter((fil) => fil.Person !== action.payload),
+          ...state.peoplesData.filter((fil) => fil.id !== action.payload),
         ],
       };
     case "SEARCH_PERSON_FOR_EDIT":
@@ -95,6 +96,14 @@ export const Form = (state = iniitialState, action) => {
       return {
         ...state,
         data: [...state.data, action.payload],
+      };
+      case "SEARCHE_PERSON_FOR_REMOVING":
+      let searchedPerson = state.peoplesData.find(
+        (f) => f.id == action.payload
+      );
+      return {
+        ...state,
+        personForRemove: searchedPerson,
       };
     case "POST_FORM_DATA_SUCCESS":
       return {

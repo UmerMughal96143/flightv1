@@ -560,7 +560,6 @@ const PeopleBooking = (props) => {
                                   "updatePerson"
                                 );
                               }}
-                              disabled={isValid}
                             >
                               Update Person
                             </button>

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { errorNotification } from "../utils/notification";
-import { removePersons, searchPersonForEdit } from "../actions/form";
+import { removePersons, searchPersonForEdit, searchPersonForRemove } from "../actions/form";
 import Modall from "../components/Modal";
 import { Link } from "react-router-dom";
+import SecondModal from "../components/SecondModal";
 
 const AppointmentSummary = ({ history }) => {
   const { peoplesData } = useSelector((state) => state.Form);
   const [condition1, setCondition1] = useState(false);
   const [condition2, setCondition2] = useState(false);
   const [modal, setModal] = useState(false);
+  const [showSecondModal, setShowSecondModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -29,6 +31,8 @@ const AppointmentSummary = ({ history }) => {
 
   const personRemoveHandler = (id) => {
     dispatch(removePersons(id));
+    
+    setShowSecondModal(true);
   };
 
   const editHandler = (id) => {
@@ -85,76 +89,30 @@ const AppointmentSummary = ({ history }) => {
                             </div>
                           </div>
                           <div class="col-6 Remove-appointment-modle">
-                            {/* <button
+                            <button
                               type="button"
                               class="remove-btn "
                               data-bs-toggle="modal"
                               data-bs-target="#staticBackdrop"
-                              onClick={() => setModal(true)}
+                              onClick={() => {
+                                setModal(true);
+                                dispatch(searchPersonForRemove(data.id))
+                              }}
                             >
                               Remove
                             </button>
 
-
-
-
-                              
-                            {/* <!-- Modal --> */}
-
-                            {/* {modal && (
+                            {modal && (
                               <Modall
                                 showModal={true}
                                 closeModal={() => setModal(false)}
                                 personRemoveHandler={() =>
-                                  personRemoveHandler(data.Person)
+                                  personRemoveHandler(data.id)
                                 }
                               />
-                            )}  */}
-                            <button type="button" 
-                            class="remove-btn"
-                            data-bs-toggle="modal" 
-                            data-bs-target="#staticBackdrop">
-                            Remove
-                            </button>
-                    
-                    {/* <!-- Modal --> */}
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <p>
-                                        Are you sure you what to remove <br /> "jammer smith" from the appointment ?
-                                    </p>
-                                    <div class="Appointment-model-footer-btns">
-                                        {/* <button type="button" class="btn">YES</button> */}
-                                        <button type="button" 
-                                          class="btn"
-                                          data-bs-toggle="modal" 
-                                          data-bs-target="#staticBackdrop-new">
-                                          YES
-                                          </button>
-                    
-                    {/* <!-- Modal --> */}
-                                        <div class="modal fade" id="staticBackdrop-new" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                              <div class="modal-content">
-                                                  <div class="modal-header border-0 pb-0 Appointment-yes-model">
-                                                      <i type="button" class="fas fa-times text-right" data-bs-dismiss="modal" aria-label="Close"></i>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                      <p>
-                                                      "jammer smith" has been removed from the appointment
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn ml-2" data-bs-dismiss="modal">NO</button>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
+                            )}
+                            
+                            
                           </div>
                         </div>
                         <div class="Person-details-info">
@@ -177,6 +135,8 @@ const AppointmentSummary = ({ history }) => {
                     </div>
                   );
                 })}
+                
+                {showSecondModal && <SecondModal showSecondModal={true}/>}
 
                 <div class="add-person">
                   <button
