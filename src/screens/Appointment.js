@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Dropdown } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addressesAppointment } from "../actions/form";
@@ -9,8 +10,13 @@ const Appointment = ({ history }) => {
   const [addressResult, setAddressResult] = useState("");
 
   const [dropDownAddressIndex, setDropdownAddressIndex] = useState("");
+  console.log(
+    "🚀 ~ file: Appointment.js ~ line 12 ~ Appointment ~ dropDownAddressIndex",
+    dropDownAddressIndex
+  );
 
   const [isAddressSuccess, setAddressSuccess] = useState(false);
+  const [isError, setIsError] = useState(true);
 
   const [numberOfPeoples, setNumberOfPeoples] = useState("");
 
@@ -24,11 +30,27 @@ const Appointment = ({ history }) => {
     city: "",
     postCode: "",
   });
-  const { address1, address2, city,  postCode } = formData;
+  const { address1, address2, city, postCode } = formData;
+  console.log(
+    "🚀 ~ file: Appointment.js ~ line 29 ~ Appointment ~ formData",
+    formData
+  );
 
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    if (address1 && address2 && city && postCode && dropDownAddressIndex && numberOfPeoples) {
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
   };
+
+  useEffect(() => {
+    if (address1 && address2 && city && postCode && dropDownAddressIndex && numberOfPeoples) {
+      setIsError(false);
+    }
+  }, [dropDownAddressIndex, numberOfPeoples]);
 
   const dispatch = useDispatch();
 
@@ -83,7 +105,7 @@ const Appointment = ({ history }) => {
 
   const continueHandler = (e) => {
     e.preventDefault();
-    if (address1 && address2 && city  && postCode) {
+    if (address1 && address2 && city && postCode) {
       let formData = {
         address1: address1,
         address2: address2,
@@ -100,7 +122,7 @@ const Appointment = ({ history }) => {
 
   const updateHandler = (e) => {
     e.preventDefault();
-    if (address1 && address2 && city  && postCode) {
+    if (address1 && address2 && city && postCode) {
       let formData = {
         address1: address1,
         address2: address2,
@@ -169,7 +191,9 @@ const Appointment = ({ history }) => {
                   }}
                   required
                 >
-                  <option value="" defaultValue>---Please Select your address---</option>
+                  <option value="" defaultValue>
+                    ---Please Select your address---
+                  </option>
                   {finalAddressArrayyy &&
                     finalAddressArrayyy.map((state, index) => {
                       return (
@@ -239,9 +263,7 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-2 appointment-form-heading">
-                   City
-                  </p>
+                  <p className="mb-2 appointment-form-heading">City</p>
                   <input
                     className="form-control"
                     name="city"
@@ -250,9 +272,7 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-2 appointment-form-heading">
-                    Postcode
-                  </p>
+                  <p className="mb-2 appointment-form-heading">Postcode</p>
                   <input
                     className="form-control"
                     name="postCode"
@@ -264,9 +284,10 @@ const Appointment = ({ history }) => {
                   <div class="appointment-footer-content pt-3">
                     <p class="travelling-tickets-footer-contentsubheading">
                       *You will be reqiured to wear a face mask when the swabber
-                      arrives at your home. If you're not at home on the day of your
-                      appointment, you will not be entitled to a refund. You will be
-                      required to re-book your appointment via the website.
+                      arrives at your home. If you're not at home on the day of
+                      your appointment, you will not be entitled to a refund.
+                      You will be required to re-book your appointment via the
+                      website.
                     </p>
                   </div>
                 )}
@@ -295,7 +316,8 @@ const Appointment = ({ history }) => {
                 <button
                   type="submit"
                   onClick={(e) => continueHandler(e)}
-                  class="Next-btn"
+                  class={!isError ? `Next-btn` : "Next-btn-disabled"}
+                  disabled={!isError ? false : true}
                 >
                   Continue
                 </button>
