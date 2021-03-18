@@ -35,7 +35,7 @@ const BookingCOmplete = () => {
                 fileName="flight_details.pdf"
                 style={{
                   fontSize: "14px",
-                  padding: "18px 15px",
+                  padding: "10px 15px",
                   color: "white",
                   border: "none",
                   borderRradius: "6px",

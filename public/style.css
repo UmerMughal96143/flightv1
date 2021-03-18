@@ -18,6 +18,9 @@
     font-family: "Poppins-Regular";
     src: url(asstes/Poppins/Poppins-Regular.ttf);
 }
+body{
+    touch-action: none;
+}
 body .check-input-extra-big{
     width: 100px !important;
     height: 25px;
