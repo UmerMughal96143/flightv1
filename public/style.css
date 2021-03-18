@@ -391,6 +391,15 @@ body .main-logo {
     background-color: #E4E4E4;
     font-family: "Poppins-SemiBold";
 }
+.expiration {
+    border: 1px solid #bbb;
+    position: relative;
+}
+.expiration input {
+    border: 0;
+    text-align: center;
+    outline: 0; /* remove if you want input highlight */
+}
 .Back-btn{
     border: 1px solid #1E9190;
     color: #1E9190;
@@ -414,6 +423,12 @@ body .main-logo {
     background-image: linear-gradient(
 45deg
 , #018195, #7CC1B1);
+}
+input.input-year {
+    border-left: none !important;
+}
+input.input-month {
+    border-right: none !important;
 }
 .Next-btn-disabled{
     background-color: #1E9190;

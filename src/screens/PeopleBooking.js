@@ -49,6 +49,7 @@ const PeopleBooking = (props) => {
   const { peoplesData, editMan } = useSelector((state) => state.Form);
 
   let sexArray = ["Male", "Female"];
+  let ethinicityArray = ["ANY OTHER ETHNIC CATEGORY", "ANY OTHER MIXED GROUP","BANGLADESHI","BLACK - AFRICAN","BLACK - CARIBBEAN","BLACK - OTHER","CHINESE","INDIAN","ISC - UNSPECIFIED","OTHER / MIXED","PAKISTANI","UNKNOWN","WHITE","WHITE AND ASIAN","WHITE AND BLACK AFRICAN","WHITE AND BLACK CARIBBEAN","WHITE BRITISH","WHITE IRISH","WHITE OTHER"];
 
   const submitCheckout = (values, resetForm) => {
     values.Person = values.firstName;
@@ -204,7 +205,7 @@ const PeopleBooking = (props) => {
                     You are booking for {localStorage.getItem('numberOfUsers')} people <br /> 12th February 2021
                     between 8am - 4pm
                   </p>
-                  {!localStorage.getItem("addperson") && (
+                  {!localStorage.getItem("addperson") && !editMan && (
                     <button class="passenger-btn">
                       Person{" "}
                       {`${NumberOfPersonsLimit}  of ${localStorage.getItem(
@@ -213,7 +214,7 @@ const PeopleBooking = (props) => {
                     </button>
                   )}
                 </div>
-                {peoplesData[0] && (
+                {peoplesData[0] && !editMan && (
                   <div class="people-booking-copy-dedail-person">
                     <div className="site-container">
                       <label>
@@ -328,7 +329,7 @@ const PeopleBooking = (props) => {
                               <option value="">
                                 ---Please Select your sex---
                               </option>
-                              {sexArray.map((se) => {
+                              {ethinicityArray.map((se) => {
                                 return <option>{se}</option>;
                               })}
                             </select>
@@ -505,7 +506,7 @@ const PeopleBooking = (props) => {
                                     </button>
                                   </Link>
                                 </div>
-                                {!localStorage.getItem("addperson") && (
+                                {!localStorage.getItem("addperson") && localStorage.getItem('numberOfUsers') !== '1' && (
                                   <div class="col-6">
                                     <button
                                       type="submit"
