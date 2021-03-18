@@ -14,7 +14,7 @@ function SecondModal({ showSecondModal }) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal centered={true} show={show} onHide={handleClose}>
         <Modal.Body>
           {personForRemove.firstName} {" "} {personForRemove.lastName}{" "} has been
           removed .

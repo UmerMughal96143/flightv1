@@ -5,7 +5,7 @@ import { removePersons, searchPersonForEdit, searchPersonForRemove } from "../ac
 import Modall from "../components/Modal";
 import { Link } from "react-router-dom";
 import SecondModal from "../components/SecondModal";
-
+ 
 const AppointmentSummary = ({ history }) => {
   const { peoplesData } = useSelector((state) => state.Form);
   const [condition1, setCondition1] = useState(false);

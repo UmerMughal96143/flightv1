@@ -1,4 +1,5 @@
 import React from "react";
+import pic from "./avatar.png"
 import {
   Page,
   Text,
@@ -9,7 +10,9 @@ import {
 } from "@react-pdf/renderer";
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "red",
+    backgroundColor: "white",
+    color: "#1e9190",
+    textAlign: "center",
   },
   section: {
     margin: 10,
@@ -17,9 +20,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   movieContainer: {
-    backgroundColor: "red",
-    display: "flex",
-    flexDirection: "row",
+    backgroundColor: "white",
+    textAlign: "center",
+    color: "#1e9190",
     padding: 5,
   },
   movieDetails: {
@@ -35,8 +38,8 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: 200,
-    width: 150,
+    height: 20,
+    width: 20,
   },
   subtitle: {
     display: "flex",
@@ -83,15 +86,24 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontWeight: "bold",
   },
+  PDF_logo: {
+    width: "10%",
+    textAlign: "center",
+    margin: "0 auto",  
+  },
+  PDF_logo_img: {
+    width: "100%",
+    margin: "0 auto",  
+  }
 });
 
 const PdfDocument = ({ peoples }) => {
   return (
     <Document>
       <Page style={styles.page}>
-        {/* <View>
-        <Image object-fit="fill" src={pic} alt="image" />
-        </View> */}
+        <View style={styles.PDF_logo}> 
+        <Image style={styles.PDF_logo_img} object-fit="fill" src={pic} alt="image" />
+        </View>
         {peoples &&
           peoples.map((peo) => {
             return (
