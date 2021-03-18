@@ -169,7 +169,7 @@ const PeopleBooking = (props) => {
             .required("Required"),
           firstName: Yup.string()
             .matches(
-              /^[A-Z][a-z0-9_-]{1,100}$/,
+              /^[A-Z]/,
               "First Letter must be Uppercase,"
             )
             .required("Required"),
@@ -317,7 +317,7 @@ const PeopleBooking = (props) => {
                       </div>
                       <div>
                         <div className=" mt-3">
-                          <label for="inputAddress"> Ehitinicity*</label>
+                          <label for="inputAddress"> Ethnicity*</label>
                           <div class="selectdiv">
                             <select
                               onChange={(e) => setSex(e.target.value)}
@@ -327,7 +327,7 @@ const PeopleBooking = (props) => {
                               onBlur={handleBlur}
                             >
                               <option value="">
-                                ---Please Select your sex---
+                                ---Please Select your ethnicity---
                               </option>
                               {ethinicityArray.map((se) => {
                                 return <option>{se}</option>;

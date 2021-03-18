@@ -104,7 +104,7 @@ const BookingCOmplete = () => {
                             </span>
                           </h4>
                           <h4 class="Booking-person-identity">
-                            Booking Refrence ID: <span>{peo._id}</span>
+                            Booking Refrence ID: <span>{peo.referenceId}</span>
                           </h4>
                           <p class="Booking-person-dec">
                             Please have you photo ID present at the appointment
