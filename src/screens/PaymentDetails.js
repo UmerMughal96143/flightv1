@@ -11,12 +11,13 @@ const PaymentDetails = ({ history }) => {
   const { peoplesData, data } = useSelector((state) => state.Form);
   const [formData, setFormData] = useState({
     cardNumber: "",
-    expiryDate: "",
+    expiryMonth: "",
+    expiryYear: "",
     cardHolderName: "",
     cvv: "",
   });
 
-  const { cardNumber, expiryDate, cardHolderName, cvv } = formData;
+  const { cardNumber, expiryMonth,expiryYear, cardHolderName, cvv } = formData;
 
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,13 +25,13 @@ const PaymentDetails = ({ history }) => {
 
   const paymentHandler = (e) => {
     e.preventDefault();
-    if (!cardNumber || !expiryDate || !cardHolderName || !cvv) {
+    if (!cardNumber || !expiryMonth || !expiryYear || !cardHolderName || !cvv) {
       errorNotification("Fill Required Fields");
       return;
     }
     let paymentData = {
       cardNumber,
-      expiryDate,
+      expiryDate : `${expiryMonth} / ${expiryYear}`,
       cardHolderName,
       cvv,
     };
@@ -100,21 +101,25 @@ const PaymentDetails = ({ history }) => {
                     <span class="expiration">
                       <input
                         type="text"
-                        name="month"
+                        name="expiryMonth"
                         placeholder="MM"
                         maxlength="2"
                         size="2"
                         required="true"
                         class="input-month"
+                        onChange={(e) => onFormChange(e)}
+                        value={expiryMonth}
                       />
                       <input
                         type="text"
-                        name="year"
+                        name="expiryYear"
                         placeholder="YY"
                         maxlength="2"
                         size="2"
                         required="true"
                         class="input-year"
+                        onChange={(e) => onFormChange(e)}
+                        value={expiryYear}
                       />
                     </span>
                   </div>
