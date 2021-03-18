@@ -314,7 +314,6 @@ body .main-logo {
     padding: 5px 0px;
     border-radius: 6px;
     width: 100%;
-    opacity: 0.6;
     transition: .25s;
 }
 .tickets-amount{
