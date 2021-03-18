@@ -19,7 +19,8 @@
     src: url(asstes/Poppins/Poppins-Regular.ttf);
 }
 body{
-    touch-action: none;
+    touch-action: pan-x;
+    /* touch-action: pan-y; */
 }
 body .check-input-extra-big{
     width: 100px !important;
