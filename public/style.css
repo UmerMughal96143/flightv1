@@ -18,6 +18,10 @@
     font-family: "Poppins-Regular";
     src: url(asstes/Poppins/Poppins-Regular.ttf);
 }
+body{
+    touch-action: pan-x;
+    touch-action: pan-y;
+}
 body .check-input-extra-big{
     width: 100px !important;
     height: 25px;
@@ -245,6 +249,11 @@ body .main-logo {
     font-size: 14px;
     font-family: "Poppins-Medium";
 }
+
+.breaking-news-dec a:hover{
+    color: white;
+}
+
 .travelling-tickets-mainheading{
     color:#1E9190;
     font-size: 28px;
@@ -284,6 +293,18 @@ body .main-logo {
 .travelling-tickets-box-left{
     text-align: right;
 }
+.tickets-button:hover{
+    background-image: linear-gradient(90deg, #0491A5, #8DCCBE);
+    opacity: 1;
+}
+.tickets-button:active{
+    background-image: linear-gradient(90deg, #0491A5, #8DCCBE);
+    opacity: 1;
+}
+.tickets-button:focus{
+    background-image: linear-gradient(90deg, #0491A5, #8DCCBE);
+    opacity: 1;
+}
 .tickets-button{
     font-family: "Poppins-Regular";
     font-size: 14px;
@@ -293,6 +314,8 @@ body .main-logo {
     padding: 5px 0px;
     border-radius: 6px;
     width: 100%;
+    opacity: 0.6;
+    transition: .25s;
 }
 .tickets-amount{
     font-family: "Poppins-Bold";
