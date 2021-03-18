@@ -96,32 +96,34 @@ const PaymentDetails = ({ history }) => {
                       value={cardNumber}
                     />
                   </div>
-                  <div class="Payment-form-row">
+                  <div className="Payment-form-row">
                     <p>Expiry Date*</p>
-                    <span class="expiration">
-                      <input
-                        type="text"
-                        name="expiryMonth"
-                        placeholder="MM"
-                        maxlength="2"
-                        size="2"
-                        required="true"
-                        class="input-month"
-                        onChange={(e) => onFormChange(e)}
-                        value={expiryMonth}
-                      />
-                      <input
-                        type="text"
-                        name="expiryYear"
-                        placeholder="YY"
-                        maxlength="2"
-                        size="2"
-                        required="true"
-                        class="input-year"
-                        onChange={(e) => onFormChange(e)}
-                        value={expiryYear}
-                      />
-                    </span>
+                    <div class="expiration">
+                      <span class="expiration-input-wrapper">
+                        <input
+                          type="text"
+                          name="expiryMonth"
+                          placeholder="MM"
+                          maxlength="2"
+                          size="2"
+                          required="true"
+                          class="input-month"
+                          onChange={(e) => onFormChange(e)}
+                          value={expiryMonth}
+                        />
+                        <input
+                          type="text"
+                          name="expiryYear"
+                          placeholder="YY"
+                          maxlength="2"
+                          size="2"
+                          required="true"
+                          class="input-year"
+                          onChange={(e) => onFormChange(e)}
+                          value={expiryYear}
+                        />
+                      </span>
+                    </div>
                   </div>
                   <div class="Payment-form-row">
                     <p>Cardholder name*</p>
