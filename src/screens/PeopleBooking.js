@@ -204,7 +204,7 @@ const PeopleBooking = (props) => {
                     You are booking for {localStorage.getItem('numberOfUsers')} people <br /> 12th February 2021
                     between 8am - 4pm
                   </p>
-                  {!localStorage.getItem("addperson") && (
+                  {!localStorage.getItem("addperson") && !editMan && (
                     <button class="passenger-btn">
                       Person{" "}
                       {`${NumberOfPersonsLimit}  of ${localStorage.getItem(
@@ -213,7 +213,7 @@ const PeopleBooking = (props) => {
                     </button>
                   )}
                 </div>
-                {peoplesData[0] && (
+                {peoplesData[0] && !editMan && (
                   <div class="people-booking-copy-dedail-person">
                     <div className="site-container">
                       <label>
@@ -505,7 +505,7 @@ const PeopleBooking = (props) => {
                                     </button>
                                   </Link>
                                 </div>
-                                {!localStorage.getItem("addperson") && (
+                                {!localStorage.getItem("addperson") && localStorage.getItem('numberOfUsers') !== '1' && (
                                   <div class="col-6">
                                     <button
                                       type="submit"

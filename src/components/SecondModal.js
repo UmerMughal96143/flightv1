@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 function SecondModal({ showSecondModal }) {
   const [show, setShow] = useState(showSecondModal);
-  console.log("🚀 ~ file: SecondModal.js ~ line 7 ~ SecondModal ~ show", show);
   const { personForRemove } = useSelector((state) => state.Form);
 
   const handleClose = () => {
