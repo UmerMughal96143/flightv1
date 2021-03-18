@@ -20,7 +20,7 @@
 }
 body{
     touch-action: pan-x;
-    /* touch-action: pan-y; */
+    touch-action: pan-y;
 }
 body .check-input-extra-big{
     width: 100px !important;
