@@ -294,15 +294,15 @@ body .main-logo {
     text-align: right;
 }
 .tickets-button:hover{
-    background-image: linear-gradient(90deg, #0491A5, #8DCCBE);
+    background-image: linear-gradient(90deg, #027586, #027586);
     opacity: 1;
 }
 .tickets-button:active{
-    background-image: linear-gradient(90deg, #0491A5, #8DCCBE);
+    background-image: linear-gradient(90deg, #027586, #027586);
     opacity: 1;
 }
 .tickets-button:focus{
-    background-image: linear-gradient(90deg, #0491A5, #8DCCBE);
+    background-image: linear-gradient(90deg, #027586, #027586);
     opacity: 1;
 }
 .tickets-button{
