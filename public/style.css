@@ -391,8 +391,13 @@ body .main-logo {
     font-family: "Poppins-SemiBold";
 }
 .expiration {
-    border: 1px solid #bbb;
+    border: 1px solid #0b8697;
     position: relative;
+    padding: 5px;
+    border-radius: 5px;
+}
+.expiration-input-wrapper input{
+    border:none !important;
 }
 .expiration input {
     border: 0;
