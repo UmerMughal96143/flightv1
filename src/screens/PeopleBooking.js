@@ -169,7 +169,7 @@ const PeopleBooking = (props) => {
             .required("Required"),
           firstName: Yup.string()
             .matches(
-              /^[A-Z][a-z0-9_-]{1,100}$/,
+              /^[A-Z]/,
               "First Letter must be Uppercase,"
             )
             .required("Required"),
