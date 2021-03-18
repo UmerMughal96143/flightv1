@@ -80,8 +80,10 @@ export const paymentDetails = (data) => async (dispatch) => {
 
 
 export const postAllFormsData = (data , history) => async (dispatch) => {
+console.log("🚀 ~ file: form.js ~ line 83 ~ postAllFormsData ~ data", data)
     
   try {
+    // const res =  await axios.post('http://localhost:3008/flight/api/v1/form' , data)
     const res =  await axios.post('https://flightackened.herokuapp.com/flight/api/v1/form' , data)
     dispatch({ type: "POST_FORM_DATA_SUCCESS", payload: res.data });
     localStorage.setItem('postedData' , JSON.stringify(res.data))

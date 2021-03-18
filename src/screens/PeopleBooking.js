@@ -49,6 +49,7 @@ const PeopleBooking = (props) => {
   const { peoplesData, editMan } = useSelector((state) => state.Form);
 
   let sexArray = ["Male", "Female"];
+  let ethinicityArray = ["ANY OTHER ETHNIC CATEGORY", "ANY OTHER MIXED GROUP","BANGLADESHI","BLACK - AFRICAN","BLACK - CARIBBEAN","BLACK - OTHER","CHINESE","INDIAN","ISC - UNSPECIFIED","OTHER / MIXED","PAKISTANI","UNKNOWN","WHITE","WHITE AND ASIAN","WHITE AND BLACK AFRICAN","WHITE AND BLACK CARIBBEAN","WHITE BRITISH","WHITE IRISH","WHITE OTHER"];
 
   const submitCheckout = (values, resetForm) => {
     values.Person = values.firstName;
@@ -328,7 +329,7 @@ const PeopleBooking = (props) => {
                               <option value="">
                                 ---Please Select your sex---
                               </option>
-                              {sexArray.map((se) => {
+                              {ethinicityArray.map((se) => {
                                 return <option>{se}</option>;
                               })}
                             </select>

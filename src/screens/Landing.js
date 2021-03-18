@@ -51,7 +51,7 @@ const Landing = () => {
                              </div>
                           </div>
                           <div className="col-9 p-0 ml-auto">
-                          <Link to="/testlocation" onClick={() => dispatch(bookCovidTest('I am travelling but need a test'))}>
+                          <Link to="/testlocation" onClick={() => dispatch(bookCovidTest('I am Not travelling but need a test'))}>
                           <button class="tickets-button" >Book</button>
                         </Link>
                           </div>

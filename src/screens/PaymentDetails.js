@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { paymentDetails, postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import Countdown from "react-countdown";
+import $ from "jquery";
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ const PaymentDetails = ({ history }) => {
     let formData = {
       peoplesData,
       data,
+      paymentData,
     };
     dispatch(postAllFormsData(formData, history));
     // history.push("/bookingcomplete");
@@ -44,6 +47,14 @@ const PaymentDetails = ({ history }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const Completionist = () => {
+    localStorage.removeItem("limit");
+    localStorage.removeItem("peoples");
+    localStorage.removeItem("numberOfUsers");
+    localStorage.removeItem("form");
+    history.push("/");
+  };
 
   return (
     <div>
@@ -62,7 +73,12 @@ const PaymentDetails = ({ history }) => {
                 date: <span> 21 February 2021</span>
               </p>
               <p class="Payment-Details-subheading">
-                Your appointment will be held for <span>00:00:00</span>
+                Your appointment will be held for{" "}
+                <Countdown
+                  zeroPadTime={1}
+                  date={Date.now() + 600000}
+                  onComplete={Completionist}
+                />
               </p>
               <div class="Payment-Details-form">
                 <h3>
@@ -81,13 +97,26 @@ const PaymentDetails = ({ history }) => {
                   </div>
                   <div class="Payment-form-row">
                     <p>Expiry Date*</p>
-                    <input
-                      type="date"
-                      class="form-control"
-                      name="expiryDate"
-                      onChange={(e) => onFormChange(e)}
-                      value={expiryDate}
-                    />
+                    <span class="expiration">
+                      <input
+                        type="text"
+                        name="month"
+                        placeholder="MM"
+                        maxlength="2"
+                        size="2"
+                        required="true"
+                        class="input-month"
+                      />
+                      <input
+                        type="text"
+                        name="year"
+                        placeholder="YY"
+                        maxlength="2"
+                        size="2"
+                        required="true"
+                        class="input-year"
+                      />
+                    </span>
                   </div>
                   <div class="Payment-form-row">
                     <p>Cardholder name*</p>
@@ -123,8 +152,9 @@ const PaymentDetails = ({ history }) => {
                     <div class="travelling-tickets">
                       <p>
                         {" "}
-                        {data[2]?.address1} {data[2]?.address2} {data[2]?.address3}{" "}
-                        {data[2]?.city} {data[2]?.country} {data[2]?.postCode}{" "}
+                        {data[2]?.address1} {data[2]?.address2}{" "}
+                        {data[2]?.address3} {data[2]?.city} {data[2]?.country}{" "}
+                        {data[2]?.postCode}{" "}
                       </p>
                     </div>
                   </div>
@@ -138,7 +168,7 @@ const PaymentDetails = ({ history }) => {
         <div className="site-container form_buttons">
           <div className="Appointment-modle-footer col-md-6 col-12 ml-auto pl-0 pr-0">
             <div className="row flight-time-footer-buttons ml-0">
-            <div className="back-btn-div col-md-4 col-5 footer-btn pr-0 m-auto">
+              <div className="back-btn-div col-md-4 col-5 footer-btn pr-0 m-auto">
                 <Link to="appointmentsummary">
                   <button type="submit" class="Back-btn">
                     Back
