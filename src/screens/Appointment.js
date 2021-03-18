@@ -21,12 +21,10 @@ const Appointment = ({ history }) => {
   const [formData, setFormData] = useState({
     address1: "",
     address2: "",
-    address3: "",
     city: "",
-    country: "",
     postCode: "",
   });
-  const { address1, address2, address3, city, country, postCode } = formData;
+  const { address1, address2, city,  postCode } = formData;
 
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,19 +69,13 @@ const Appointment = ({ history }) => {
   useEffect(() => {
     if (dropDownAddressIndex) {
       setFormData({
-        address1: finalAddressArrayyy[dropDownAddressIndex].line_1
-          ? finalAddressArrayyy[dropDownAddressIndex].line_1
+        address1: finalAddressArrayyy[dropDownAddressIndex]?.line_1
+          ? finalAddressArrayyy[dropDownAddressIndex]?.line_1
           : "",
-        address2: finalAddressArrayyy[dropDownAddressIndex].line_2
-          ? finalAddressArrayyy[dropDownAddressIndex].line_2
-          : "",
-        address3: finalAddressArrayyy[dropDownAddressIndex].line_3
-          ? finalAddressArrayyy[dropDownAddressIndex].line_3
+        address2: finalAddressArrayyy[dropDownAddressIndex]?.line_2
+          ? finalAddressArrayyy[dropDownAddressIndex]?.line_2
           : "",
         city: addressResult.town ? addressResult.town : "",
-        country: finalAddressArrayyy[dropDownAddressIndex].country
-          ? finalAddressArrayyy[dropDownAddressIndex].country
-          : "",
         postCode: postcode ? postcode : "",
       });
     }
@@ -91,13 +83,11 @@ const Appointment = ({ history }) => {
 
   const continueHandler = (e) => {
     e.preventDefault();
-    if (address1 && address2 && city && country && postCode) {
+    if (address1 && address2 && city  && postCode) {
       let formData = {
         address1: address1,
         address2: address2,
-        address3: address3 ? address3 : "",
         city: city,
-        country: country,
         postCode: postcode,
       };
       dispatch(addressesAppointment(formData));
@@ -110,13 +100,11 @@ const Appointment = ({ history }) => {
 
   const updateHandler = (e) => {
     e.preventDefault();
-    if (address1 && address2 && city && country && postCode) {
+    if (address1 && address2 && city  && postCode) {
       let formData = {
         address1: address1,
         address2: address2,
-        address3: address3 ? address3 : "",
         city: city,
-        country: country,
         postCode: postcode,
       };
       dispatch(addressesAppointment(formData));
@@ -168,7 +156,6 @@ const Appointment = ({ history }) => {
                 <button
                   class="tickets-button"
                   onClick={(e) => findAddressHandler(e)}
-                  disabled={isAddressSuccess}
                 >
                   Find Address
                 </button>
@@ -182,7 +169,7 @@ const Appointment = ({ history }) => {
                   }}
                   required
                 >
-                  <option>---Please Select your address---</option>
+                  <option value="" defaultValue>---Please Select your address---</option>
                   {finalAddressArrayyy &&
                     finalAddressArrayyy.map((state, index) => {
                       return (
@@ -253,34 +240,12 @@ const Appointment = ({ history }) => {
                 </div>
                 <div className="form-group">
                   <p className="mb-2 appointment-form-heading">
-                    Street Address Line 3
-                  </p>
-                  <input
-                    className="form-control"
-                    name="address3"
-                    value={address3}
-                    onChange={(e) => onFormChange(e)}
-                  />
-                </div>
-                <div className="form-group">
-                  <p className="mb-2 appointment-form-heading">
                    City
                   </p>
                   <input
                     className="form-control"
                     name="city"
                     value={city}
-                    onChange={(e) => onFormChange(e)}
-                  />
-                </div>
-                <div className="form-group">
-                  <p className="mb-2 appointment-form-heading">
-                    Country 
-                  </p>
-                  <input
-                    className="form-control"
-                    name="country"
-                    value={country}
                     onChange={(e) => onFormChange(e)}
                   />
                 </div>

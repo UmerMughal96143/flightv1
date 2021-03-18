@@ -201,7 +201,7 @@ const PeopleBooking = (props) => {
                 <div class="flite-time">
                   <h4 class="PRC-flite-heading">PCR Fit to Fly</h4>
                   <p class="PRC-flite-dec">
-                    You are booking for 3 people <br /> 12th February 2021
+                    You are booking for {localStorage.getItem('numberOfUsers')} people <br /> 12th February 2021
                     between 8am - 4pm
                   </p>
                   {!localStorage.getItem("addperson") && (
@@ -376,7 +376,7 @@ const PeopleBooking = (props) => {
                             }
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.confirmEmail}
+                            value={values.confirmEmail.toLowerCase()}
                             name="confirmEmail"
                           />
                           {errors.confirmEmail && touched.confirmEmail && (
@@ -388,7 +388,7 @@ const PeopleBooking = (props) => {
                         <div class="form-group col-md-12">
                           <label for="inputCity">Mobile Number*</label>
                           <input
-                            type="number"
+                            type="tel"
                             class={
                               errors.mobile && touched.mobile
                                 ? "form-control error"
@@ -415,7 +415,7 @@ const PeopleBooking = (props) => {
                         <div class="form-group col-md-12">
                           <label for="inputCity">Confirm Mobile Number*</label>
                           <input
-                            type="number"
+                            type="tel"
                             class={
                               errors.confirmMobile && touched.confirmMobile
                                 ? "form-control error"
