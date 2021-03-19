@@ -39,7 +39,14 @@ const Appointment = ({ history }) => {
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    if (address1 && address2 && city && postCode && dropDownAddressIndex && numberOfPeoples) {
+    if (
+      address1 &&
+      address2 &&
+      city &&
+      postCode &&
+      dropDownAddressIndex &&
+      numberOfPeoples
+    ) {
       setIsError(false);
     } else {
       setIsError(true);
@@ -47,7 +54,14 @@ const Appointment = ({ history }) => {
   };
 
   useEffect(() => {
-    if (address1 && address2 && city && postCode && dropDownAddressIndex && numberOfPeoples) {
+    if (
+      address1 &&
+      address2 &&
+      city &&
+      postCode &&
+      dropDownAddressIndex &&
+      numberOfPeoples
+    ) {
       setIsError(false);
     }
   }, [dropDownAddressIndex, numberOfPeoples]);
@@ -101,6 +115,22 @@ const Appointment = ({ history }) => {
         postCode: postcode ? postcode : "",
       });
     }
+    var currentdate = new Date();
+    console.log("🚀 ~ file: Appointment.js ~ line 119 ~ useEffect ~ currentdate", currentdate)
+    var datetime =
+      "Last Sync: " +
+      currentdate.getDate() +
+      "/" +
+      (currentdate.getMonth() + 1) +
+      "/" +
+      currentdate.getFullYear() +
+      " @ " +
+      currentdate.getHours() +
+      ":" +
+      currentdate.getMinutes() +
+      ":" +
+      currentdate.getSeconds();
+    localStorage.setItem('datetime' , datetime)
   }, [dropDownAddressIndex]);
 
   const continueHandler = (e) => {

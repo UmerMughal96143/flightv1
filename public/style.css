@@ -1295,3 +1295,8 @@ body .check-box-input {
 .disable-color{
     color: gray !important;
 }
+
+
+.mbsc-ios.mbsc-page{
+    background: white !important;
+}
