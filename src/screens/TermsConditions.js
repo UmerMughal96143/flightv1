@@ -7,7 +7,7 @@ const TermsConditions = ({history}) => {
   const [condition1 , setCondition1] = useState(false)
   const [condition2 , setCondition2] = useState(false)
   const [condition3 , setCondition3] = useState(false)
-  const [condition4 , setCondition4] = useState(true)
+  const [condition4 , setCondition4] = useState(false)
 
 
 
@@ -62,28 +62,39 @@ const TermsConditions = ({history}) => {
                 </p>
               </div>
               <div class="user-agree-conditions">
-                <label className="check-box-label">
-                  <input className="check-box-input" type="checkbox" onChange={(e) => setCondition1(e.target.checked)} />
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""  onChange={(e) => setCondition1(e.target.checked)} />
+                  <label class="form-check-label" for="flexCheckDefault">
                   <h3>
-                    By ticking I acknowledge I have read and accept the above
-                    statement.
-                  </h3>
-                </label>
-                <label className="check-box-label">
-                  <input type="checkbox" onChange={(e) => setCondition2(e.target.checked)}/>
-                  <h3>I have read and accept the Terms and Conditions.</h3>
-                </label>
-                <label className="check-box-label">
-                  <input type="checkbox" onChange={(e) => setCondition3(e.target.checked)}/>
-                  <h3>I have read and agree to the Fair Processing Notice.</h3>
-                </label>
-                <label className="check-box-label">
-                  <input className="check-box-input" type="checkbox" onChange={(e) => setCondition4(e.target.checked)}/>
-                  <h3>
-                    I accept the no refund policy unless in the event of an
-                    airline cancellation.
-                  </h3>
-                </label>
+                      By ticking I acknowledge I have read and accept the above
+                      statement.
+                    </h3>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" onChange={(e) => setCondition2(e.target.checked)} />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    <h3>
+                      I have read and accept the Terms and Conditions.
+                    </h3>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" onChange={(e) => setCondition3(e.target.checked)} />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    <h3>
+                    I have read and agree to the Fair Processing Notice.
+                    </h3>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value=""  onChange={(e) => setCondition4(e.target.checked)} />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    <h3>
+                    I accept the no refund policy unless in the event of an airline cancellation.
+                    </h3>
+                  </label>
+                </div>
               </div>
             </div>
           </section>

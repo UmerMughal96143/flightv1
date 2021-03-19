@@ -18,6 +18,10 @@
     font-family: "Poppins-Regular";
     src: url(asstes/Poppins/Poppins-Regular.ttf);
 }
+body .form-check-input:checked {
+    background-color: #0c8798;
+    border-color: #048396;
+}
 body{
     touch-action: pan-x;
     touch-action: pan-y;
@@ -776,7 +780,7 @@ body .modal{
 .user-agree-conditions label{
     display: flex;
     margin: 28px 0px;
-    align-items: end;
+    align-items: flex-end;
 }
 .user-agree-conditions label input{
     margin-right: 10px;

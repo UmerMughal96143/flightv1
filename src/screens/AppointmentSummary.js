@@ -170,21 +170,21 @@ const AppointmentSummary = ({ history }) => {
         </section>
         <section className="site-container">
           <div class="amount-due-points">
-            <label>
+            <div className="form-check">
               <input
                 type="checkbox"
-                className="check-box-input"
+                className="form-check-input"
                 onChange={(e) => setCondition1(e.target.checked)}
               />
               <p>
                 I confirm I have checked the above and information and this is
                 correct
               </p>
-            </label>
-            <label>
+            </div>
+            <div className="form-check">
               <input
                 type="checkbox"
-                className="check-input-extra-big"
+                className="form-check-input"
                 onChange={(e) => setCondition2(e.target.checked)}
               />
               <p>
@@ -192,7 +192,7 @@ const AppointmentSummary = ({ history }) => {
                 my plans, and I understand that my results may take up to 48
                 hours after my test to arrive.
               </p>
-            </label>
+            </div>
           </div>
         </section>
       </div>
