@@ -12,6 +12,8 @@ const Landing = () => {
     localStorage.removeItem("peoples");
     localStorage.removeItem("numberOfUsers");
     localStorage.removeItem("form");
+    localStorage.removeItem("postedData");
+    
 
   },[])
 

@@ -67,26 +67,26 @@ const BookingCOmplete = () => {
                   <h3 class="person-heading">Your appointment details</h3>
                   <div class="Person-details-info">
                     <p>
-                      Appointment date :<span>{postedData?.savedform?.startDate} </span>
+                      Appointment date : {" "}<span>{postedData?.savedform?.startDate} </span>
                     </p>
                     <p>
-                      Appointment time: <span> Between 8am - 4pm</span>
+                      Appointment time : {" "}<span> Between 8am - 4pm</span>
                     </p>
                     <p>
-                      Test type: <span> PCR Test + Fit to Fly Certificate</span>
+                      Test type : {" "}<span> PCR Test + Fit to Fly Certificate</span>
                     </p>
                     <p>
-                      Number of person: <span> {postedData?.savedform?.peoples?.length} person</span>
+                      Number of person : {" "}<span> {postedData?.savedform?.peoples?.length} person</span>
                     </p>
                     <p>
                       Appointment Type : <span> {postedData?.savedform?.testLocation}</span>
                     </p>
                     <p>
-                      Appointment Location:
-                      <span> 14 Fernview Drive, Rammasbottom, BL0 9XB</span>
+                      Appointment Location :
+                      {" "}<span> 14 Fernview Drive, Rammasbottom, BL0 9XB</span>
                     </p>
                     <p>
-                      Amount Paid: <span> £300.00</span>
+                      Amount Paid : {" "}<span> £300.00</span>
                     </p>
                   </div>
                 </div>

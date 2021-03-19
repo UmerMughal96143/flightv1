@@ -10,9 +10,15 @@ import Date from "../components/Date";
 
 const Suggestions = ({ history }) => {
   const [flightTime, setFlightTime] = useState("");
- 
+  const [formatedTime, setFormatedTime] = useState("");
+  const [bestChoice, setBestChoice] = useState("");
+  console.log("🚀 ~ file: Suggestions.js ~ line 14 ~ Suggestions ~ formatedTime", formatedTime)
+  const [bestMediumWrostTimeForUser, setBestMediumWrostTimeForUser] = useState([]);
+  console.log("🚀 ~ file: Suggestions.js ~ line 15 ~ Suggestions ~ bestMediumWrostTimeForUser", bestMediumWrostTimeForUser)
+
+
   const [startDate, setStartDate] = useState("");
-  
+
   const dispatch = useDispatch();
 
   let flightTimes = [
@@ -53,8 +59,180 @@ const Suggestions = ({ history }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
 
-  },[])
+  let row1 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+  let row2 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+  let row3 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+
+  let row4 = ["10am - 12pm","12pm - 2pm","2pm - 4pm"]
+  let row5 = ["12pm - 2pm","2pm - 4pm"]
+  let row6 = ["2pm - 4pm"]
+  let row7 = ["6am - 8am","8am - 10am","10am - 12pm","12pm - 2pm"]
+  let row8 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+  let row9 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+  let row10 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+  let row11 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+  let row12 = ["8am - 10am","10am - 12pm","12pm - 2pm","2pm - 4pm"]
+
+
+  useEffect(() => {
+    if (flightTime) {
+      let splitedTimeHour = flightTime.split(":")[0];
+      let splitedTimeMinutes = flightTime.split(":")[1];
+      let splitedTimeZone = flightTime.split(" ")[1].toLowerCase();
+      // let manipulatedFlightTime = `${splitedTimeHour}${splitedTimeZone}${" "} ${"-"}${" "}`
+      if(splitedTimeHour % 2 == 1){
+        let newXone ;
+        if(splitedTimeHour == 10 || splitedTimeHour == 12){
+          newXone = 'pm'
+          let prevHour ;
+          prevHour = parseInt(splitedTimeHour) - 1 ;
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour) + 1 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 90 ~ useEffect ~ hour", prevHour + splitedTimeZone , '-' , nextHour + `${newXone}`)
+          setFormatedTime(prevHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + newXone)
+          return
+        }
+        if(splitedTimeHour == 1 && splitedTimeZone == 'pm'){
+          newXone = 'pm'
+          let prevHour ;
+          prevHour = 12 ;
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour) + 1 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 90 ~ useEffect ~ hour", prevHour + splitedTimeZone , '-' , nextHour + `${newXone}`)
+          setFormatedTime(`${prevHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + newXone}`)
+          return
+        }
+        if(splitedTimeHour == 1 && splitedTimeZone == 'am'){
+          newXone = 'am'
+          let prevHour ;
+          prevHour = 12 ;
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour) + 1 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 90 ~ useEffect ~ hour", prevHour + splitedTimeZone , '-' , nextHour + `${newXone}`)
+          setFormatedTime(`${prevHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + newXone}`)
+          return
+        }
+        if(splitedTimeHour == 11 && splitedTimeZone == 'pm'){
+          newXone = 'am'
+          let prevHour ;
+          prevHour = 10 ;
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour) + 1 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 99 ~ useEffect ~ hour", prevHour + splitedTimeZone , '-' , nextHour + `${newXone}`)
+          setFormatedTime(`${prevHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + newXone}`)
+          return
+        }
+        if(splitedTimeHour == 11 && splitedTimeZone == 'am'){
+          newXone = 'pm'
+          let prevHour ;
+          prevHour = 10 ;
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour) + 1 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 99 ~ useEffect ~ hour", prevHour + splitedTimeZone , '-' , nextHour + `${newXone}`)
+          setFormatedTime(`${prevHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + newXone}`)
+          return
+        }
+        let prevHour ;
+       prevHour = parseInt(splitedTimeHour) - 1 ;
+        let nextHour ;
+       nextHour= parseInt(splitedTimeHour) + 1 ;
+       console.log("🚀 ~ file: Suggestions.js ~ line 90 ~ useEffect ~ hour", prevHour + splitedTimeZone , '-' , nextHour + `${splitedTimeZone}`)
+       setFormatedTime(`${prevHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + splitedTimeZone}`)
+      //  console.log("🚀 ~ file: Suggestions.js ~ line 92 ~ useEffect ~ nextHour", nextHour + splitedTimeZone)
+      }else{
+        let newXone ;
+        if(splitedTimeHour == 10 && splitedTimeZone == 'am'){
+          newXone = 'pm'
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour) + 2 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 90 ~ useEffect ~ hour", splitedTimeHour + splitedTimeZone , '-' , nextHour + `${newXone}`)
+          setFormatedTime(`${splitedTimeHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + newXone}`)
+
+          return
+        }
+        if(splitedTimeHour == 10 && splitedTimeZone == 'pm'){
+          newXone = 'am'
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour) + 2 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 90 ~ useEffect ~ hour", splitedTimeHour + splitedTimeZone , '-' , nextHour + `${newXone}`)
+          setFormatedTime(`${splitedTimeHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + newXone}`)
+          return
+        }
+        if(splitedTimeHour == 12){
+           let nextHour ;
+          nextHour= parseInt(splitedTimeHour)%12 + 2 ;
+          console.log("🚀 ~ file: Suggestions.js ~ line 90 ~ useEffect ~ hour", splitedTimeHour + splitedTimeZone , '-' , nextHour + `${splitedTimeZone}`)
+          setFormatedTime(`${splitedTimeHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + splitedTimeZone}`)
+          return
+        }
+       
+        let nextHour ;
+       nextHour= parseInt(splitedTimeHour) + 2 ;
+       console.log("🚀 ~ file: Suggestions.js ~ line 0 ~ useEffect ~ hour", splitedTimeHour + splitedTimeZone , '-' , nextHour + splitedTimeZone)
+       setFormatedTime(`${splitedTimeHour + splitedTimeZone + ' ' + '-' + ' ' + nextHour + splitedTimeZone}`)
+
+      //  console.log("🚀 ~ file: Suggestions.js ~ line 92 ~ useEffect ~ nextHour", )
+      }
+     
+    }
+  }, [flightTime]);
+
+
+  useEffect(() => {
+
+    if(formatedTime == '12am - 2am'){
+      setBestMediumWrostTimeForUser(row1)
+      setBestChoice("6am - 8am")
+    }
+    if(formatedTime == '2am - 4am'){
+      setBestMediumWrostTimeForUser(row2)
+      setBestChoice("6am - 8am")
+    }
+    if(formatedTime == '4am - 6am'){
+      setBestMediumWrostTimeForUser(row3)
+      setBestChoice("6am - 8am")
+    }
+    if(formatedTime == '6am - 8am'){
+      setBestMediumWrostTimeForUser(row4)
+      setBestChoice("8am - 10am")
+    }
+    if(formatedTime == '8am - 10am'){
+      setBestMediumWrostTimeForUser(row5)
+      setBestChoice("10am - 12pm")
+    }
+    if(formatedTime == '10am - 12pm'){
+      setBestMediumWrostTimeForUser(row6)
+      setBestChoice("12pm - 2pm")
+    }
+    if(formatedTime == '12pm - 2pm'){
+      setBestMediumWrostTimeForUser(row7)
+      setBestChoice("2pm - 4pm")
+    }
+    if(formatedTime == '2pm - 4pm'){
+      setBestMediumWrostTimeForUser(row8)
+      setBestChoice("6am - 8am")
+    }
+    if(formatedTime == '4pm - 6pm'){
+      setBestMediumWrostTimeForUser(row9)
+      setBestChoice("6am - 8am")
+    }
+    if(formatedTime == '6pm - 8pm'){
+      setBestMediumWrostTimeForUser(row10)
+      setBestChoice("6am - 8am")
+    }
+    if(formatedTime == '8pm - 10pm'){
+      setBestMediumWrostTimeForUser(row11)
+      setBestChoice("6am - 8am")
+    }
+    if(formatedTime == '10pm - 12am'){
+      setBestMediumWrostTimeForUser(row12)
+      setBestChoice("6am - 8am")
+    }
+
+     
+  },[formatedTime])
   return (
     <div>
       <div className="wrapper">
@@ -117,36 +295,27 @@ const Suggestions = ({ history }) => {
                   </h3>
                   <div class="suggest-best-time">
                     <button class="suggest-best-time-btn">
-                      <span>2pm - 4pm</span> {startDate.toString()}
+                      <span>{bestChoice}</span> {startDate.toString()}
                     </button>
                   </div>
+
+
+
                   <div class="user-choose">
                     <p class="user-choose-heading">You can also choose</p>
-                    <div class="user-choose-box">
+                    {bestMediumWrostTimeForUser?.map((time) => {
+                      return(
+                        <div class="user-choose-box">
                       <button class="user-choose-conent">
-                        6am - 8am Monday 12th March
+                        {time}
                       </button>
                     </div>
-                    <div class="user-choose-box">
-                      <button class="user-choose-conent">
-                        8am - 8am Monday 12th March
-                      </button>
-                    </div>
-                    <div class="user-choose-box">
-                      <button class="user-choose-conent">
-                        10am - 10am Monday 12th March
-                      </button>
-                    </div>
-                    <div class="user-choose-box">
-                      <button class="user-choose-conent">
-                        10am - 8am Monday 12th March
-                      </button>
-                    </div>
-                    <div class="user-choose-box">
-                      <button class="user-choose-conent">
-                        12am - 12am Monday 12th March
-                      </button>
-                    </div>
+                      )
+                    })}
+                    
+                    
+
+
                   </div>
                 </div>
               )}
@@ -159,9 +328,9 @@ const Suggestions = ({ history }) => {
           <div className="pl-0 pr-0 col-md-6 col-12 row ml-auto flight-time-footer-buttons mt-0 mb-2 mr-0">
             <div class="col-md-6 col-6 footer-btn">
               <Link to="/appointment">
-              <button type="submit" class="Back-btn">
-                Back
-              </button>
+                <button type="submit" class="Back-btn">
+                  Back
+                </button>
               </Link>
             </div>
             <div class="col-md-6 col-6 footer-btn pl-2 pr-0">
