@@ -118,7 +118,7 @@ const PaymentDetails = ({ history }) => {
                           class="input-month"
                           onChange={(e) => onFormChange(e)}
                           value={expiryMonth}
-                          style={{textAlign : 'center' , marginRight : '7px'}}
+                          style={{textAlign : 'center' , marginRight : '7px' , width : '90px'}}
                         />
                         <input
                           type="text"
@@ -130,7 +130,7 @@ const PaymentDetails = ({ history }) => {
                           class="input-year"
                           onChange={(e) => onFormChange(e)}
                           value={expiryYear}
-                          style={{textAlign : 'center'}}
+                          style={{textAlign : 'center',width : '90px'}}
 
                         />
                       </span>

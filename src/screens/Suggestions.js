@@ -117,11 +117,11 @@ console.log(today)
 useEffect(() => {
 
   if(isTimeBt12am12pm){
-  alert("Time rely between 12 am to 12 pm")
+  // alert("Time rely between 12 am to 12 pm")
     
   }
   if(isTimeBt12pm12am){
-    alert("Time rely between 12 pm to 12 am")
+    // alert("Time rely between 12 pm to 12 am")
       
     }
 
