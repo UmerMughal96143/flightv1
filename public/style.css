@@ -400,9 +400,6 @@ body .main-logo {
     padding: 5px;
     border-radius: 5px;
 }
-.expiration-input-wrapper input{
-    border:none !important;
-}
 .expiration input {
     border: 0;
     text-align: center;
@@ -432,12 +429,12 @@ body .main-logo {
 45deg
 , #018195, #7CC1B1);
 }
-input.input-year {
+/* input.input-year {
     border-left: none !important;
 }
 input.input-month {
     border-right: none !important;
-}
+} */
 .Next-btn-disabled{
     background-color: #1E9190;
     color: white;
