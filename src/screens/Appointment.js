@@ -115,22 +115,7 @@ const Appointment = ({ history }) => {
         postCode: postcode ? postcode : "",
       });
     }
-    var currentdate = new Date();
-    console.log("🚀 ~ file: Appointment.js ~ line 119 ~ useEffect ~ currentdate", currentdate)
-    var datetime =
-      "Last Sync: " +
-      currentdate.getDate() +
-      "/" +
-      (currentdate.getMonth() + 1) +
-      "/" +
-      currentdate.getFullYear() +
-      " @ " +
-      currentdate.getHours() +
-      ":" +
-      currentdate.getMinutes() +
-      ":" +
-      currentdate.getSeconds();
-    localStorage.setItem('datetime' , datetime)
+    
   }, [dropDownAddressIndex]);
 
   const continueHandler = (e) => {
