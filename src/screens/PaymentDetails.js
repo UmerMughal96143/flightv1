@@ -49,6 +49,14 @@ const PaymentDetails = ({ history }) => {
   }, []);
 
 
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = mm + '/' + dd + '/' + yyyy;
+
+
 
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
@@ -78,7 +86,7 @@ const PaymentDetails = ({ history }) => {
               <p class="Payment-Details-heading">
                 Your appointment has been temporarily secured for the following
                 <br />
-                date: <span> 21 February 2021</span>
+                date: <span> {today}</span>
               </p>
               <p class="Payment-Details-subheading">
                 Your appointment will be held for{" "}

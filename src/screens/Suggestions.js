@@ -106,6 +106,9 @@ let currentTime = formatAMPM(new Date)
 console.log(currentTime);
 
 
+
+
+
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -575,6 +578,10 @@ useEffect(() => {
   }, [formatedTime]);
 
 
+
+  const chooseTimeHandler = (e) => {
+    e.preventDefault()
+  }
  
 
 
@@ -599,7 +606,6 @@ useEffect(() => {
               </p>
               <div class="suggestion-date-row">
                 <div class="form-group">
-                  <label for="inputAddress">Date*</label>
                   <input
                     type="date"
                     class={`form-control`}
@@ -615,7 +621,6 @@ useEffect(() => {
                 </p>
                 <div class="suggestion-date-row">
                   <div class="form-group">
-                    <label for="inputAddress">Time*</label>
                     <input
                       type="time"
                       class={`form-control`}
@@ -636,7 +641,7 @@ useEffect(() => {
                   </h3>
                   <div class="suggest-best-time">
                     <button class="suggest-best-time-btn">
-                      <span>{bestChoice}</span> {isTimeBt12pm12am ? 'plus 1' : 'Current'}
+                      <span>{bestChoice}</span> {isTimeBt12pm12am ? 'plus 1' : `${today}`}
                     </button>
                   </div>
 
@@ -645,7 +650,7 @@ useEffect(() => {
                     {bestMediumWrostTimeForUser?.map((time) => {
                       return (
                         <div class="user-choose-box">
-                          <button class="user-choose-conent">{time}</button>
+                          <button class="user-choose-conent" onClick={(e) => chooseTimeHandler(e)}>{time} {" "} {isTimeBt12pm12am ? `${today}` : `${today}`}</button>
                         </div>
                       );
                     })}

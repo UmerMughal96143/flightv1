@@ -83,6 +83,14 @@ const PeopleBooking = (props) => {
     // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
   };
 
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = mm + '/' + dd + '/' + yyyy;
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -202,7 +210,7 @@ const PeopleBooking = (props) => {
                 <div class="flite-time">
                   <h4 class="PRC-flite-heading">PCR Fit to Fly</h4>
                   <p class="PRC-flite-dec">
-                    You are booking for {localStorage.getItem('numberOfUsers')} people <br /> 12th February 2021
+                    You are booking for {localStorage.getItem('numberOfUsers')} people <br />{today}{" "}
                     between 8am - 4pm
                   </p>
                   {!localStorage.getItem("addperson") && !editMan && (

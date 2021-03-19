@@ -11,6 +11,14 @@ const BookingCOmplete = () => {
     window.scrollTo(0, 0);
   }, []);
 
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = mm + '/' + dd + '/' + yyyy;
+
   return (
     <div>
       <section class="Appointment-Summary">
@@ -67,7 +75,7 @@ const BookingCOmplete = () => {
                   <h3 class="person-heading">Your appointment details</h3>
                   <div class="Person-details-info">
                     <p>
-                      Appointment date : {" "}<span>{postedData?.savedform?.startDate} </span>
+                      Appointment date : {" "}<span>{today} </span>
                     </p>
                     <p>
                       Appointment time : {" "}<span> Between 8am - 4pm</span>

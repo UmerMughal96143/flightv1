@@ -10,6 +10,7 @@ import {
 import Modall from "../components/Modal";
 import { Link } from "react-router-dom";
 import SecondModal from "../components/SecondModal";
+import { date } from "yup/lib/locale";
 
 const AppointmentSummary = ({ history }) => {
   const { peoplesData, data } = useSelector((state) => state.Form);
@@ -168,6 +169,14 @@ const AppointmentSummary = ({ history }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = mm + '/' + dd + '/' + yyyy;
   return (
     <div>
       <section class="Appointment-Summary">
@@ -177,7 +186,7 @@ const AppointmentSummary = ({ history }) => {
         <div class="breaking-news-box">
           <h4 class="breaking-news">PCR Fit to Fly</h4>
           <p class="breaking-news-dec">
-            You are booking for 3 people 12th February 2021 between 8am - 4pm
+            You are booking for 3 people {" "}{today} {" "} between 8am - 4pm
           </p>
         </div>
       </section>
