@@ -13,6 +13,9 @@ const Landing = () => {
     localStorage.removeItem("numberOfUsers");
     localStorage.removeItem("form");
     localStorage.removeItem("postedData");
+    localStorage.removeItem("addperson");
+    localStorage.removeItem("price");
+    
     
 
   },[])

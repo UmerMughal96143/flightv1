@@ -1,17 +1,142 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { errorNotification } from "../utils/notification";
-import { removePersons, searchPersonForEdit, searchPersonForRemove } from "../actions/form";
+import {
+  removePersons,
+  searchPersonForEdit,
+  searchPersonForRemove,
+  setPrice,
+} from "../actions/form";
 import Modall from "../components/Modal";
 import { Link } from "react-router-dom";
 import SecondModal from "../components/SecondModal";
- 
+
 const AppointmentSummary = ({ history }) => {
-  const { peoplesData } = useSelector((state) => state.Form);
+  const { peoplesData, data } = useSelector((state) => state.Form);
   const [condition1, setCondition1] = useState(false);
   const [condition2, setCondition2] = useState(false);
   const [modal, setModal] = useState(false);
   const [showSecondModal, setShowSecondModal] = useState(false);
+  const [totalPrice, setTotalPRice] = useState("");
+  const [hideAmount, setHideAmount] = useState(false);
+
+  let homeTestForOnePerson = 149 * 1;
+  let homeTestForTwoPerson = 149 * 2;
+  let homeTestForThirdPerson = 139 * 3;
+  let homeTestForFourthPerson = 139 * 4;
+  let homeTestForFifthPerson = 129 * 5;
+  let homeTestForSixthPerson = 129 * 6;
+  let homeTestForSeventhPerson = 119 * 7;
+  let homeTestForEighthPerson = 119 * 8;
+  let homeTestForNinthPerson = 109 * 9;
+  let homeTestForTenthPerson = 99 * 10;
+
+  let driveThroughTestForOnePerson = 80 * 1;
+  let driveThroughTestForTwoPerson = 80 * 2;
+  let driveThroughTestForThirdPerson = 80 * 3;
+  let driveThroughTestForFourthPerson = 80 * 4;
+  let driveThroughTestForFifthPerson = 80 * 5;
+  let driveThroughTestForSixthPerson = 80 * 6;
+  let driveThroughTestForSeventhPerson = 80 * 7;
+  let driveThroughTestForEighthPerson = 80 * 8;
+  let driveThroughTestForNinthPerson = 80 * 9;
+  let driveThroughTestForTenthPerson = 80 * 10;
+
+  useEffect(() => {
+    if (data[1]?.testLocation == "Home Visit") {
+      if (peoplesData.length == 1) {
+        setTotalPRice(homeTestForOnePerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 2) {
+        setTotalPRice(homeTestForTwoPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 3) {
+        setTotalPRice(homeTestForThirdPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 4) {
+        setTotalPRice(homeTestForFourthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 5) {
+        setTotalPRice(homeTestForFifthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 6) {
+        setTotalPRice(homeTestForSixthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 7) {
+        setTotalPRice(homeTestForSeventhPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 8) {
+        setTotalPRice(homeTestForEighthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 9) {
+        setTotalPRice(homeTestForNinthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 10) {
+        setTotalPRice(homeTestForTenthPerson);
+        setHideAmount(false);
+      }
+    }
+    if (peoplesData.length == 0) {
+      setHideAmount(true);
+    }
+    if (data[1].testLocation == "Drive through") {
+      if (peoplesData.length == 1) {
+        setTotalPRice(driveThroughTestForOnePerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 2) {
+        setTotalPRice(driveThroughTestForTwoPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 3) {
+        setTotalPRice(driveThroughTestForThirdPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 4) {
+        setTotalPRice(driveThroughTestForFourthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 5) {
+        setTotalPRice(driveThroughTestForFifthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 6) {
+        setTotalPRice(driveThroughTestForSixthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 7) {
+        setTotalPRice(driveThroughTestForSeventhPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 8) {
+        setTotalPRice(driveThroughTestForEighthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 9) {
+        setTotalPRice(driveThroughTestForNinthPerson);
+        setHideAmount(false);
+      }
+      if (peoplesData.length == 10) {
+        setTotalPRice(driveThroughTestForTenthPerson);
+        setHideAmount(false);
+      }
+    }
+  }, [peoplesData.length]);
+
+  useEffect(() => {
+    if (totalPrice && !hideAmount) {
+      dispatch(setPrice(totalPrice));
+    }
+  }, [totalPrice]);
 
   const dispatch = useDispatch();
 
@@ -31,7 +156,7 @@ const AppointmentSummary = ({ history }) => {
 
   const personRemoveHandler = (id) => {
     dispatch(removePersons(id));
-    
+
     setShowSecondModal(true);
   };
 
@@ -96,7 +221,7 @@ const AppointmentSummary = ({ history }) => {
                               data-bs-target="#staticBackdrop"
                               onClick={() => {
                                 setModal(true);
-                                dispatch(searchPersonForRemove(data.id))
+                                dispatch(searchPersonForRemove(data.id));
                               }}
                             >
                               Remove
@@ -111,8 +236,6 @@ const AppointmentSummary = ({ history }) => {
                                 }
                               />
                             )}
-                            
-                            
                           </div>
                         </div>
                         <div class="Person-details-info">
@@ -135,8 +258,8 @@ const AppointmentSummary = ({ history }) => {
                     </div>
                   );
                 })}
-                
-                {showSecondModal && <SecondModal showSecondModal={true}/>}
+
+                {showSecondModal && <SecondModal showSecondModal={true} />}
 
                 <div class="add-person">
                   <button
@@ -155,18 +278,20 @@ const AppointmentSummary = ({ history }) => {
           </section>
         </div>
         <section>
-          <div class="amount-due">
-            <div class="container-fluid site-container">
-              <div class="row">
-                <div class="col-6 amount-due-text">
-                  <h3>Amount due</h3>
-                </div>
-                <div class="col-6 amount-due-price">
-                  <h3>£149</h3>
+          {!hideAmount && (
+            <div class="amount-due">
+              <div class="container-fluid site-container">
+                <div class="row">
+                  <div class="col-6 amount-due-text">
+                    <h3>Amount due</h3>
+                  </div>
+                  <div class="col-6 amount-due-price">
+                    <h3>£{totalPrice}</h3>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </section>
         <section className="site-container">
           <div class="amount-due-points">

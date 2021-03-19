@@ -78,6 +78,15 @@ export const paymentDetails = (data) => async (dispatch) => {
 };
 
 
+export const setPrice = (data) => async (dispatch) => {
+    
+  try {
+    dispatch({ type: "TOTAL_PRICE", payload: data });
+
+  } catch (error) {}
+};
+
+
 
 export const postAllFormsData = (data , history) => async (dispatch) => {
 console.log("🚀 ~ file: form.js ~ line 83 ~ postAllFormsData ~ data", data)

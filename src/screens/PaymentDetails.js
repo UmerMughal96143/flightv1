@@ -7,7 +7,7 @@ import Countdown, { formatTimeDelta } from "react-countdown";
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
-  const { peoplesData, data } = useSelector((state) => state.Form);
+  const { peoplesData, data , totalPrice } = useSelector((state) => state.Form);
   const [formData, setFormData] = useState({
     cardNumber: "",
     expiryMonth: "",
@@ -91,7 +91,7 @@ const PaymentDetails = ({ history }) => {
               </p>
               <div class="Payment-Details-form">
                 <h3>
-                  Payment due: <span>£298.00</span>
+                  Payment due: <span>£{totalPrice}.00</span>
                 </h3>
                 <form>
                   <div class="Payment-form-row">

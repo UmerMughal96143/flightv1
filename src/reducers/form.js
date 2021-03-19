@@ -10,7 +10,11 @@ const iniitialState = {
   postedData: localStorage.getItem("postedData")
     ? JSON.parse(localStorage.getItem("postedData"))
     : null,
-    personForRemove : null
+    personForRemove : null,
+    totalPrice :localStorage.getItem("price")
+    ? localStorage.getItem("price")
+    : null
+
 };
 
 export const Form = (state = iniitialState, action) => {
@@ -109,6 +113,12 @@ export const Form = (state = iniitialState, action) => {
       return {
         ...state,
         postedData: action.payload,
+      };
+      case "TOTAL_PRICE":
+        localStorage.setItem("price" , action.payload)
+      return {
+        ...state,
+        totalPrice: action.payload,
       };
     default:
       return {
