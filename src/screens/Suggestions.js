@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { suggestions } from "../actions/form";
+import { setAppointmentDate, suggestions } from "../actions/form";
 import { errorNotification } from "../utils/notification";
 import date from "date-and-time";
 
@@ -13,6 +13,8 @@ const Suggestions = ({ history }) => {
   const [isTimeBt12pm12am, setTimeBt12pm12am] = useState(false);
   const [isTimeBt12am12pm, setTimeBt12am12pm] = useState(false);
   const [renderFlightTime, setRenderFlighTime] = useState(false);
+  const [continueButton, setContinueButton] = useState(false);
+  
   const [showDate, setShowDate] = useState(false);
   const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
@@ -20,11 +22,13 @@ const Suggestions = ({ history }) => {
   const [activeParagraph, setActiceParagraph] = useState("");
 
   const [selectedTimeByUser, setSelectedTimeByUser] = useState("");
-  console.log("🚀 ~ file: Suggestions.js ~ line 23 ~ Suggestions ~ selectedTimeByUser", selectedTimeByUser)
+  console.log(
+    "🚀 ~ file: Suggestions.js ~ line 23 ~ Suggestions ~ selectedTimeByUser",
+    selectedTimeByUser
+  );
   const [bestMediumWrostTimeForUser, setBestMediumWrostTimeForUser] = useState(
     []
   );
-  console.log("🚀 ~ file: Suggestions.js ~ line 417 ~ Suggestions ~ bestTime");
 
   const [startDate, setStartDate] = useState("");
 
@@ -315,7 +319,6 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "12am - 2am") {
       setBestMediumWrostTimeForUser(row1);
       setBestChoice("6am - 8am");
-      setActiceParagraph("6am - 8am");
     }
     if (formatedTime == "2am - 4am") {
       setBestMediumWrostTimeForUser(row2);
@@ -324,7 +327,6 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "4am - 6am") {
       setBestMediumWrostTimeForUser(row3);
       setBestChoice("6am - 8am");
-      setActiceParagraph("6am - 8am");
     }
     if (formatedTime == "6am - 8am") {
       setBestMediumWrostTimeForUser(row4);
@@ -333,42 +335,36 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "8am - 10am") {
       setBestMediumWrostTimeForUser(row5);
       setBestChoice("10am - 12pm");
-      setActiceParagraph("10am - 12pm");
     }
     if (formatedTime == "10am - 12pm") {
       setBestMediumWrostTimeForUser(row6);
       setBestChoice("12pm - 2pm");
-      setActiceParagraph("12pm - 2pm");
+     
     }
     if (formatedTime == "12pm - 2pm") {
       setBestMediumWrostTimeForUser(row7);
       setBestChoice("2pm - 4pm");
-      setActiceParagraph("2pm - 4pm");
     }
     if (formatedTime == "2pm - 4pm") {
       setBestMediumWrostTimeForUser(row8);
       setBestChoice("6am - 8am");
-      setActiceParagraph("6am - 8am")
     }
     if (formatedTime == "4pm - 6pm") {
       setBestMediumWrostTimeForUser(row9);
       setBestChoice("6am - 8am");
-      setActiceParagraph("6am - 8am")
     }
     if (formatedTime == "6pm - 8pm") {
       setBestMediumWrostTimeForUser(row10);
       setBestChoice("6am - 8am");
-      setActiceParagraph("6am - 8am")
     }
     if (formatedTime == "8pm - 10pm") {
       setBestMediumWrostTimeForUser(row11);
       setBestChoice("6am - 8am");
-      setActiceParagraph("6am - 8am");
+     
     }
     if (formatedTime == "10pm - 12am") {
       setBestMediumWrostTimeForUser(row12);
       setBestChoice("6am - 8am");
-      setActiceParagraph("6am - 8am");
     }
 
     if (formatedTime) {
@@ -423,15 +419,14 @@ const Suggestions = ({ history }) => {
     }
   }, [formatedTime]);
 
+  const time = React.createRef();
+
   const chooseTimeHandler = (e) => {
     setSelectedTimeByUser(e.target.textContent);
+    dispatch(setAppointmentDate(e.target.textContent))
+    setContinueButton(true)
   };
 
-  useEffect(() => {
-
-    localStorage.setItem('appointment' ,activeParagraph )
-
-  },[activeParagraph])
 
   return (
     <div>
@@ -500,6 +495,7 @@ const Suggestions = ({ history }) => {
                         setActiceParagraph(bestChoice);
                         chooseTimeHandler(e);
                       }}
+                      ref={time}
                     >
                       {bestChoice}{" "}
                       {finalDateAfterAlgo &&
@@ -560,6 +556,7 @@ const Suggestions = ({ history }) => {
                   type="submit"
                   class="Next-btn"
                   onClick={(e) => submitFormHandler(e)}
+                  disabled={continueButton ? false : true}
                 >
                   Continue
                 </button>

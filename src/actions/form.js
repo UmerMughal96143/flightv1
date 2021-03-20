@@ -1,5 +1,11 @@
 import axios from "axios";
 
+export const resetState = () => async (dispatch) => {
+  try {
+    dispatch({ type: "RESET_STATE"});
+  } catch (error) {}
+};
+
 export const bookCovidTest = (data) => async (dispatch) => {
   try {
     dispatch({ type: "BOOK_COVID_TEST", payload: data });
@@ -82,6 +88,15 @@ export const setPrice = (data) => async (dispatch) => {
     
   try {
     dispatch({ type: "TOTAL_PRICE", payload: data });
+
+  } catch (error) {}
+};
+
+
+export const setAppointmentDate = (data) => async (dispatch) => {
+    
+  try {
+    dispatch({ type: "APPOINTMENT_DATE", payload: data });
 
   } catch (error) {}
 };

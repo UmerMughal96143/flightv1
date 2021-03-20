@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { paymentDetails, postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
 import { Link, Redirect } from "react-router-dom";
-import Countdown, { formatTimeDelta } from "react-countdown";
+import Countdown, { formatTimeDelta,zeroPad } from "react-countdown";
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
-  const { peoplesData, data , totalPrice } = useSelector((state) => state.Form);
+  const { peoplesData, data , totalPrice,appointmentDate } = useSelector((state) => state.Form);
   const [formData, setFormData] = useState({
     cardNumber: "",
     expiryMonth: "",
@@ -39,6 +39,8 @@ const PaymentDetails = ({ history }) => {
       peoplesData,
       data,
       paymentData,
+      appointmentDate : appointmentDate,
+      amountPaid : totalPrice
     };
     dispatch(postAllFormsData(formData, history));
     // history.push("/bookingcomplete");
@@ -66,11 +68,14 @@ const PaymentDetails = ({ history }) => {
       // Render a countdown
       return (
         <span>
-          {minutes}:{seconds}
+          {zeroPad(minutes)}:{zeroPad(seconds)}
         </span>
       );
     }
   };
+
+  let appointmentDateFromDb = appointmentDate?.split(" ")
+
 
   return (
     <div>
@@ -86,7 +91,7 @@ const PaymentDetails = ({ history }) => {
               <p class="Payment-Details-heading">
                 Your appointment has been temporarily secured for the following
                 <br />
-                date: <span> {today}</span>
+                date: <span>{appointmentDateFromDb[4]}{" "} {appointmentDateFromDb[5]} {" " }{appointmentDateFromDb[6]}</span>
               </p>
               <p class="Payment-Details-subheading">
                 Your appointment will be held for{" "}

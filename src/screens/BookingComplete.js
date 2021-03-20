@@ -19,6 +19,8 @@ const BookingCOmplete = () => {
   
   today = mm + '/' + dd + '/' + yyyy;
 
+  let appointmentDateFromDb = postedData?.savedform?.appointmentDate.split(" ")
+
   return (
     <div>
       <section class="Appointment-Summary">
@@ -75,13 +77,13 @@ const BookingCOmplete = () => {
                   <h3 class="person-heading">Your appointment details</h3>
                   <div class="Person-details-info">
                     <p>
-                      Appointment date : {" "}<span>{today} </span>
+                      Appointment date : {" "}<span>{postedData?.savedform && appointmentDateFromDb[4]}{" "} { postedData?.savedform && appointmentDateFromDb[5]} {" " }{postedData?.savedform && appointmentDateFromDb[6]} </span>
                     </p>
                     <p>
-                      Appointment time : {" "}<span> Between 8am - 4pm</span>
+                      Appointment time : {" "}<span> Between { postedData?.savedform && appointmentDateFromDb[0]}{" "} { postedData?.savedform && appointmentDateFromDb[1]} {" " }{ postedData?.savedform && appointmentDateFromDb[2]}</span>
                     </p>
                     <p>
-                      Test type : {" "}<span> PCR Test + Fit to Fly Certificate</span>
+                      Test type : {" "}<span> {postedData?.savedform?.testType}</span>
                     </p>
                     <p>
                       Number of person : {" "}<span> {postedData?.savedform?.peoples?.length} person</span>
@@ -91,10 +93,10 @@ const BookingCOmplete = () => {
                     </p>
                     <p>
                       Appointment Location :
-                      {" "}<span> 14 Fernview Drive, Rammasbottom, BL0 9XB</span>
+                      {" "}<span> {postedData?.savedform?.address1}{" "} {postedData?.savedform?.address2} {" "} {postedData?.savedform?.city} {" "} {postedData?.savedform?.postCode}</span>
                     </p>
                     <p>
-                      Amount Paid : {" "}<span> £300.00</span>
+                    Amount Paid : {" "}<span>£{postedData?.savedform?.amountPaid}</span>
                     </p>
                   </div>
                 </div>
@@ -106,7 +108,7 @@ const BookingCOmplete = () => {
                       <div class="Booking-Complete-person-data-box">
                         <div class="Booking-Complete-person-data-box-header">
                           <h4 class="Booking-person-info">
-                            Person :{" "}
+                            Patient Name :{" "}
                             <span>
                               {peo.firstName} {peo.lastName}
                             </span>

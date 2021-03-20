@@ -13,7 +13,7 @@ import SecondModal from "../components/SecondModal";
 import { date } from "yup/lib/locale";
 
 const AppointmentSummary = ({ history }) => {
-  const { peoplesData, data } = useSelector((state) => state.Form);
+  const { peoplesData, data ,appointmentDate} = useSelector((state) => state.Form);
   const [condition1, setCondition1] = useState(false);
   const [condition2, setCondition2] = useState(false);
   const [modal, setModal] = useState(false);
@@ -170,13 +170,12 @@ const AppointmentSummary = ({ history }) => {
     window.scrollTo(0, 0);
   }, []);
 
-
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
-  
-  today = mm + '/' + dd + '/' + yyyy;
+
+  today = mm + "/" + dd + "/" + yyyy;
   return (
     <div>
       <section class="Appointment-Summary">
@@ -186,7 +185,9 @@ const AppointmentSummary = ({ history }) => {
         <div class="breaking-news-box">
           <h4 class="breaking-news">PCR Fit to Fly</h4>
           <p class="breaking-news-dec">
-            You are booking for 3 people {" "}{today} {" "} between 8am - 4pm
+            You are booking for {localStorage.getItem("numberOfUsers")} people{" "}
+            <br />
+            between {appointmentDate}
           </p>
         </div>
       </section>
@@ -196,7 +197,7 @@ const AppointmentSummary = ({ history }) => {
             <div class="Payment-Details-wrapper">
               <div class="mini-heading">
                 <p>
-                  Please check your appointment <br /> derails carefully below
+                  Please check your appointment <br /> details carefully below
                 </p>
               </div>
               <div class="appointment-derails-wrapper">
@@ -204,7 +205,7 @@ const AppointmentSummary = ({ history }) => {
                   return (
                     <div class="person-details">
                       <div class="person-info">
-                        <h3 class="person-heading">Person {data.Person} </h3>
+                        <h3 class="person-heading">Patient Name : {data.Person} </h3>
                         <div class="Person-details-name">
                           <p>
                             {data.firstName} {data.lastName} - PCR Fit to Fly

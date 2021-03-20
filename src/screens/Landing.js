@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { bookCovidTest } from "../actions/form";
+import { bookCovidTest, resetState } from "../actions/form";
 import {useDispatch} from 'react-redux'
 
 const Landing = () => {
@@ -15,7 +15,8 @@ const Landing = () => {
     localStorage.removeItem("postedData");
     localStorage.removeItem("addperson");
     localStorage.removeItem("price");
-    
+    localStorage.removeItem("appointmentDate");
+    dispatch(resetState())
     
 
   },[])
@@ -61,7 +62,7 @@ const Landing = () => {
                              </div>
                           </div>
                           <div className="col-9 p-0 ml-auto">
-                          <Link to="/testlocation" onClick={() => dispatch(bookCovidTest('I am Not travelling but need a test'))}>
+                          <Link to="/testlocation" onClick={() => dispatch(bookCovidTest({ title : 'I am Not travelling but need a test' , testType : 'PCR Test'}))}>
                           <button class="tickets-button" >Book</button>
                         </Link>
                           </div>
@@ -97,7 +98,7 @@ const Landing = () => {
                           </div>
                         </div>
                         <div className="col-9 p-0 ml-auto">
-                        <Link to="/testlocation"  onClick={() => dispatch(bookCovidTest('I am travelling out of the UK'))}>
+                        <Link to="/testlocation"  onClick={() => dispatch(bookCovidTest({ title : 'I am travelling out of the UK' , testType : 'PCR Test + Fit to Fly certificate'}))}>
                           <button class="tickets-button">Book</button>
                         </Link>
                         </div>
@@ -131,7 +132,7 @@ const Landing = () => {
                           </div>
                         </div>
                         <div className="col-9 p-0 ml-auto">
-                        <Link to="/testlocation" onClick={() => dispatch(bookCovidTest('I am arriving in England'))}>
+                        <Link to="/testlocation" onClick={() => dispatch(bookCovidTest({ title : 'I am arriving in England' , testType : 'PCR Test'}))}>
                           <button class="tickets-button">Book</button>
                         </Link>
                         </div>

@@ -10,21 +10,21 @@ const iniitialState = {
   postedData: localStorage.getItem("postedData")
     ? JSON.parse(localStorage.getItem("postedData"))
     : null,
-    personForRemove : null,
-    totalPrice :localStorage.getItem("price")
+  personForRemove: null,
+  totalPrice: localStorage.getItem("price")
     ? localStorage.getItem("price")
-    : null
-
+    : null,
+  appointmentDate: localStorage.getItem("appointmentDate")
+    ? localStorage.getItem("appointmentDate")
+    : null,
 };
 
 export const Form = (state = iniitialState, action) => {
   switch (action.type) {
     case "BOOK_COVID_TEST":
-      let obj = {
-        title: action.payload,
-      };
+      console.log(action.payload);
       let arr = [];
-      arr.push(obj);
+      arr.push(action.payload);
       localStorage.setItem("form", JSON.stringify(arr));
       return {
         ...state,
@@ -101,7 +101,7 @@ export const Form = (state = iniitialState, action) => {
         ...state,
         data: [...state.data, action.payload],
       };
-      case "SEARCHE_PERSON_FOR_REMOVING":
+    case "SEARCHE_PERSON_FOR_REMOVING":
       let searchedPerson = state.peoplesData.find(
         (f) => f.id == action.payload
       );
@@ -112,14 +112,33 @@ export const Form = (state = iniitialState, action) => {
     case "POST_FORM_DATA_SUCCESS":
       return {
         ...state,
-        postedData: action.payload,
+        postedData: action.payload
       };
-      case "TOTAL_PRICE":
-        localStorage.setItem("price" , action.payload)
+    case "TOTAL_PRICE":
+      localStorage.setItem("price", action.payload);
       return {
         ...state,
         totalPrice: action.payload,
       };
+    case "APPOINTMENT_DATE":
+      localStorage.setItem("appointmentDate", action.payload);
+      return {
+        ...state,
+        appointmentDate: action.payload,
+      };
+
+      case "RESET_STATE" : 
+      return{
+        data: [],
+      loading: false,
+      peoplesData:  [],
+      editMan: null,
+      postedData: null,
+      personForRemove: null,
+      totalPrice:  null,
+      appointmentDate: null,
+      
+      }
     default:
       return {
         ...state,

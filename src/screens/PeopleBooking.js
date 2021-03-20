@@ -46,7 +46,7 @@ const PeopleBooking = (props) => {
   });
   const [NumberOfPersonsLimit, setNumberOfPersonsLimit] = useState(1);
 
-  const { peoplesData, editMan } = useSelector((state) => state.Form);
+  const { peoplesData, editMan , appointmentDate } = useSelector((state) => state.Form);
 
   let sexArray = ["Male", "Female"];
   let ethinicityArray = [
@@ -228,7 +228,7 @@ const PeopleBooking = (props) => {
                   <p class="PRC-flite-dec">
                     You are booking for {localStorage.getItem("numberOfUsers")}{" "}
                     people <br />
-                    {today} between 8am - 4pm
+                    between {appointmentDate}
                   </p>
                   {!localStorage.getItem("addperson") && !editMan && (
                     <button class="passenger-btn">
