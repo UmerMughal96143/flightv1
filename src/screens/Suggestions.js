@@ -8,7 +8,6 @@ import date from "date-and-time";
 const Suggestions = ({ history }) => {
   const [flightTime, setFlightTime] = useState("");
 
-
   const [formatedTime, setFormatedTime] = useState("");
 
   const [isTimeBt12pm12am, setTimeBt12pm12am] = useState(false);
@@ -18,9 +17,13 @@ const Suggestions = ({ history }) => {
   const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
   const [bestChoice, setBestChoice] = useState("");
+
+  const [selectedTimeByUser, setSelectedTimeByUser] = useState("");
   const [bestMediumWrostTimeForUser, setBestMediumWrostTimeForUser] = useState(
     []
   );
+  console.log("🚀 ~ file: Suggestions.js ~ line 417 ~ Suggestions ~ bestTime", )
+
 
   const [startDate, setStartDate] = useState("");
 
@@ -99,8 +102,6 @@ const Suggestions = ({ history }) => {
 
   let currentTime = formatAMPM(new Date());
 
-
-
   useEffect(() => {
     if (isTimeBt12am12pm) {
       const getdate = () => {
@@ -137,8 +138,6 @@ const Suggestions = ({ history }) => {
       getdate();
     }
   }, [isTimeBt12am12pm, isTimeBt12pm12am, startDate]);
-
-
 
   useEffect(() => {
     if (flightTime) {
@@ -414,8 +413,12 @@ const Suggestions = ({ history }) => {
   }, [formatedTime]);
 
   const chooseTimeHandler = (e) => {
-    e.preventDefault();
+    console.log(e.target.textContent);
   };
+
+
+
+  
 
   return (
     <div>
@@ -448,9 +451,9 @@ const Suggestions = ({ history }) => {
               </div>
               <div className="form-group">
                 <div class="form-group">
-                <p class="appointment-form-heading appointment-date-div">
-                  What time if your flight?
-                </p>
+                  <p class="appointment-form-heading appointment-date-div">
+                    What time if your flight?
+                  </p>
                   <div class="suggestion-date-row">
                     <input
                       type="time"
@@ -473,14 +476,14 @@ const Suggestions = ({ history }) => {
                     Best choice
                   </h3>
                   <div class="suggest-best-time">
-                    <button class="suggest-best-time-btn">
-                      <span>{bestChoice}</span>{" "}
+                    <p class="suggest-best-time-btn" style={{textAlign : 'center'}}>
+                      {bestChoice}{" "}
                       {finalDateAfterAlgo &&
-                              date.format(
-                                new Date(finalDateAfterAlgo),
-                                " DD MMM YYYY"
-                              )}
-                    </button>
+                        date.format(
+                          new Date(finalDateAfterAlgo),
+                          " DD MMM YYYY"
+                        )}
+                    </p>
                   </div>
 
                   <div class="user-choose">
@@ -488,8 +491,9 @@ const Suggestions = ({ history }) => {
                     {bestMediumWrostTimeForUser?.map((time) => {
                       return (
                         <div class="user-choose-box">
-                          <button
+                          <p
                             class="user-choose-conent"
+                            style={{textAlign : 'center'}}
                             onClick={(e) => chooseTimeHandler(e)}
                           >
                             {time}{" "}
@@ -498,7 +502,7 @@ const Suggestions = ({ history }) => {
                                 new Date(finalDateAfterAlgo),
                                 " DD MMM YYYY"
                               )}
-                          </button>
+                          </p>
                         </div>
                       );
                     })}
