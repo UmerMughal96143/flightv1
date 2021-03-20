@@ -17,13 +17,14 @@ const Suggestions = ({ history }) => {
   const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
   const [bestChoice, setBestChoice] = useState("");
+  const [activeParagraph, setActiceParagraph] = useState("");
 
   const [selectedTimeByUser, setSelectedTimeByUser] = useState("");
+  console.log("🚀 ~ file: Suggestions.js ~ line 23 ~ Suggestions ~ selectedTimeByUser", selectedTimeByUser)
   const [bestMediumWrostTimeForUser, setBestMediumWrostTimeForUser] = useState(
     []
   );
-  console.log("🚀 ~ file: Suggestions.js ~ line 417 ~ Suggestions ~ bestTime", )
-
+  console.log("🚀 ~ file: Suggestions.js ~ line 417 ~ Suggestions ~ bestTime");
 
   const [startDate, setStartDate] = useState("");
 
@@ -314,6 +315,7 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "12am - 2am") {
       setBestMediumWrostTimeForUser(row1);
       setBestChoice("6am - 8am");
+      setActiceParagraph("6am - 8am");
     }
     if (formatedTime == "2am - 4am") {
       setBestMediumWrostTimeForUser(row2);
@@ -322,6 +324,7 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "4am - 6am") {
       setBestMediumWrostTimeForUser(row3);
       setBestChoice("6am - 8am");
+      setActiceParagraph("6am - 8am");
     }
     if (formatedTime == "6am - 8am") {
       setBestMediumWrostTimeForUser(row4);
@@ -330,34 +333,42 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "8am - 10am") {
       setBestMediumWrostTimeForUser(row5);
       setBestChoice("10am - 12pm");
+      setActiceParagraph("10am - 12pm");
     }
     if (formatedTime == "10am - 12pm") {
       setBestMediumWrostTimeForUser(row6);
       setBestChoice("12pm - 2pm");
+      setActiceParagraph("12pm - 2pm");
     }
     if (formatedTime == "12pm - 2pm") {
       setBestMediumWrostTimeForUser(row7);
       setBestChoice("2pm - 4pm");
+      setActiceParagraph("2pm - 4pm");
     }
     if (formatedTime == "2pm - 4pm") {
       setBestMediumWrostTimeForUser(row8);
       setBestChoice("6am - 8am");
+      setActiceParagraph("6am - 8am")
     }
     if (formatedTime == "4pm - 6pm") {
       setBestMediumWrostTimeForUser(row9);
       setBestChoice("6am - 8am");
+      setActiceParagraph("6am - 8am")
     }
     if (formatedTime == "6pm - 8pm") {
       setBestMediumWrostTimeForUser(row10);
       setBestChoice("6am - 8am");
+      setActiceParagraph("6am - 8am")
     }
     if (formatedTime == "8pm - 10pm") {
       setBestMediumWrostTimeForUser(row11);
       setBestChoice("6am - 8am");
+      setActiceParagraph("6am - 8am");
     }
     if (formatedTime == "10pm - 12am") {
       setBestMediumWrostTimeForUser(row12);
       setBestChoice("6am - 8am");
+      setActiceParagraph("6am - 8am");
     }
 
     if (formatedTime) {
@@ -413,12 +424,14 @@ const Suggestions = ({ history }) => {
   }, [formatedTime]);
 
   const chooseTimeHandler = (e) => {
-    console.log(e.target.textContent);
+    setSelectedTimeByUser(e.target.textContent);
   };
 
+  useEffect(() => {
 
+    localStorage.setItem('appointment' ,activeParagraph )
 
-  
+  },[activeParagraph])
 
   return (
     <div>
@@ -476,7 +489,18 @@ const Suggestions = ({ history }) => {
                     Best choice
                   </h3>
                   <div class="suggest-best-time">
-                    <p class="suggest-best-time-btn" style={{textAlign : 'center'}}>
+                    <p
+                      class={`${
+                        activeParagraph == bestChoice
+                          ? "active"
+                          : "user-choose-conent"
+                      }`}
+                      style={{ textAlign: "center" }}
+                      onClick={(e) => {
+                        setActiceParagraph(bestChoice);
+                        chooseTimeHandler(e);
+                      }}
+                    >
                       {bestChoice}{" "}
                       {finalDateAfterAlgo &&
                         date.format(
@@ -488,13 +512,20 @@ const Suggestions = ({ history }) => {
 
                   <div class="user-choose">
                     <p class="user-choose-heading">You can also choose</p>
-                    {bestMediumWrostTimeForUser?.map((time) => {
+                    {bestMediumWrostTimeForUser?.map((time, index) => {
                       return (
-                        <div class="user-choose-box">
+                        <div class="user-choose-box" key={index}>
                           <p
-                            class="user-choose-conent"
-                            style={{textAlign : 'center'}}
-                            onClick={(e) => chooseTimeHandler(e)}
+                            class={`${
+                              activeParagraph == time
+                                ? "active"
+                                : "user-choose-conent"
+                            }`}
+                            style={{ textAlign: "center" }}
+                            onClick={(e) => {
+                              setActiceParagraph(time);
+                              chooseTimeHandler(e);
+                            }}
                           >
                             {time}{" "}
                             {finalDateAfterAlgo &&

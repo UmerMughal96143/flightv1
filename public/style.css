@@ -710,7 +710,7 @@ body .modal{
     padding: 10px 0px;
     border-radius: 5px;
 }
-.user-choose-conent:active{
+.active{
     background-color: #1E9190;
     border: 1px solid #1E9190;
     color: white;
