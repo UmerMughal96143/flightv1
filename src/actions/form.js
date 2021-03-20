@@ -89,7 +89,6 @@ export const setPrice = (data) => async (dispatch) => {
 
 
 export const postAllFormsData = (data , history) => async (dispatch) => {
-console.log("🚀 ~ file: form.js ~ line 83 ~ postAllFormsData ~ data", data)
     
   try {
     // const res =  await axios.post('http://localhost:3008/flight/api/v1/form' , data)

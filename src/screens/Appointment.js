@@ -10,10 +10,7 @@ const Appointment = ({ history }) => {
   const [addressResult, setAddressResult] = useState("");
 
   const [dropDownAddressIndex, setDropdownAddressIndex] = useState("");
-  console.log(
-    "🚀 ~ file: Appointment.js ~ line 12 ~ Appointment ~ dropDownAddressIndex",
-    dropDownAddressIndex
-  );
+ 
 
   const [isAddressSuccess, setAddressSuccess] = useState(false);
   const [isError, setIsError] = useState(true);
@@ -31,10 +28,7 @@ const Appointment = ({ history }) => {
     postCode: "",
   });
   const { address1, address2, city, postCode } = formData;
-  console.log(
-    "🚀 ~ file: Appointment.js ~ line 29 ~ Appointment ~ formData",
-    formData
-  );
+
 
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

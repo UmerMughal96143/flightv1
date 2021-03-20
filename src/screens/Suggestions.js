@@ -7,10 +7,15 @@ import date from "date-and-time";
 
 const Suggestions = ({ history }) => {
   const [flightTime, setFlightTime] = useState("");
+
+
   const [formatedTime, setFormatedTime] = useState("");
-  const [currentFormattedTime, setCurrentFormattedTime] = useState("");
+
   const [isTimeBt12pm12am, setTimeBt12pm12am] = useState(false);
   const [isTimeBt12am12pm, setTimeBt12am12pm] = useState(false);
+  const [renderFlightTime, setRenderFlighTime] = useState(false);
+  const [showDate, setShowDate] = useState(false);
+  const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
   const [bestChoice, setBestChoice] = useState("");
   const [bestMediumWrostTimeForUser, setBestMediumWrostTimeForUser] = useState(
@@ -26,23 +31,6 @@ const Suggestions = ({ history }) => {
   var day = new Date();
   var nextDay = new Date(day);
   nextDay.setDate(day.getDate() + 1);
-  console.log(nextDay, "nextDay"); // May 01 2000
-
-  let flightTimes = [
-    "1am - 3am",
-    "3am - 5am",
-    "5am - 7am",
-    "7am - 9am",
-    "9am - 11am",
-    "11am - 1pm",
-    "1pm - 3pm",
-    "3pm - 5pm",
-    "5pm - 7pm",
-    "7pm - 9pm",
-    "9pm - 11pm",
-    "11pm - 1am",
-  ];
-
   const submitFormHandler = (e) => {
     e.preventDefault();
     if (flightTime && startDate) {
@@ -81,6 +69,7 @@ const Suggestions = ({ history }) => {
     }
     setTimeToAmPm(hours + ":" + minutes + " " + meridian);
     setFlightTime(e.target.value);
+    setRenderFlighTime(!renderFlightTime);
   };
 
   let row1 = ["8am - 10am", "10am - 12pm", "12pm - 2pm", "2pm - 4pm"];
@@ -110,252 +99,51 @@ const Suggestions = ({ history }) => {
 
   let currentTime = formatAMPM(new Date());
 
-  console.log(currentTime);
 
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = mm + "/" + dd + "/" + yyyy;
-  console.log(today);
-
-  // useEffect(() => {
-
-  //   if(isTimeBt12am12pm){
-  //   // alert("Time rely between 12 am to 12 pm")
-
-  //   }
-  //   if(isTimeBt12pm12am){
-  //     // alert("Time rely between 12 pm to 12 am")
-
-  //     }
-
-  // },[isTimeBt12am12pm,isTimeBt12pm12am])
 
   useEffect(() => {
-    if (currentFormattedTime) {
-      if (currentFormattedTime == "12am - 2am") {
-        setTimeBt12am12pm(true);
-        return;
-      }
-      if (currentFormattedTime == "2am - 4am") {
-        setTimeBt12am12pm(true);
-        return;
-      }
-      if (currentFormattedTime == "4am - 6am") {
-        setTimeBt12am12pm(true);
-        return;
-      }
-      if (currentFormattedTime == "6am - 8am") {
-        setTimeBt12am12pm(true);
-        return;
-      }
-      if (currentFormattedTime == "8am - 10am") {
-        setTimeBt12am12pm(true);
-        return;
-      }
-      if (currentFormattedTime == "10am - 12pm") {
-        setTimeBt12am12pm(true);
-        return;
-      }
-      if (currentFormattedTime == "12pm - 2pm") {
-        setTimeBt12pm12am(true);
-        return;
-      }
-      if (currentFormattedTime == "2pm - 4pm") {
-        setTimeBt12pm12am(true);
-        return;
-      }
-      if (currentFormattedTime == "4pm - 6pm") {
-        setTimeBt12pm12am(true);
-        return;
-      }
-      if (currentFormattedTime == "6pm - 8pm") {
-        setTimeBt12pm12am(true);
-        return;
-      }
-      if (currentFormattedTime == "8pm - 10pm") {
-        setTimeBt12pm12am(true);
-        return;
-      }
-      if (currentFormattedTime == "10pm - 12am") {
-        setTimeBt12pm12am(true);
-        return;
-      }
+    if (isTimeBt12am12pm) {
+      const getdate = () => {
+        var date = new Date(startDate);
+        var newdate = new Date(date);
+
+        newdate.setDate(newdate.getDate() - 3);
+
+        var dd = newdate.getDate();
+        var mm = newdate.getMonth() + 1;
+        var y = newdate.getFullYear();
+
+        var someFormattedDate = mm + "/" + dd + "/" + y;
+
+        setFinalDateAfterAlgo(someFormattedDate);
+      };
+
+      getdate();
     }
-  }, [currentFormattedTime]);
+    if (isTimeBt12pm12am) {
+      const getdate = () => {
+        var date = new Date(startDate);
+        var newdate = new Date(date);
 
-  useEffect(() => {
-    if (currentTime) {
-      let splitedTimeHour = currentTime.split(":")[0];
-      if (
-        splitedTimeHour == "01" ||
-        splitedTimeHour == "02" ||
-        splitedTimeHour == "03" ||
-        splitedTimeHour == "04" ||
-        splitedTimeHour == "05" ||
-        splitedTimeHour == "06" ||
-        splitedTimeHour == "07" ||
-        splitedTimeHour == "08" ||
-        splitedTimeHour == "09"
-      ) {
-        splitedTimeHour = currentTime.slice(splitedTimeHour.length - 1);
-      }
-      let splitedTimeZone = currentTime.split(" ")[1].toLowerCase();
-      if (splitedTimeHour % 2 == 1) {
-        let newXone;
-        if (splitedTimeHour == 10 || splitedTimeHour == 12) {
-          newXone = "pm";
-          let prevHour;
-          prevHour = parseInt(splitedTimeHour) - 1;
-          let nextHour;
-          nextHour = parseInt(splitedTimeHour) + 1;
-          setFormatedTime(
-            prevHour + splitedTimeZone + " " + "-" + " " + nextHour + newXone
-          );
-          return;
-        }
-        if (splitedTimeHour == 1 && splitedTimeZone == "pm") {
-          newXone = "pm";
-          let prevHour;
-          prevHour = 12;
-          let nextHour;
-          nextHour = parseInt(splitedTimeHour) + 1;
-          setCurrentFormattedTime(
-            `${
-              prevHour + splitedTimeZone + " " + "-" + " " + nextHour + newXone
-            }`
-          );
-          return;
-        }
-        if (splitedTimeHour == 1 && splitedTimeZone == "am") {
-          newXone = "am";
-          let prevHour;
-          prevHour = 12;
-          let nextHour;
-          nextHour = parseInt(splitedTimeHour) + 1;
-          setCurrentFormattedTime(
-            `${
-              prevHour + splitedTimeZone + " " + "-" + " " + nextHour + newXone
-            }`
-          );
-          return;
-        }
-        if (splitedTimeHour == 11 && splitedTimeZone == "pm") {
-          newXone = "am";
-          let prevHour;
-          prevHour = 10;
-          let nextHour;
-          nextHour = parseInt(splitedTimeHour) + 1;
-          setCurrentFormattedTime(
-            `${
-              prevHour + splitedTimeZone + " " + "-" + " " + nextHour + newXone
-            }`
-          );
-          return;
-        }
-        if (splitedTimeHour == 11 && splitedTimeZone == "am") {
-          newXone = "pm";
-          let prevHour;
-          prevHour = 10;
-          let nextHour;
-          nextHour = parseInt(splitedTimeHour) + 1;
-          setCurrentFormattedTime(
-            `${
-              prevHour + splitedTimeZone + " " + "-" + " " + nextHour + newXone
-            }`
-          );
-          return;
-        }
-        let prevHour;
-        prevHour = parseInt(splitedTimeHour) - 1;
-        let nextHour;
-        nextHour = parseInt(splitedTimeHour) + 1;
-        setCurrentFormattedTime(
-          `${
-            prevHour +
-            splitedTimeZone +
-            " " +
-            "-" +
-            " " +
-            nextHour +
-            splitedTimeZone
-          }`
-        );
-      } else {
-        let newXone;
-        if (splitedTimeHour == 10 && splitedTimeZone == "am") {
-          newXone = "pm";
-          let nextHour;
-          nextHour = parseInt(splitedTimeHour) + 2;
-          setCurrentFormattedTime(
-            `${
-              splitedTimeHour +
-              splitedTimeZone +
-              " " +
-              "-" +
-              " " +
-              nextHour +
-              newXone
-            }`
-          );
+        newdate.setDate(newdate.getDate() - 2);
 
-          return;
-        }
-        if (splitedTimeHour == 10 && splitedTimeZone == "pm") {
-          newXone = "am";
-          let nextHour;
-          nextHour = parseInt(splitedTimeHour) + 2;
-          setCurrentFormattedTime(
-            `${
-              splitedTimeHour +
-              splitedTimeZone +
-              " " +
-              "-" +
-              " " +
-              nextHour +
-              newXone
-            }`
-          );
-          return;
-        }
-        if (splitedTimeHour == 12) {
-          let nextHour;
-          nextHour = (parseInt(splitedTimeHour) % 12) + 2;
-          setCurrentFormattedTime(
-            `${
-              splitedTimeHour +
-              splitedTimeZone +
-              " " +
-              "-" +
-              " " +
-              nextHour +
-              splitedTimeZone
-            }`
-          );
-          return;
-        }
+        var dd = newdate.getDate();
+        var mm = newdate.getMonth() + 1;
+        var y = newdate.getFullYear();
 
-        let nextHour;
-        nextHour = parseInt(splitedTimeHour) + 2;
-        setCurrentFormattedTime(
-          `${
-            splitedTimeHour +
-            splitedTimeZone +
-            " " +
-            "-" +
-            " " +
-            nextHour +
-            splitedTimeZone
-          }`
-        );
-      }
+        var someFormattedDate = mm + "/" + dd + "/" + y;
+        setFinalDateAfterAlgo(someFormattedDate);
+      };
+      getdate();
     }
-  }, [currentTime]);
+  }, [isTimeBt12am12pm, isTimeBt12pm12am, startDate]);
+
+
 
   useEffect(() => {
     if (flightTime) {
+      setTimeBt12pm12am(false);
+      setTimeBt12am12pm(false);
       let splitedTimeHour = amPmTime.split(":")[0];
       if (
         splitedTimeHour == "01" ||
@@ -452,7 +240,6 @@ const Suggestions = ({ history }) => {
             splitedTimeZone
           }`
         );
-        //  console.log("🚀 ~ file: Suggestions.js ~ line 92 ~ useEffect ~ nextHour", nextHour + splitedTimeZone)
       } else {
         let newXone;
         if (splitedTimeHour == 10 && splitedTimeZone == "am") {
@@ -522,7 +309,7 @@ const Suggestions = ({ history }) => {
         );
       }
     }
-  }, [flightTime]);
+  }, [flightTime, renderFlightTime]);
 
   useEffect(() => {
     if (formatedTime == "12am - 2am") {
@@ -573,6 +360,57 @@ const Suggestions = ({ history }) => {
       setBestMediumWrostTimeForUser(row12);
       setBestChoice("6am - 8am");
     }
+
+    if (formatedTime) {
+      if (formatedTime == "12am - 2am") {
+        setTimeBt12am12pm(true);
+        return;
+      }
+      if (formatedTime == "2am - 4am") {
+        setTimeBt12am12pm(true);
+        return;
+      }
+      if (formatedTime == "4am - 6am") {
+        setTimeBt12am12pm(true);
+        return;
+      }
+      if (formatedTime == "6am - 8am") {
+        setTimeBt12am12pm(true);
+        return;
+      }
+      if (formatedTime == "8am - 10am") {
+        setTimeBt12am12pm(true);
+        return;
+      }
+      if (formatedTime == "10am - 12pm") {
+        setTimeBt12am12pm(true);
+        return;
+      }
+      if (formatedTime == "12pm - 2pm") {
+        setTimeBt12pm12am(true);
+        return;
+      }
+      if (formatedTime == "2pm - 4pm") {
+        setTimeBt12pm12am(true);
+        return;
+      }
+      if (formatedTime == "4pm - 6pm") {
+        setTimeBt12pm12am(true);
+        return;
+      }
+      if (formatedTime == "6pm - 8pm") {
+        setTimeBt12pm12am(true);
+        return;
+      }
+      if (formatedTime == "8pm - 10pm") {
+        setTimeBt12pm12am(true);
+        return;
+      }
+      if (formatedTime == "10pm - 12am") {
+        setTimeBt12pm12am(true);
+        return;
+      }
+    }
   }, [formatedTime]);
 
   const chooseTimeHandler = (e) => {
@@ -619,7 +457,9 @@ const Suggestions = ({ history }) => {
                       class={`form-control`}
                       name="dob"
                       value={flightTime}
-                      onChange={(e) => onTimeChange(e)}
+                      onChange={(e) => {
+                        onTimeChange(e);
+                      }}
                     />
                   </div>
                 </div>
@@ -635,9 +475,11 @@ const Suggestions = ({ history }) => {
                   <div class="suggest-best-time">
                     <button class="suggest-best-time-btn">
                       <span>{bestChoice}</span>{" "}
-                      {isTimeBt12pm12am
-                        ? `${date.format(nextDay, " DD MMM YYYY")}`
-                        : `${date.format(now, " DD MMM YYYY")}`}
+                      {finalDateAfterAlgo &&
+                              date.format(
+                                new Date(finalDateAfterAlgo),
+                                " DD MMM YYYY"
+                              )}
                     </button>
                   </div>
 
@@ -651,9 +493,11 @@ const Suggestions = ({ history }) => {
                             onClick={(e) => chooseTimeHandler(e)}
                           >
                             {time}{" "}
-                            {isTimeBt12pm12am
-                              ? `${date.format(nextDay, " DD MMM YYYY")}`
-                              : `${date.format(now, "DD MMM YYYY")}`}
+                            {finalDateAfterAlgo &&
+                              date.format(
+                                new Date(finalDateAfterAlgo),
+                                " DD MMM YYYY"
+                              )}
                           </button>
                         </div>
                       );

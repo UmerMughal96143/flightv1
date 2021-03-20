@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 const Header = ({ history }) => {
-  console.log(history);
   return (
     <>
       {history.location.pathname == "/" ? (
