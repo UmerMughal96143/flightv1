@@ -601,11 +601,11 @@ useEffect(() => {
           </section>
           <section>
             <form class="appointment-form">
-              <p class="appointment-form-heading">
-                What is your departure date?
-              </p>
-              <div class="suggestion-date-row">
-                <div class="form-group">
+              <div class="form-group">
+                <p class="appointment-form-heading">
+                  What is your departure date?
+                </p>
+                <div class="suggestion-date-row">
                   <input
                     type="date"
                     class={`form-control`}
@@ -615,12 +615,12 @@ useEffect(() => {
                   />
                 </div>
               </div>
-              <div>
+              <div className="form-group">
+                <div class="form-group">
                 <p class="appointment-form-heading appointment-date-div">
                   What time if your flight?
                 </p>
-                <div class="suggestion-date-row">
-                  <div class="form-group">
+                  <div class="suggestion-date-row">
                     <input
                       type="time"
                       class={`form-control`}
