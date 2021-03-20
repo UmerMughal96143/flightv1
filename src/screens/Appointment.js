@@ -167,52 +167,58 @@ const Appointment = ({ history }) => {
                 Please Select your billing address
               </p>
             ) : (
-              <p class="appointment-form-heading">
-                Please Select which address you would like to have appointed
-              </p>
+              <div className="form-group">
+                  <p class="appointment-form-heading">
+                    Please Select which address you would like to have appointed
+                  </p>
+              </div>
             )}
 
-            <div class="appointment-user-address-row row">
-              <div class="form-group col-md-8 col-7">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Postal Code"
-                  onChange={(e) => setPostCode(e.target.value)}
-                  required
-                  value={postcode.toUpperCase()}
-                />
-              </div>
-              <div class="form-group col-md-4 col-5 Find-Address-btn pl-2">
-                <button
-                  class="tickets-button"
-                  onClick={(e) => findAddressHandler(e)}
-                >
-                  Find Address
-                </button>
+            <div className="form-group">
+              <div class="appointment-user-address-row row">
+                <div class="col-md-8 col-7">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Postal Code"
+                    onChange={(e) => setPostCode(e.target.value)}
+                    required
+                    value={postcode.toUpperCase()}
+                  />
+                </div>
+                <div class="col-md-4 col-5 Find-Address-btn pl-2">
+                  <button
+                    class="tickets-button"
+                    onClick={(e) => findAddressHandler(e)}
+                  >
+                    Find Address
+                  </button>
+                </div>
               </div>
             </div>
             {isAddressSuccess && (
-              <div class="selectdiv mb-3">
-                <select
-                  onChange={(e) => {
-                    setDropdownAddressIndex(e.target.value);
-                  }}
-                  required
-                >
-                  <option value="" defaultValue>
-                    ---Please Select your address---
-                  </option>
-                  {finalAddressArrayyy &&
-                    finalAddressArrayyy.map((state, index) => {
-                      return (
-                        <option key={index} value={index}>
-                          {state.line_1} {state.line_2}{" "}
-                          {state.organisation_name} {state.townCity}{" "}
-                        </option>
-                      );
-                    })}
-                </select>
+              <div className="form-group">
+                  <div class="selectdiv mb-3">
+                    <select
+                      onChange={(e) => {
+                        setDropdownAddressIndex(e.target.value);
+                      }}
+                      required
+                    >
+                      <option value="" defaultValue>
+                        ---Please Select your address---
+                      </option>
+                      {finalAddressArrayyy &&
+                        finalAddressArrayyy.map((state, index) => {
+                          return (
+                            <option key={index} value={index}>
+                              {state.line_1} {state.line_2}{" "}
+                              {state.organisation_name} {state.townCity}{" "}
+                            </option>
+                          );
+                        })}
+                    </select>
+                  </div>
               </div>
             )}
 
@@ -250,7 +256,7 @@ const Appointment = ({ history }) => {
             {dropDownAddressIndex && (
               <>
                 <div className="form-group ">
-                  <p className="mb-2 appointment-form-heading">
+                  <p className="appointment-form-heading">
                     Street Address Line 1
                   </p>
                   <input
@@ -261,7 +267,7 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-2 appointment-form-heading">
+                  <p className="appointment-form-heading">
                     Street Address Line 2
                   </p>
                   <input
@@ -272,7 +278,7 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-2 appointment-form-heading">City</p>
+                  <p className="appointment-form-heading">City</p>
                   <input
                     className="form-control"
                     name="city"
@@ -281,7 +287,7 @@ const Appointment = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <p className="mb-2 appointment-form-heading">Postcode</p>
+                  <p className="appointment-form-heading">Postcode</p>
                   <input
                     className="form-control"
                     name="postCode"

@@ -102,86 +102,88 @@ const PaymentDetails = ({ history }) => {
                   Payment due: <span>£{totalPrice}.00</span>
                 </h3>
                 <form>
-                  <div class="Payment-form-row">
-                    <p>Card number*</p>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="cardNumber"
-                      onChange={(e) => onFormChange(e)}
-                      value={cardNumber}
-                    />
+                  <div class="form-group">
+                      <p>Card number*</p>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="cardNumber"
+                        onChange={(e) => onFormChange(e)}
+                        value={cardNumber}
+                      />
                   </div>
-                  <div className="Payment-form-row">
-                    <p>Expiry Date*</p>
-                    {/* <div class="expiration"> */}
-                      <span class="expiration-input-wrapper">
-                        <input
-                          type="text"
-                          name="expiryMonth"
-                          placeholder="MM"
-                          maxlength="2"
-                          size="2"
-                          required="true"
-                          class="input-month"
-                          onChange={(e) => onFormChange(e)}
-                          value={expiryMonth}
-                          style={{textAlign : 'center' , marginRight : '7px' , width : '90px'}}
-                        />
-                        <input
-                          type="text"
-                          name="expiryYear"
-                          placeholder="YY"
-                          maxlength="2"
-                          size="2"
-                          required="true"
-                          class="input-year"
-                          onChange={(e) => onFormChange(e)}
-                          value={expiryYear}
-                          style={{textAlign : 'center',width : '90px'}}
+                  <div className="form-group">
+                      <p>Expiry Date*</p>
+                      {/* <div class="expiration"> */}
+                        <span class="expiration-input-wrapper">
+                          <input
+                            type="text"
+                            name="expiryMonth"
+                            placeholder="MM"
+                            maxlength="2"
+                            size="2"
+                            required="true"
+                            class="input-month"
+                            onChange={(e) => onFormChange(e)}
+                            value={expiryMonth}
+                            style={{textAlign : 'center' , marginRight : '7px' , width : '90px'}}
+                          />
+                          <input
+                            type="text"
+                            name="expiryYear"
+                            placeholder="YY"
+                            maxlength="2"
+                            size="2"
+                            required="true"
+                            class="input-year"
+                            onChange={(e) => onFormChange(e)}
+                            value={expiryYear}
+                            style={{textAlign : 'center',width : '90px'}}
 
-                        />
-                      </span>
-                    {/* </div> */}
+                          />
+                        </span>
+                      {/* </div> */}
                   </div>
-                  <div class="Payment-form-row">
-                    <p>Cardholder name*</p>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="cardHolderName"
-                      onChange={(e) => onFormChange(e)}
-                      value={cardHolderName}
-                    />
+                  <div class="form-group">
+                      <p>Cardholder name*</p>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="cardHolderName"
+                        onChange={(e) => onFormChange(e)}
+                        value={cardHolderName}
+                      />
                   </div>
-                  <div class="Payment-form-row">
-                    <p>CVV*</p>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="cvv"
-                      onChange={(e) => onFormChange(e)}
-                      value={cvv}
-                    />
+                  <div class="form-group">
+                      <p>CVV*</p>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="cvv"
+                        onChange={(e) => onFormChange(e)}
+                        value={cvv}
+                      />
                   </div>
-                  <div class="Payment-form-row Billing-address">
-                    <p>
-                      Billing address{" "}
-                      <i
-                        class="fas fa-pen"
-                        onClick={() => {
-                          localStorage.setItem("editaddress", true);
-                          history.push("/appointment");
-                        }}
-                      ></i>
-                    </p>
-                    <div class="travelling-tickets">
+                  <div class="form-group">
+                    <div className="Billing-address">
                       <p>
-                        {" "}
-                        {data[2]?.address1} {data[2]?.address2}{" "}
-                        {data[2]?.address3} {data[2]?.city} {data[2]?.country}{" "}
-                        {data[2]?.postCode}{" "}
+                        Billing address{" "}
+                        <i
+                          class="fas fa-pen"
+                          onClick={() => {
+                            localStorage.setItem("editaddress", true);
+                            history.push("/appointment");
+                          }}
+                        ></i>
                       </p>
+                      <div class="travelling-tickets">
+                        <p>
+                          {" "}
+                          {data[2]?.address1} {data[2]?.address2}{" "}
+                          {data[2]?.address3} {data[2]?.city} {data[2]?.country}{" "}
+                          {data[2]?.postCode}{" "}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </form>

@@ -221,7 +221,7 @@ const PeopleBooking = (props) => {
           } = props;
 
           return (
-            <Form>
+            <Form className="appointment-form">
               <section>
                 <div class="flite-time">
                   <h4 class="PRC-flite-heading">PCR Fit to Fly</h4>
@@ -258,50 +258,52 @@ const PeopleBooking = (props) => {
                 <div className="wrapper">
                   <div className="site-container">
                     <form>
-                      <div class="form-row">
-                        <div class="form-group col-md-12">
-                          <label for="inputEmail4">First name*</label>
-                          <input
-                            type="text"
-                            class={
-                              errors.firstName && touched.firstName
-                                ? "form-control error"
-                                : `form-control`
-                            }
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name="firstName"
-                            value={values.firstName}
-                          />
-                          {errors.firstName && touched.firstName && (
-                            <div className="input-feedback">
-                              {errors.firstName}
-                            </div>
-                          )}
+                        <div class="form-group">
+                         <div className="col-md-12">
+                          <p>First name*</p>
+                            <input
+                              type="text"
+                              class={
+                                errors.firstName && touched.firstName
+                                  ? "form-control error"
+                                  : `form-control`
+                              }
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              name="firstName"
+                              value={values.firstName}
+                            />
+                            {errors.firstName && touched.firstName && (
+                              <div className="input-feedback">
+                                {errors.firstName}
+                              </div>
+                            )}
+                         </div>
                         </div>
-                        <div class="form-group col-md-12">
-                          <label for="inputPassword4">Last name*</label>
-                          <input
-                            type="text"
-                            class={
-                              errors.lastName && touched.lastName
-                                ? "form-control error"
-                                : `form-control`
-                            }
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name="lastName"
-                            value={values.lastName}
-                          />
-                          {errors.lastName && touched.lastName && (
-                            <div className="input-feedback">
-                              {errors.lastName}
-                            </div>
-                          )}
+                        <div class="form-group">
+                          <div className="col-md-12">
+                            <p>Last name*</p>
+                            <input
+                              type="text"
+                              class={
+                                errors.lastName && touched.lastName
+                                  ? "form-control error"
+                                  : `form-control`
+                              }
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              name="lastName"
+                              value={values.lastName}
+                            />
+                            {errors.lastName && touched.lastName && (
+                              <div className="input-feedback">
+                                {errors.lastName}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      </div>
                       <div class="form-group">
-                        <label for="inputAddress">DOB*</label>
+                        <p>DOB*</p>
                         <input
                           type="date"
                           class={
@@ -318,8 +320,8 @@ const PeopleBooking = (props) => {
                           <div className="input-feedback">{errors.dob}</div>
                         )}
                       </div>
-                      <div>
-                        <label for="inputAddress"> Sex*</label>
+                      <div class="form-group">
+                        <p> Sex*</p>
                         <div class="selectdiv">
                           <select
                             onChange={(e) => setSex(e.target.value)}
@@ -340,9 +342,9 @@ const PeopleBooking = (props) => {
                           )}
                         </div>
                       </div>
-                      <div>
+                      <div class="form-group">
                         <div className=" mt-3">
-                          <label for="inputAddress"> Ethnicity*</label>
+                          <p> Ethnicity*</p>
                           <div class="selectdiv">
                             <select
                               onChange={(e) => setSex(e.target.value)}
@@ -366,9 +368,9 @@ const PeopleBooking = (props) => {
                           </div>
                         </div>
                       </div>
-                      <div class="form-row mt-4">
+                      <div class="form-group">
                         <div class="form-group col-md-12">
-                          <label for="inputCity">Email*</label>
+                          <p>Email*</p>
                           <input
                             type="email"
                             class={
@@ -392,7 +394,7 @@ const PeopleBooking = (props) => {
                     <p>Your results will be Sent to you via email</p>
                   </div> */}
                         <div class="form-group col-md-12">
-                          <label for="inputCity">Confirm Email*</label>
+                          <p>Confirm Email*</p>
                           <input
                             type="emai"
                             class={
@@ -412,7 +414,7 @@ const PeopleBooking = (props) => {
                           )}
                         </div>
                         <div class="form-group col-md-12">
-                          <label for="inputCity">Mobile Number*</label>
+                          <p>Mobile Number*</p>
                           <input
                             type="tel"
                             class={
@@ -439,7 +441,7 @@ const PeopleBooking = (props) => {
                     <p>Your results will be Sent to you via email</p>
                   </div> */}
                         <div class="form-group col-md-12">
-                          <label for="inputCity">Confirm Mobile Number*</label>
+                          <p>Confirm Mobile Number*</p>
                           <input
                             type="tel"
                             class={
@@ -460,7 +462,7 @@ const PeopleBooking = (props) => {
                           )}
                         </div>
                         <div class="form-group col-md-12">
-                          <label for="inputZip">Passport/ID card number*</label>
+                          <p>Passport/ID card number*</p>
                           <input
                             type="text"
                             class={
@@ -480,29 +482,31 @@ const PeopleBooking = (props) => {
                           )}
                         </div>
                       </div>
-                      <div class="form-group Confirm-passport col-md-12 p-0">
-                        <label for="inputZip">
-                          Confirm Passport/ID card number*
-                        </label>
-                        <input
-                          type="text"
-                          class={
-                            errors.confIrmpassportIdCard &&
-                            touched.confIrmpassportIdCard
-                              ? "form-control error"
-                              : `form-control`
-                          }
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          name="confIrmpassportIdCard"
-                          value={values.confIrmpassportIdCard}
-                        />
-                        {errors.confIrmpassportIdCard &&
-                          touched.confIrmpassportIdCard && (
-                            <div className="input-feedback">
-                              {errors.confIrmpassportIdCard}
-                            </div>
-                          )}
+                      <div class="form-group">
+                        <div className="Confirm-passport col-md-12 p-0">
+                            <p>
+                              Confirm Passport/ID card number*
+                            </p>
+                            <input
+                              type="text"
+                              class={
+                                errors.confIrmpassportIdCard &&
+                                touched.confIrmpassportIdCard
+                                  ? "form-control error"
+                                  : `form-control`
+                              }
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              name="confIrmpassportIdCard"
+                              value={values.confIrmpassportIdCard}
+                            />
+                            {errors.confIrmpassportIdCard &&
+                              touched.confIrmpassportIdCard && (
+                                <div className="input-feedback">
+                                  {errors.confIrmpassportIdCard}
+                                </div>
+                              )}
+                          </div>
                       </div>
                     </form>
                   </div>

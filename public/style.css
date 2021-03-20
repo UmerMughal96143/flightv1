@@ -467,7 +467,7 @@ input.mbsc-ios.mbsc-ltr.mbsc-textfield.mbsc-textfield-underline {
     width: 100%;
 }
 
-form label{
+form p{
     font-family: "Poppins-Medium";
     font-size: 16px;
     color: black;
@@ -511,6 +511,15 @@ body form select{
     line-height: 25px;
     margin-bottom: 70px;
     text-align: center;
+}
+.appointment-form p{
+    margin-bottom: 15px;
+}
+form .form-group {
+    margin-bottom: 25px;
+}
+form .form-group .col-md-12{
+    padding: 0px;
 }
 .appointment-form-heading{
     /* font-family: "Poppins-SemiBold"; */
@@ -931,20 +940,36 @@ body .check-box-input {
     font-family: "Poppins-Regular"; 
     color: #1E9190;
 }
+.expiration-input-wrapper{
+    border: 1px solid #1e9190;
+    display: block;
+    width: 100%;
+    padding: 5px 0px;
+    border-radius: 5px;
+}
+.expiration-input-wrapper input{
+    border: none;
+}
 .amount-due{
+    padding: 10px 0px;
     margin: 57px 0px 42px 0px;
     border-top: 1px solid #1e9190;
     border-bottom: 1px solid #1e9190;
+}
+.amount-due .container-fluid .row{
+    align-items: center;
 }
 .amount-due-text h3{
     font-size: 24px;
     color: black;
     text-align: left;
+    margin-bottom: 0px;
     font-family: "Poppins-Bold";
 }
 .amount-due-price h3{
     font-size: 24px;
     color: #1e9190;
+    margin-bottom: 0px;
     text-align: right;
     font-family: "Poppins-Bold"; 
 }
