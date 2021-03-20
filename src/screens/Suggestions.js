@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { suggestions } from "../actions/form";
 import { errorNotification } from "../utils/notification";
+import date from 'date-and-time';
 
 const Suggestions = ({ history }) => {
   const [flightTime, setFlightTime] = useState("");
@@ -19,6 +20,15 @@ const Suggestions = ({ history }) => {
   const [startDate, setStartDate] = useState("");
 
   const dispatch = useDispatch();
+
+  const now = new Date();
+
+  var day = new Date();
+  var nextDay = new Date(day);
+nextDay.setDate(day.getDate() + 1);
+console.log(nextDay,"nextDay"); // May 01 2000 
+
+ 
 
   let flightTimes = [
     "1am - 3am",
@@ -641,7 +651,7 @@ useEffect(() => {
                   </h3>
                   <div class="suggest-best-time">
                     <button class="suggest-best-time-btn">
-                      <span>{bestChoice}</span> {isTimeBt12pm12am ? 'plus 1' : `${today}`}
+                      <span>{bestChoice}</span> {isTimeBt12pm12am ? `${date.format(nextDay, ' MMM DD YYYY')}` : `${date.format(now, ' MMM DD YYYY')}`}
                     </button>
                   </div>
 
@@ -650,7 +660,7 @@ useEffect(() => {
                     {bestMediumWrostTimeForUser?.map((time) => {
                       return (
                         <div class="user-choose-box">
-                          <button class="user-choose-conent" onClick={(e) => chooseTimeHandler(e)}>{time} {" "} {isTimeBt12pm12am ? `${today}` : `${today}`}</button>
+                          <button class="user-choose-conent" onClick={(e) => chooseTimeHandler(e)}>{time} {" "} {isTimeBt12pm12am ? `${date.format(nextDay, ' MMM DD YYYY')}` : `${date.format(now, ' MMM DD YYYY')}`}</button>
                         </div>
                       );
                     })}

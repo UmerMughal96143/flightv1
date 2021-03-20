@@ -49,7 +49,27 @@ const PeopleBooking = (props) => {
   const { peoplesData, editMan } = useSelector((state) => state.Form);
 
   let sexArray = ["Male", "Female"];
-  let ethinicityArray = ["ANY OTHER ETHNIC CATEGORY", "ANY OTHER MIXED GROUP","BANGLADESHI","BLACK - AFRICAN","BLACK - CARIBBEAN","BLACK - OTHER","CHINESE","INDIAN","ISC - UNSPECIFIED","OTHER / MIXED","PAKISTANI","UNKNOWN","WHITE","WHITE AND ASIAN","WHITE AND BLACK AFRICAN","WHITE AND BLACK CARIBBEAN","WHITE BRITISH","WHITE IRISH","WHITE OTHER"];
+  let ethinicityArray = [
+    "ANY OTHER ETHNIC CATEGORY",
+    "ANY OTHER MIXED GROUP",
+    "BANGLADESHI",
+    "BLACK - AFRICAN",
+    "BLACK - CARIBBEAN",
+    "BLACK - OTHER",
+    "CHINESE",
+    "INDIAN",
+    "ISC - UNSPECIFIED",
+    "OTHER / MIXED",
+    "PAKISTANI",
+    "UNKNOWN",
+    "WHITE",
+    "WHITE AND ASIAN",
+    "WHITE AND BLACK AFRICAN",
+    "WHITE AND BLACK CARIBBEAN",
+    "WHITE BRITISH",
+    "WHITE IRISH",
+    "WHITE OTHER",
+  ];
 
   const submitCheckout = (values, resetForm) => {
     values.Person = values.firstName;
@@ -83,13 +103,12 @@ const PeopleBooking = (props) => {
     // localStorage.setItem('peoples' , JSON.stringify(peoplesData) )
   };
 
-
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
-  
-  today = mm + '/' + dd + '/' + yyyy;
+
+  today = mm + "/" + dd + "/" + yyyy;
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -176,10 +195,7 @@ const PeopleBooking = (props) => {
             .oneOf([Yup.ref("mobile"), null], "Mobile no don't match!")
             .required("Required"),
           firstName: Yup.string()
-            .matches(
-              /^[A-Z]/,
-              "First Letter must be Uppercase,"
-            )
+            .matches(/^[A-Z]/, "First Letter must be Uppercase,")
             .required("Required"),
           lastName: Yup.string()
             .matches(
@@ -210,8 +226,9 @@ const PeopleBooking = (props) => {
                 <div class="flite-time">
                   <h4 class="PRC-flite-heading">PCR Fit to Fly</h4>
                   <p class="PRC-flite-dec">
-                    You are booking for {localStorage.getItem('numberOfUsers')} people <br />{today}{" "}
-                    between 8am - 4pm
+                    You are booking for {localStorage.getItem("numberOfUsers")}{" "}
+                    people <br />
+                    {today} between 8am - 4pm
                   </p>
                   {!localStorage.getItem("addperson") && !editMan && (
                     <button class="passenger-btn">
@@ -514,27 +531,29 @@ const PeopleBooking = (props) => {
                                     </button>
                                   </Link>
                                 </div>
-                                {!localStorage.getItem("addperson") && localStorage.getItem('numberOfUsers') !== '1' && (
-                                  <div class="col-6">
-                                    <button
-                                      type="submit"
-                                      onClick={() => {
-                                        handleSubmit();
-                                        localStorage.setItem(
-                                          "submitType",
-                                          "nextPerson"
-                                        );
-                                      }}
-                                      class={`${
-                                        isValid
-                                          ? "Next-btn"
-                                          : "Next-btn-disabled"
-                                      }`}
-                                    >
-                                      Next Person
-                                    </button>
-                                  </div>
-                                )}
+                                {!localStorage.getItem("addperson") &&
+                                  localStorage.getItem("numberOfUsers") !==
+                                    "1" && (
+                                    <div class="col-6">
+                                      <button
+                                        type="submit"
+                                        onClick={() => {
+                                          handleSubmit();
+                                          localStorage.setItem(
+                                            "submitType",
+                                            "nextPerson"
+                                          );
+                                        }}
+                                        class={`${
+                                          isValid
+                                            ? "Next-btn"
+                                            : "Next-btn-disabled"
+                                        }`}
+                                      >
+                                        Next Person
+                                      </button>
+                                    </div>
+                                  )}
                               </>
                             )}
 
