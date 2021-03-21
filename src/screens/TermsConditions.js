@@ -33,7 +33,7 @@ const TermsConditions = ({history}) => {
           <h3>Terms and Conditions</h3>
         </div>
       </section>
-        <div class="site-container mt-5">
+        <div class="site-container term-condition_wrapper">
         <div className="wrapper">
           <section>
             <div class="Terms-Conditions-wrapper">

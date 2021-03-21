@@ -371,7 +371,7 @@ body .main-logo {
 /* INDEX PAGE */
 /* user-detail */
 .flite-time{
-    margin: 15px;
+    margin: 15px 15px 35px 15px;
     text-align: center;
 }
 .PRC-flite-heading{
@@ -501,6 +501,13 @@ body form select{
     margin: 50px 0px;
 }
 /* user-detail Page*/
+body .appointmentsummary_footer{
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+.appointment-form .min_margin{
+    margin-bottom: 15px;
+}
 .appointment-header{
     margin: 20px 20px;
 }
@@ -522,7 +529,7 @@ form .form-group .col-md-12{
     padding: 0px;
 }
 .appointment-form-heading{
-    /* font-family: "Poppins-SemiBold"; */
+    font-family: "Poppins-SemiBold";
     font-weight: 600;
     font-size: 14px;
 }
@@ -695,11 +702,12 @@ body .modal{
 .appointment-prosecer-steps .appointment-prosecer-steps-subheading {
     font-family: "Poppins-Medium";
     font-size: 14px;
-    margin: 30px 0px;
+    margin: 25px 0px;
 }
 .appointment-prosecer-steps-mainheading{
     font-family: "Poppins-Bold";
     font-size: 20px;
+    margin-bottom: 15px;
     color: #1E9190;
 }
 .suggest-best-time-btn{
@@ -719,7 +727,10 @@ body .modal{
     border-radius: 5px;
 }
 .suggest-best-time{
-    padding: 5px 0px;
+    padding: 0px 0px;
+}
+.suggest-best-time .user-choose-conent{
+    margin-bottom: 0px;
 }
 .suggest-best-time span{
     font-family: "Poppins-Bold";
@@ -731,7 +742,7 @@ body .modal{
     color: black;
 }
 .user-choose{
-    margin: 28px 0px 44px 0px;
+    margin: 25px 0px 44px 0px;
 }
 .user-choose-conent{
     background-color: transparent;
@@ -744,7 +755,7 @@ body .modal{
     font-family: "Poppins-Regular";
 }
 .user-choose-box {
-    margin: 17px 0px;
+    margin: 15px 0px;
 }
 .user-choose-heading{
     margin-bottom: 0px;
@@ -763,10 +774,13 @@ body .modal{
 }
 /* Suggestion */
 /* Term and Condition */
+body .term-condition_wrapper{
+    margin-top: 35px;
+}
 .Terms-Condition_heaading{
     font-family: "Poppins-Bold";
     font-size: 16px;
-    margin-bottom: 28px;
+    margin-bottom: 35px;
 }
 .Terms-Conditions-points{
     display: flex;
@@ -781,12 +795,16 @@ body .modal{
 .Terms-Conditions-points p{
     font-size: 16px;
     color: black;
+    margin-bottom: 0px;
     font-family: "Poppins-Regular";
 }
 .user-agree-conditions label{
     display: flex;
-    margin: 28px 0px;
+    margin: 15px 0px 15px 0px;
     align-items: flex-end;
+}
+.user-agree-conditions{
+    margin-top: 25px;
 }
 .user-agree-conditions label input{
     margin-right: 10px;
@@ -815,6 +833,9 @@ body .check-box-input {
 }
 /* Term and Condition */
 /* Payment Details */
+body .paymentdetails-wrapper{
+    margin-top: 35px;
+}
 .Payment-Details-heading{
     font-family: "Poppins-Regular";
     font-size: 16px;
@@ -838,7 +859,7 @@ body .check-box-input {
 .Payment-Details-form h3{
     font-family: "Poppins-Bold";
     font-size: 22px;  
-    margin: 50px 0px 47px 0px;
+    margin: 25px 0px 25px 0px;
 }
 .Payment-Details-form h3 span{
     font-family: "Poppins-Bold";
@@ -863,10 +884,17 @@ body .check-box-input {
 .Appointment-Summary .breaking-news-box{
     margin: 2px 0px;
 }
-.mini-heading p{
+.Payment-Details-wrapper .mini-heading p{
     font-family: "Poppins-Bold";
     font-size: 16px;  
     text-align: center;
+    margin-bottom: 25px;
+}
+body .appointment_summary_wrapper{
+    margin-top: 35px;
+}
+.person-info .person-heading{
+    margin-bottom: 15px;
 }
 .person-heading{
     font-family: "Poppins-Bold";
@@ -884,7 +912,7 @@ body .check-box-input {
  font-family: "Poppins-Bold";
 }
 .person-personal-detail{
-    padding: 23px 0px;
+    padding: 25px 0px 0px 0px;
 }
 .Person-details-name span{
     font-family: "Poppins-Regular";
@@ -901,7 +929,7 @@ body .check-box-input {
     margin: 4px 0px;
 }
 .Person-requird-details{
-    margin: 15px 0px 4px 0px;
+    margin: 25px 0px 4px 0px;
 }
 .Person-requird-details p{
     font-size: 14px;
@@ -921,7 +949,7 @@ body .check-box-input {
     background-color: white;
 }
 .person-detail-flex-box{
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     align-items: center;
 }
 .person-heading-icon{
@@ -951,7 +979,7 @@ body .check-box-input {
 }
 .amount-due{
     padding: 10px 0px;
-    margin: 57px 0px 42px 0px;
+    margin: 25px 0px 25px 0px;
     border-top: 1px solid #1e9190;
     border-bottom: 1px solid #1e9190;
 }
@@ -976,6 +1004,9 @@ body .check-box-input {
     font-size: 16px;
     margin-left: 12px;
     font-family: "Poppins-Medium";
+}
+.amount-due-points .form-check{
+    margin-bottom: 15px;
 }
 .amount-due-points{
     padding: 0px 25px;
@@ -1048,7 +1079,7 @@ body .check-box-input {
 .Booking-Complete-details h3{
     text-align: center;
     margin: 20px 0px;
-    margin: 46px 0px 22px 0px;
+    margin: 25px 0px 22px 0px;
 }
 .Person-details-info span{
     font-family: "Poppins-Regular"; 
@@ -1219,7 +1250,7 @@ body .check-box-input {
         padding: 9px 5px;
     }
     .appointment-heading{
-        margin-bottom: 10px;
+        margin-bottom: 35px;
         margin-top: 10px;
     }
     .Next-btn {

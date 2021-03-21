@@ -192,7 +192,7 @@ const AppointmentSummary = ({ history }) => {
         </div>
       </section>
       <div className="wrapper">
-        <div class="site-container mt-5 mb-4">
+        <div class="site-container appointment_summary_wrapper">
           <section>
             <div class="Payment-Details-wrapper">
               <div class="mini-heading">
@@ -303,7 +303,7 @@ const AppointmentSummary = ({ history }) => {
             </div>
           )}
         </section>
-        <section className="site-container">
+        <section className="site-container appointmentsummary_footer">
           <div class="amount-due-points">
             <div className="form-check">
               <input

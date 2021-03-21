@@ -167,14 +167,15 @@ const Appointment = ({ history }) => {
                 Please Select your billing address
               </p>
             ) : (
-              <div className="form-group">
-                  <p class="appointment-form-heading">
-                    Please Select which address you would like to have appointed
-                  </p>
+              <div className="form-group d-none">
+                  
               </div>
             )}
 
-            <div className="form-group">
+            <div className="form-group min_margin">
+              <p class="appointment-form-heading">
+                Please Select which address you would like to have appointed
+              </p>
               <div class="appointment-user-address-row row">
                 <div class="col-md-8 col-7">
                   <input

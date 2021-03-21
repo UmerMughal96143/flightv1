@@ -85,7 +85,7 @@ const PaymentDetails = ({ history }) => {
         </div>
       </section>
       <div className="wrapper">
-        <div class="site-container mt-5">
+        <div class="site-container paymentdetails-wrapper">
           <section>
             <div class="Payment-Details-wrapper">
               <p class="Payment-Details-heading">
@@ -106,7 +106,7 @@ const PaymentDetails = ({ history }) => {
                 <h3>
                   Payment due: <span>£{totalPrice}.00</span>
                 </h3>
-                <form>
+                <form className="appointment-form">
                   <div class="form-group">
                       <p>Card number*</p>
                       <input
