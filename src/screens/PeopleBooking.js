@@ -6,23 +6,35 @@ import { peopleBookingAction, updatePersonAction } from "../actions/form";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-
 // Date loop
 let dateArray = [];
-for(let i=1; i<32; i++){
+for (let i = 1; i < 32; i++) {
   dateArray.push(i);
 }
 // Date loop
 
 // Month Loop
-let monthArray =['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+let monthArray = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 // Month Loop
 
 // Year Loop
 let yearArray = [];
-let startYear = 2021 ;
-for(let i=1; i <103; i++){
-yearArray.push(startYear--)
+let startYear = 2021;
+for (let i = 1; i < 103; i++) {
+  yearArray.push(startYear--);
 }
 // Year Loop
 
@@ -66,7 +78,9 @@ const PeopleBooking = (props) => {
   });
   const [NumberOfPersonsLimit, setNumberOfPersonsLimit] = useState(1);
 
-  const { peoplesData, editMan , appointmentDate } = useSelector((state) => state.Form);
+  const { peoplesData, editMan, appointmentDate } = useSelector(
+    (state) => state.Form
+  );
 
   let sexArray = ["Male", "Female"];
   let ethinicityArray = [
@@ -158,7 +172,6 @@ const PeopleBooking = (props) => {
         initialValues={{
           firstName: editMan?.firstName ? editMan.firstName : "",
           lastName: editMan?.lastName ? editMan.lastName : "",
-          dob: editMan?.dob ? editMan.dob : "",
           ethnicity: editMan?.ethnicity ? editMan.ethnicity : "",
           email: copyDetailObject.email
             ? copyDetailObject.email
@@ -186,6 +199,9 @@ const PeopleBooking = (props) => {
             : "",
           sex: editMan?.sex ? editMan.sex : "",
           ethnicity: editMan?.ethnicity ? editMan.ethnicity : "",
+          month: editMan?.month ? editMan.month : "",
+          day: editMan?.day ? editMan.day : "",
+          year: editMan?.year ? editMan.year : "",
         }}
         onSubmit={async (values, { resetForm }) => {
           if (localStorage.getItem("submitType") == "nextPerson") {
@@ -225,6 +241,9 @@ const PeopleBooking = (props) => {
             .required("Required"),
           sex: Yup.string().required("Required"),
           ethnicity: Yup.string().required("Required"),
+          month: Yup.string().required("Required"),
+          day: Yup.string().required("Required"),
+          year: Yup.string().required("Required"),
         })}
       >
         {(props) => {
@@ -278,50 +297,50 @@ const PeopleBooking = (props) => {
                 <div className="wrapper">
                   <div className="site-container">
                     <form>
-                        <div class="form-group">
-                         <div className="col-md-12">
+                      <div class="form-group">
+                        <div className="col-md-12">
                           <p>First name*</p>
-                            <input
-                              type="text"
-                              class={
-                                errors.firstName && touched.firstName
-                                  ? "form-control error"
-                                  : `form-control`
-                              }
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              name="firstName"
-                              value={values.firstName}
-                            />
-                            {errors.firstName && touched.firstName && (
-                              <div className="input-feedback">
-                                {errors.firstName}
-                              </div>
-                            )}
-                         </div>
+                          <input
+                            type="text"
+                            class={
+                              errors.firstName && touched.firstName
+                                ? "form-control error"
+                                : `form-control`
+                            }
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name="firstName"
+                            value={values.firstName}
+                          />
+                          {errors.firstName && touched.firstName && (
+                            <div className="input-feedback">
+                              {errors.firstName}
+                            </div>
+                          )}
                         </div>
-                        <div class="form-group">
-                          <div className="col-md-12">
-                            <p>Last name*</p>
-                            <input
-                              type="text"
-                              class={
-                                errors.lastName && touched.lastName
-                                  ? "form-control error"
-                                  : `form-control`
-                              }
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              name="lastName"
-                              value={values.lastName}
-                            />
-                            {errors.lastName && touched.lastName && (
-                              <div className="input-feedback">
-                                {errors.lastName}
-                              </div>
-                            )}
-                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div className="col-md-12">
+                          <p>Last name*</p>
+                          <input
+                            type="text"
+                            class={
+                              errors.lastName && touched.lastName
+                                ? "form-control error"
+                                : `form-control`
+                            }
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name="lastName"
+                            value={values.lastName}
+                          />
+                          {errors.lastName && touched.lastName && (
+                            <div className="input-feedback">
+                              {errors.lastName}
+                            </div>
+                          )}
                         </div>
+                      </div>
                       <div class="form-group">
                         <p>DOB*</p>
                         {/* <input
@@ -340,50 +359,89 @@ const PeopleBooking = (props) => {
                           <div className="input-feedback">{errors.dob}</div>
                         )} */}
                         <div className="form-row departure-date-box">
-                    <div className="form-group">
-                      <div className="date-select">
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option value="">DD</option>
-                          {dateArray.map((d,ind) => {
-                            return(
-                              <option key={ind} value={d}>{d}</option>
-                            )
-                          })}
-                        </select>
-                      </div>
-                    </div>
-                    <span>/</span>
-                    <div className="form-group">
-                      <div className="month-select">
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option value="">MM</option>
-                          {monthArray.map((m,ind) =>
-                            <option key={ind} value={m}>{m}</option>
+                          <div className="form-group">
+                            <div className="date-select">
+                              <select
+                                aria-label="Default select example"
+                                class={
+                                  errors.day && touched.day
+                                    ? "form-control error"
+                                    : `form-control`
+                                }
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                name="day"
+                                value={values.day}
+                              >
+                                <option value="">DD</option>
+                                {dateArray.map((d, ind) => {
+                                  return (
+                                    <option key={ind} value={d}>
+                                      {d}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                              {errors.day && touched.day && (
+                            <div className="input-feedback">{errors.day}</div>
                           )}
-                        </select>
-                      </div>
-                    </div>
-                    <span>/</span>
-                    <div className="form-group">
-                      <div className="year-select">
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option value="">YYYY</option>
-                            {yearArray.map((y,ind) => 
-                              <option key={ind} value={y}>{y}</option>
-                            )}
-                        </select>
-                      </div>
-                    </div>
-                  </div>
+                            </div>
+                          </div>
+                          <span>/</span>
+                          <div className="form-group">
+                            <div className="month-select">
+                              <select
+                                class={
+                                  errors.month && touched.month
+                                    ? "form-control error"
+                                    : `form-control`
+                                }
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                name="month"
+                                value={values.month}
+                                aria-label="Default select example"
+                              >
+                                <option value="">MM</option>
+                                {monthArray.map((m, ind) => (
+                                  <option key={ind} value={m}>
+                                    {m}
+                                  </option>
+                                ))}
+                              </select>
+                              {errors.month && touched.month && (
+                            <div className="input-feedback">{errors.month}</div>
+                          )}
+                            </div>
+                          </div>
+                          <span>/</span>
+                          <div className="form-group">
+                            <div className="year-select">
+                              <select
+                                class={
+                                  errors.year && touched.year
+                                    ? "form-control error"
+                                    : `form-control`
+                                }
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                name="year"
+                                value={values.year}
+                                aria-label="Default select example"
+                              >
+                                <option value="">YYYY</option>
+                                {yearArray.map((y, ind) => (
+                                  <option key={ind} value={y}>
+                                    {y}
+                                  </option>
+                                ))}
+                              </select>
+                              {errors.year && touched.year && (
+                            <div className="input-feedback">{errors.year}</div>
+                          )}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div class="form-group">
                         <p> Sex*</p>
@@ -549,29 +607,27 @@ const PeopleBooking = (props) => {
                       </div>
                       <div class="form-group">
                         <div className="Confirm-passport col-md-12 p-0">
-                            <p>
-                              Confirm Passport/ID card number*
-                            </p>
-                            <input
-                              type="text"
-                              class={
-                                errors.confIrmpassportIdCard &&
-                                touched.confIrmpassportIdCard
-                                  ? "form-control error"
-                                  : `form-control`
-                              }
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              name="confIrmpassportIdCard"
-                              value={values.confIrmpassportIdCard}
-                            />
-                            {errors.confIrmpassportIdCard &&
-                              touched.confIrmpassportIdCard && (
-                                <div className="input-feedback">
-                                  {errors.confIrmpassportIdCard}
-                                </div>
-                              )}
-                          </div>
+                          <p>Confirm Passport/ID card number*</p>
+                          <input
+                            type="text"
+                            class={
+                              errors.confIrmpassportIdCard &&
+                              touched.confIrmpassportIdCard
+                                ? "form-control error"
+                                : `form-control`
+                            }
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name="confIrmpassportIdCard"
+                            value={values.confIrmpassportIdCard}
+                          />
+                          {errors.confIrmpassportIdCard &&
+                            touched.confIrmpassportIdCard && (
+                              <div className="input-feedback">
+                                {errors.confIrmpassportIdCard}
+                              </div>
+                            )}
+                        </div>
                       </div>
                     </form>
                   </div>

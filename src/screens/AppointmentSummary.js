@@ -185,7 +185,7 @@ const AppointmentSummary = ({ history }) => {
         <div class="breaking-news-box">
           <h4 class="breaking-news">PCR Fit to Fly</h4>
           <p class="breaking-news-dec">
-            You are booking for {localStorage.getItem("numberOfUsers")} people{" "}
+            You are booking for {peoplesData?.length} people{" "}
             <br />
             between {appointmentDate}
           </p>
@@ -205,7 +205,7 @@ const AppointmentSummary = ({ history }) => {
                   return (
                     <div class="person-details">
                       <div class="person-info">
-                        <h3 class="person-heading">Patient Name : {data.Person} </h3>
+                        <h3 class="person-heading">Patient Name : {data.firstName}{" "} {data.lastName} </h3>
                         <div class="Person-details-name">
                           <p>
                             {data.firstName} {data.lastName} - PCR Fit to Fly
