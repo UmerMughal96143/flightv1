@@ -6,6 +6,26 @@ import { peopleBookingAction, updatePersonAction } from "../actions/form";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
+
+// Date loop
+let dateArray = [];
+for(let i=1; i<32; i++){
+  dateArray.push(i);
+}
+// Date loop
+
+// Month Loop
+let monthArray =['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+// Month Loop
+
+// Year Loop
+let yearArray = [];
+let startYear = 2020 ;
+for(let i=1; i <71; i++){
+yearArray.push(startYear++)
+}
+// Year Loop
+
 const PeopleBooking = (props) => {
   const [isValidSubmitCheckout, setIsValidSubmitCheckout] = useState(false);
   const [isValidNextPerson, setIsValidNextPerson] = useState(false);
@@ -304,7 +324,7 @@ const PeopleBooking = (props) => {
                         </div>
                       <div class="form-group">
                         <p>DOB*</p>
-                        <input
+                        {/* <input
                           type="date"
                           class={
                             errors.dob && touched.dob
@@ -318,7 +338,52 @@ const PeopleBooking = (props) => {
                         />
                         {errors.dob && touched.dob && (
                           <div className="input-feedback">{errors.dob}</div>
-                        )}
+                        )} */}
+                        <div className="form-row departure-date-box">
+                    <div className="form-group">
+                      <div className="date-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option value="">DD</option>
+                          {dateArray.map((d,ind) => {
+                            return(
+                              <option key={ind} value={d}>{d}</option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                    <span>/</span>
+                    <div className="form-group">
+                      <div className="month-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option value="">MM</option>
+                          {monthArray.map((m,ind) =>
+                            <option key={ind} value={m}>{m}</option>
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                    <span>/</span>
+                    <div className="form-group">
+                      <div className="year-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option value="">YYYY</option>
+                            {yearArray.map((y,ind) => 
+                              <option key={ind} value={y}>{y}</option>
+                            )}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                       </div>
                       <div class="form-group">
                         <p> Sex*</p>

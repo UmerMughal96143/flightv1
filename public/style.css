@@ -1,4 +1,4 @@
-@font-face {
+@font-face { 
     font-family: "Poppins-Light";
     src: url(asstes/Poppins/Poppins-Light.ttf);
   }
@@ -134,9 +134,18 @@ body input,select:focus{
     pointer-events: none;
     background-color: white;
   }
-  
+  body .departure-date-box{
+      margin: 0px;
+  }
+  .departure-date-box .form-select{
+      background: none;
+      padding: .375rem .775rem;
+  }
+  .departure-date-box span{
+      margin: 0px 10px;
+  }
   select::-ms-expand {
-  display: none;
+    display: none;
   }
   
   .selectdiv select {

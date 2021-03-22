@@ -14,7 +14,7 @@ const Suggestions = ({ history }) => {
   const [isTimeBt12am12pm, setTimeBt12am12pm] = useState(false);
   const [renderFlightTime, setRenderFlighTime] = useState(false);
   const [continueButton, setContinueButton] = useState(false);
-  
+
   const [showDate, setShowDate] = useState(false);
   const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
@@ -93,6 +93,25 @@ const Suggestions = ({ history }) => {
   let row10 = ["8am - 10am", "10am - 12pm", "12pm - 2pm", "2pm - 4pm"];
   let row11 = ["8am - 10am", "10am - 12pm", "12pm - 2pm", "2pm - 4pm"];
   let row12 = ["8am - 10am", "10am - 12pm", "12pm - 2pm", "2pm - 4pm"];
+
+// Date loop
+  let dateArray = [];
+  for(let i=1; i<32; i++){
+    dateArray.push(i);
+  }
+// Date loop
+
+// Month Loop
+let monthArray =['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+// Month Loop
+
+// Year Loop
+let yearArray = [];
+let startYear = 2020 ;
+for(let i=1; i <71; i++){
+  yearArray.push(startYear++)
+}
+// Year Loop
 
   function formatAMPM(date) {
     var hours = date.getHours();
@@ -339,7 +358,6 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "10am - 12pm") {
       setBestMediumWrostTimeForUser(row6);
       setBestChoice("12pm - 2pm");
-     
     }
     if (formatedTime == "12pm - 2pm") {
       setBestMediumWrostTimeForUser(row7);
@@ -360,7 +378,6 @@ const Suggestions = ({ history }) => {
     if (formatedTime == "8pm - 10pm") {
       setBestMediumWrostTimeForUser(row11);
       setBestChoice("6am - 8am");
-     
     }
     if (formatedTime == "10pm - 12am") {
       setBestMediumWrostTimeForUser(row12);
@@ -423,10 +440,9 @@ const Suggestions = ({ history }) => {
 
   const chooseTimeHandler = (e) => {
     setSelectedTimeByUser(e.target.textContent);
-    dispatch(setAppointmentDate(e.target.textContent))
-    setContinueButton(true)
+    dispatch(setAppointmentDate(e.target.textContent));
+    setContinueButton(true);
   };
-
 
   return (
     <div>
@@ -448,13 +464,58 @@ const Suggestions = ({ history }) => {
                   What is your departure date?
                 </p>
                 <div class="suggestion-date-row">
-                  <input
+                  {/* <input
                     type="date"
                     class={`form-control`}
                     name="dob"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                  />
+                  /> */}
+                  <div className="form-row departure-date-box">
+                    <div className="form-group">
+                      <div className="date-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option value="">DD</option>
+                          {dateArray.map((d,ind) => {
+                            return(
+                              <option key={ind} value={d}>{d}</option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                    <span>/</span>
+                    <div className="form-group">
+                      <div className="month-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option value="">MM</option>
+                          {monthArray.map((m,ind) =>
+                            <option key={ind} value={m}>{m}</option>
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                    <span>/</span>
+                    <div className="form-group">
+                      <div className="year-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                        >
+                          <option value="">YYYY</option>
+                            {yearArray.map((y,ind) => 
+                              <option key={ind} value={y}>{y}</option>
+                            )}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="form-group">
