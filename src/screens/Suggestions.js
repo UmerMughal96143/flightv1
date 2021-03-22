@@ -21,17 +21,13 @@ const Suggestions = ({ history }) => {
   const [year, setYear] = useState("");
   
 
-  const [showDate, setShowDate] = useState(false);
   const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
   const [bestChoice, setBestChoice] = useState("");
   const [activeParagraph, setActiceParagraph] = useState("");
 
   const [selectedTimeByUser, setSelectedTimeByUser] = useState("");
-  console.log(
-    "🚀 ~ file: Suggestions.js ~ line 23 ~ Suggestions ~ selectedTimeByUser",
-    selectedTimeByUser
-  );
+
   const [bestMediumWrostTimeForUser, setBestMediumWrostTimeForUser] = useState(
     []
   );
@@ -449,7 +445,7 @@ for(let i=1; i <71; i++){
     }
   }, [formatedTime]);
 
-  const time = React.createRef();
+
 
   const chooseTimeHandler = (e) => {
     setSelectedTimeByUser(e.target.textContent);
@@ -574,7 +570,6 @@ for(let i=1; i <71; i++){
                         setActiceParagraph(bestChoice);
                         chooseTimeHandler(e);
                       }}
-                      ref={time}
                     >
                       {bestChoice}{" "}
                       {finalDateAfterAlgo &&
