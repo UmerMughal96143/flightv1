@@ -5,6 +5,17 @@ import { errorNotification } from "../utils/notification";
 import { Link, Redirect } from "react-router-dom";
 import Countdown, { formatTimeDelta,zeroPad } from "react-countdown";
 
+let monthArray = [];
+for(let i=1; i<=12; i++){
+  monthArray.push(i);
+}
+
+let startYear = 21 ;
+let startYearArray = [];
+for(let i=1; i<=12; i++){
+  startYearArray.push(startYear++);
+}
+
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
   const { peoplesData, data , totalPrice,appointmentDate } = useSelector((state) => state.Form);
@@ -120,7 +131,7 @@ const PaymentDetails = ({ history }) => {
                   <div className="form-group">
                       <p>Expiry Date*</p>
                       {/* <div class="expiration"> */}
-                        <span class="expiration-input-wrapper">
+                        {/* <span class="expiration-input-wrapper">
                           <input
                             type="text"
                             name="expiryMonth"
@@ -146,8 +157,40 @@ const PaymentDetails = ({ history }) => {
                             style={{textAlign : 'center',width : '90px'}}
 
                           />
-                        </span>
+                        </span> */}
                       {/* </div> */}
+                      <div className="form-row departure-date-box">
+                    
+                    <div className="form-group">
+                      <div className="month-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+
+                        >
+                          <option value="">MM</option>
+                          {monthArray.map((m,ind) =>
+                            <option key={ind} value={m}>{m}</option>
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                    <span>/</span>
+                    <div className="form-group">
+                      <div className="month-select">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+
+                        >
+                          <option value=""> YY </option>
+                          {startYearArray.map((m,ind) =>
+                            <option key={ind} value={m}>{m}</option>
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                   </div>
                   <div class="form-group">
                       <p>Cardholder name*</p>
