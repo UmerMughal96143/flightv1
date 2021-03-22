@@ -33,10 +33,11 @@ const Suggestions = ({ history }) => {
   );
 
   const [startDate, setStartDate] = useState("");
+  console.log("🚀 ~ file: Suggestions.js ~ line 36 ~ Suggestions ~ startDate", startDate)
 
   useEffect(() => {
 
-    setStartDate(year + '-' + inputDay + "-" + month)
+    setStartDate(month + '-' + inputDay + "-" + year)
 
   },[ inputDay , month , year])
 

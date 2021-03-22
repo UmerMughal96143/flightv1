@@ -20,9 +20,9 @@ let monthArray =['January', 'February', 'March', 'April', 'May', 'June', 'July',
 
 // Year Loop
 let yearArray = [];
-let startYear = 1920 ;
+let startYear = 2021 ;
 for(let i=1; i <103; i++){
-yearArray.push(startYear++)
+yearArray.push(startYear--)
 }
 // Year Loop
 
