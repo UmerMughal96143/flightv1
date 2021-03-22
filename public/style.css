@@ -147,7 +147,9 @@ body input,select:focus{
   select::-ms-expand {
     display: none;
   }
-  
+  .departure-date-box .form-group{
+      margin-bottom: 0px;
+  }
   .selectdiv select {
     background-color: #ffffff;
     border: 1px solid #0ebeff;

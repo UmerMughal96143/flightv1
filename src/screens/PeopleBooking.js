@@ -20,8 +20,8 @@ let monthArray =['January', 'February', 'March', 'April', 'May', 'June', 'July',
 
 // Year Loop
 let yearArray = [];
-let startYear = 2020 ;
-for(let i=1; i <71; i++){
+let startYear = 1920 ;
+for(let i=1; i <103; i++){
 yearArray.push(startYear++)
 }
 // Year Loop
