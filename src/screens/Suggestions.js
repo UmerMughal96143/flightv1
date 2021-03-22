@@ -15,6 +15,12 @@ const Suggestions = ({ history }) => {
   const [renderFlightTime, setRenderFlighTime] = useState(false);
   const [continueButton, setContinueButton] = useState(false);
 
+
+  const [inputDay, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  
+
   const [showDate, setShowDate] = useState(false);
   const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
@@ -31,6 +37,12 @@ const Suggestions = ({ history }) => {
   );
 
   const [startDate, setStartDate] = useState("");
+
+  useEffect(() => {
+
+    setStartDate(year + '-' + inputDay + "-" + month)
+
+  },[ inputDay , month , year])
 
   const dispatch = useDispatch();
 
@@ -148,6 +160,7 @@ for(let i=1; i <71; i++){
     if (isTimeBt12pm12am) {
       const getdate = () => {
         var date = new Date(startDate);
+        console.log(startDate,"asdasdasd")
         var newdate = new Date(date);
 
         newdate.setDate(newdate.getDate() - 2);
@@ -477,6 +490,7 @@ for(let i=1; i <71; i++){
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          onChange={(e) => setDay(e.target.value)}
                         >
                           <option value="">DD</option>
                           {dateArray.map((d,ind) => {
@@ -493,6 +507,8 @@ for(let i=1; i <71; i++){
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          onChange={(e) => setMonth(e.target.value)}
+
                         >
                           <option value="">MM</option>
                           {monthArray.map((m,ind) =>
@@ -507,6 +523,8 @@ for(let i=1; i <71; i++){
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          onChange={(e) => setYear(e.target.value)}
+
                         >
                           <option value="">YYYY</option>
                             {yearArray.map((y,ind) => 
