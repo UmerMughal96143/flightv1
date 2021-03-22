@@ -15,22 +15,30 @@ const Suggestions = ({ history }) => {
   const [renderFlightTime, setRenderFlighTime] = useState(false);
   const [continueButton, setContinueButton] = useState(false);
 
-  const [showDate, setShowDate] = useState(false);
+
+  const [inputDay, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  
+
   const [finalDateAfterAlgo, setFinalDateAfterAlgo] = useState("");
   const [amPmTime, setTimeToAmPm] = useState("");
   const [bestChoice, setBestChoice] = useState("");
   const [activeParagraph, setActiceParagraph] = useState("");
 
   const [selectedTimeByUser, setSelectedTimeByUser] = useState("");
-  console.log(
-    "🚀 ~ file: Suggestions.js ~ line 23 ~ Suggestions ~ selectedTimeByUser",
-    selectedTimeByUser
-  );
+
   const [bestMediumWrostTimeForUser, setBestMediumWrostTimeForUser] = useState(
     []
   );
 
   const [startDate, setStartDate] = useState("");
+
+  useEffect(() => {
+
+    setStartDate(year + '-' + inputDay + "-" + month)
+
+  },[ inputDay , month , year])
 
   const dispatch = useDispatch();
 
@@ -148,6 +156,7 @@ for(let i=1; i <71; i++){
     if (isTimeBt12pm12am) {
       const getdate = () => {
         var date = new Date(startDate);
+        console.log(startDate,"asdasdasd")
         var newdate = new Date(date);
 
         newdate.setDate(newdate.getDate() - 2);
@@ -436,7 +445,7 @@ for(let i=1; i <71; i++){
     }
   }, [formatedTime]);
 
-  const time = React.createRef();
+
 
   const chooseTimeHandler = (e) => {
     setSelectedTimeByUser(e.target.textContent);
@@ -477,6 +486,7 @@ for(let i=1; i <71; i++){
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          onChange={(e) => setDay(e.target.value)}
                         >
                           <option value="">DD</option>
                           {dateArray.map((d,ind) => {
@@ -493,6 +503,8 @@ for(let i=1; i <71; i++){
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          onChange={(e) => setMonth(e.target.value)}
+
                         >
                           <option value="">MM</option>
                           {monthArray.map((m,ind) =>
@@ -507,6 +519,8 @@ for(let i=1; i <71; i++){
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          onChange={(e) => setYear(e.target.value)}
+
                         >
                           <option value="">YYYY</option>
                             {yearArray.map((y,ind) => 
@@ -556,7 +570,6 @@ for(let i=1; i <71; i++){
                         setActiceParagraph(bestChoice);
                         chooseTimeHandler(e);
                       }}
-                      ref={time}
                     >
                       {bestChoice}{" "}
                       {finalDateAfterAlgo &&

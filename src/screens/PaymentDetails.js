@@ -91,7 +91,7 @@ const PaymentDetails = ({ history }) => {
               <p class="Payment-Details-heading">
                 Your appointment has been temporarily secured for the following
                 <br />
-                date: <span>{appointmentDateFromDb[4]}{" "} {appointmentDateFromDb[5]} {" " }{appointmentDateFromDb[6]}</span>
+                date: <span>{ appointmentDate && appointmentDateFromDb[4]}{" "} {appointmentDate && appointmentDateFromDb[5]} {" " }{appointmentDate && appointmentDateFromDb[6]}</span>
               </p>
               <p class="Payment-Details-subheading">
                 Your appointment will be held for{" "}
