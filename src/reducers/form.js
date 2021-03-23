@@ -58,6 +58,11 @@ export const Form = (state = iniitialState, action) => {
         ...state,
       };
     case "PEOPLE_BOOKING":
+      let dob = action.payload.day + " - " + action.payload.month + " - " +  action.payload.year 
+      delete action.payload.day ;
+      delete action.payload.month ;
+      delete action.payload.year ;
+      action.payload.dob = dob
       localStorage.setItem(
         "peoples",
         JSON.stringify([...state.peoplesData, action.payload])

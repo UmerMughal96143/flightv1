@@ -21,13 +21,14 @@ const PaymentDetails = ({ history }) => {
   const { peoplesData, data , totalPrice,appointmentDate } = useSelector((state) => state.Form);
   const [formData, setFormData] = useState({
     cardNumber: "",
-    expiryMonth: "",
-    expiryYear: "",
     cardHolderName: "",
     cvv: "",
   });
 
-  const { cardNumber, expiryMonth, expiryYear, cardHolderName, cvv } = formData;
+  const [expiryYear , setExpiryYear] = useState("")
+  const [expiryMonth , setExpiryMonth] = useState("")
+
+  const { cardNumber, cardHolderName, cvv } = formData;
 
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,10 +42,11 @@ const PaymentDetails = ({ history }) => {
     }
     let paymentData = {
       cardNumber,
-      expiryDate: `${expiryMonth} / ${expiryYear}`,
+      
       cardHolderName,
       cvv,
     };
+    paymentData.expiryDate = `${expiryMonth} / ${expiryYear}`
     dispatch(paymentDetails(paymentData));
     let formData = {
       peoplesData,
@@ -166,6 +168,7 @@ const PaymentDetails = ({ history }) => {
                         <select
                           class="form-select"
                           aria-label="Default select example"
+                          onChange={(e) => setExpiryMonth(e.target.value)}
 
                         >
                           <option value="">MM</option>
@@ -181,7 +184,7 @@ const PaymentDetails = ({ history }) => {
                         <select
                           class="form-select"
                           aria-label="Default select example"
-
+                          onChange={(e) => setExpiryYear(e.target.value)}
                         >
                           <option value=""> YY </option>
                           {startYearArray.map((m,ind) =>
