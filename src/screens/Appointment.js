@@ -121,6 +121,10 @@ const Appointment = ({ history }) => {
         city: city,
         postCode: postcode,
       };
+      if(!localStorage.getItem('editaddress')){
+
+        localStorage.setItem('clinetAddress' , JSON.stringify(formData))
+      }
       dispatch(addressesAppointment(formData));
       history.push("/suggestions");
     } else {
