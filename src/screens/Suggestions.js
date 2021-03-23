@@ -536,7 +536,7 @@ for(let i=1; i <71; i++){
               <div className="form-group">
                 <div class="form-group">
                   <p class="appointment-form-heading appointment-date-div">
-                    What time if your flight?
+                    What time is your flight?
                   </p>
                   <div class="suggestion-date-row">
                     <input
