@@ -117,8 +117,14 @@ export const Form = (state = iniitialState, action) => {
     case "POST_FORM_DATA_SUCCESS":
       return {
         ...state,
-        postedData: action.payload
+        postedData: action.payload,
+        loading : false
       };
+      case 'SET_LOADING' : 
+      return{
+        ...state,
+        loading : true
+      }
     case "TOTAL_PRICE":
       localStorage.setItem("price", action.payload);
       return {

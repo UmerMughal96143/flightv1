@@ -19,6 +19,7 @@
     "formik": "^2.2.6",
     "jquery": "^3.6.0",
     "moment-range": "^4.0.2",
+    "qrcode.react": "^1.0.1",
     "rc-time-picker": "^3.7.3",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",

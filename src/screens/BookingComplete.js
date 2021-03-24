@@ -2,24 +2,27 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import PdfDocument from "../components/PdfDocument";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import QRCode  from 'qrcode.react'
 
 const BookingCOmplete = () => {
   const ref = React.createRef();
   const { postedData } = useSelector((state) => state.Form);
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
-  
-  today = mm + '/' + dd + '/' + yyyy;
 
-  let appointmentDateFromDb = postedData?.savedform?.appointmentDate.split(" ")
+  today = mm + "/" + dd + "/" + yyyy;
+
+  let appointmentDateFromDb = postedData?.savedform?.appointmentDate.split(" ");
+
+  let appointmentLocation = JSON.parse(localStorage.getItem("clinetAddress"));
 
   return (
     <div>
@@ -77,26 +80,55 @@ const BookingCOmplete = () => {
                   <h3 class="person-heading">Your appointment details</h3>
                   <div class="Person-details-info">
                     <p>
-                      Appointment date : {" "}<span>{postedData?.savedform && appointmentDateFromDb[4]}{" "} { postedData?.savedform && appointmentDateFromDb[5]} {" " }{postedData?.savedform && appointmentDateFromDb[6]} </span>
+                      Appointment date :{" "}
+                      <span>
+                        {postedData?.savedform && appointmentDateFromDb[4]}{" "}
+                        {postedData?.savedform && appointmentDateFromDb[5]}{" "}
+                        {postedData?.savedform && appointmentDateFromDb[6]}{" "}
+                      </span>
                     </p>
                     <p>
-                      Appointment time : {" "}<span> Between { postedData?.savedform && appointmentDateFromDb[0]}{" "} { postedData?.savedform && appointmentDateFromDb[1]} {" " }{ postedData?.savedform && appointmentDateFromDb[2]}</span>
+                      Appointment time :{" "}
+                      <span>
+                        {" "}
+                        Between{" "}
+                        {postedData?.savedform && appointmentDateFromDb[0]}{" "}
+                        {postedData?.savedform && appointmentDateFromDb[1]}{" "}
+                        {postedData?.savedform && appointmentDateFromDb[2]}
+                      </span>
                     </p>
                     <p>
-                      Test type : {" "}<span> {postedData?.savedform?.testType}</span>
+                      Test type :{" "}
+                      <span> {postedData?.savedform?.testType}</span>
                     </p>
                     <p>
-                      Number of person : {" "}<span> {postedData?.savedform?.peoples?.length} person</span>
+                      Number of person :{" "}
+                      <span>
+                        {" "}
+                        {postedData?.savedform?.peoples?.length} person
+                      </span>
                     </p>
                     <p>
-                      Appointment Type : <span> {postedData?.savedform?.testLocation}</span>
+                      Appointment Type :{" "}
+                      <span> {postedData?.savedform?.testLocation}</span>
                     </p>
                     <p>
-                      Appointment Location :
-                      {" "}<span> {postedData?.savedform?.address1}{" "} {postedData?.savedform?.address2} {" "} {postedData?.savedform?.city} {" "} {postedData?.savedform?.postCode}</span>
+                      Appointment Location :{" "}
+                      <span>
+                        {" "}
+                        {/* {postedData?.savedform?.address1}{" "}
+                        {postedData?.savedform?.address2}{" "}
+                        {postedData?.savedform?.city}{" "}
+                        {postedData?.savedform?.postCode} */}
+                        {appointmentLocation.address1}{" "}
+                        {appointmentLocation.address2}{" "}
+                        {appointmentLocation.city}{" "}
+                        {appointmentLocation.postCode}
+                      </span>
                     </p>
                     <p>
-                    Amount Paid : {" "}<span>£{postedData?.savedform?.amountPaid}</span>
+                      Amount Paid :{" "}
+                      <span>£{postedData?.savedform?.amountPaid}</span>
                     </p>
                   </div>
                 </div>
@@ -122,6 +154,7 @@ const BookingCOmplete = () => {
                             will not be able to issue your test results without
                             taking photo ID
                           </p>
+                          <QRCode value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`} />
                         </div>
                       </div>
                     );

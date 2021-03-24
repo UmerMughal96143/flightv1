@@ -3,30 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { paymentDetails, postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
 import { Link, Redirect } from "react-router-dom";
-import Countdown, { formatTimeDelta,zeroPad } from "react-countdown";
+import Countdown, { formatTimeDelta, zeroPad } from "react-countdown";
 
 let monthArray = [];
-for(let i=1; i<=12; i++){
+for (let i = 1; i <= 12; i++) {
   monthArray.push(i);
 }
 
-let startYear = 21 ;
+let startYear = 21;
 let startYearArray = [];
-for(let i=1; i<=12; i++){
+for (let i = 1; i <= 12; i++) {
   startYearArray.push(startYear++);
 }
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
-  const { peoplesData, data , totalPrice,appointmentDate } = useSelector((state) => state.Form);
+  const { peoplesData, data, totalPrice, appointmentDate ,loading} = useSelector(
+    (state) => state.Form
+  );
   const [formData, setFormData] = useState({
     cardNumber: "",
     cardHolderName: "",
     cvv: "",
   });
 
-  const [expiryYear , setExpiryYear] = useState("")
-  const [expiryMonth , setExpiryMonth] = useState("")
+  const [expiryYear, setExpiryYear] = useState("");
+  const [expiryMonth, setExpiryMonth] = useState("");
 
   const { cardNumber, cardHolderName, cvv } = formData;
 
@@ -42,18 +44,18 @@ const PaymentDetails = ({ history }) => {
     }
     let paymentData = {
       cardNumber,
-      
+
       cardHolderName,
       cvv,
     };
-    paymentData.expiryDate = `${expiryMonth} / ${expiryYear}`
+    paymentData.expiryDate = `${expiryMonth} / ${expiryYear}`;
     dispatch(paymentDetails(paymentData));
     let formData = {
       peoplesData,
       data,
       paymentData,
-      appointmentDate : appointmentDate,
-      amountPaid : totalPrice
+      appointmentDate: appointmentDate,
+      amountPaid: totalPrice,
     };
     dispatch(postAllFormsData(formData, history));
     // history.push("/bookingcomplete");
@@ -63,20 +65,17 @@ const PaymentDetails = ({ history }) => {
     window.scrollTo(0, 0);
   }, []);
 
-
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
-  
-  today = mm + '/' + dd + '/' + yyyy;
 
-
+  today = mm + "/" + dd + "/" + yyyy;
 
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
       // Render a completed state
-      return <Redirect to='/' />
+      return <Redirect to="/" />;
     } else {
       // Render a countdown
       return (
@@ -87,8 +86,7 @@ const PaymentDetails = ({ history }) => {
     }
   };
 
-  let appointmentDateFromDb = appointmentDate?.split(" ")
-
+  let appointmentDateFromDb = appointmentDate?.split(" ");
 
   return (
     <div>
@@ -104,7 +102,12 @@ const PaymentDetails = ({ history }) => {
               <p class="Payment-Details-heading">
                 Your appointment has been temporarily secured for the following
                 <br />
-                date: <span>{ appointmentDate && appointmentDateFromDb[4]}{" "} {appointmentDate && appointmentDateFromDb[5]} {" " }{appointmentDate && appointmentDateFromDb[6]}</span>
+                date:{" "}
+                <span>
+                  {appointmentDate && appointmentDateFromDb[4]}{" "}
+                  {appointmentDate && appointmentDateFromDb[5]}{" "}
+                  {appointmentDate && appointmentDateFromDb[6]}
+                </span>
               </p>
               <p class="Payment-Details-subheading">
                 Your appointment will be held for{" "}
@@ -121,19 +124,19 @@ const PaymentDetails = ({ history }) => {
                 </h3>
                 <form className="appointment-form">
                   <div class="form-group">
-                      <p>Card number*</p>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="cardNumber"
-                        onChange={(e) => onFormChange(e)}
-                        value={cardNumber}
-                      />
+                    <p>Card number*</p>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="cardNumber"
+                      onChange={(e) => onFormChange(e)}
+                      value={cardNumber}
+                    />
                   </div>
                   <div className="form-group">
-                      <p>Expiry Date*</p>
-                      {/* <div class="expiration"> */}
-                        {/* <span class="expiration-input-wrapper">
+                    <p>Expiry Date*</p>
+                    {/* <div class="expiration"> */}
+                    {/* <span class="expiration-input-wrapper">
                           <input
                             type="text"
                             name="expiryMonth"
@@ -160,60 +163,62 @@ const PaymentDetails = ({ history }) => {
 
                           />
                         </span> */}
-                      {/* </div> */}
-                      <div className="form-row departure-date-box">
-                    
-                    <div className="form-group">
-                      <div className="month-select">
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                          onChange={(e) => setExpiryMonth(e.target.value)}
-
-                        >
-                          <option value="">MM</option>
-                          {monthArray.map((m,ind) =>
-                            <option key={ind} value={m}>{m}</option>
-                          )}
-                        </select>
+                    {/* </div> */}
+                    <div className="form-row departure-date-box">
+                      <div className="form-group">
+                        <div className="month-select">
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onChange={(e) => setExpiryMonth(e.target.value)}
+                          >
+                            <option value="">MM</option>
+                            {monthArray.map((m, ind) => (
+                              <option key={ind} value={m}>
+                                {m}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                      <span>/</span>
+                      <div className="form-group">
+                        <div className="month-select">
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onChange={(e) => setExpiryYear(e.target.value)}
+                          >
+                            <option value=""> YY </option>
+                            {startYearArray.map((m, ind) => (
+                              <option key={ind} value={m}>
+                                {m}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
                     </div>
-                    <span>/</span>
-                    <div className="form-group">
-                      <div className="month-select">
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                          onChange={(e) => setExpiryYear(e.target.value)}
-                        >
-                          <option value=""> YY </option>
-                          {startYearArray.map((m,ind) =>
-                            <option key={ind} value={m}>{m}</option>
-                          )}
-                        </select>
-                      </div>
-                    </div>
-                  </div>
                   </div>
                   <div class="form-group">
-                      <p>Cardholder name*</p>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="cardHolderName"
-                        onChange={(e) => onFormChange(e)}
-                        value={cardHolderName}
-                      />
+                    <p>Cardholder name*</p>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="cardHolderName"
+                      onChange={(e) => onFormChange(e)}
+                      value={cardHolderName}
+                    />
                   </div>
                   <div class="form-group">
-                      <p>CVV*</p>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="cvv"
-                        onChange={(e) => onFormChange(e)}
-                        value={cvv}
-                      />
+                    <p>CVV*</p>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="cvv"
+                      onChange={(e) => onFormChange(e)}
+                      value={cvv}
+                    />
                   </div>
                   <div class="form-group">
                     <div className="Billing-address">
@@ -256,7 +261,11 @@ const PaymentDetails = ({ history }) => {
               </div>
               <div class="accept-turm-condition col-md-8 col-6 footer-btn pl-0 m-auto">
                 <button class="Submit-to-checkout" onClick={paymentHandler}>
-                  Complete Payment
+                  {loading  ? <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div> : 'Complete Payment'}
+                  
+                  
                 </button>
               </div>
             </div>

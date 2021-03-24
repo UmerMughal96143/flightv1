@@ -16,6 +16,9 @@ const Landing = () => {
     localStorage.removeItem("addperson");
     localStorage.removeItem("price");
     localStorage.removeItem("appointmentDate");
+    localStorage.removeItem("editaddress");
+    localStorage.removeItem("clinetAddress");
+    
     dispatch(resetState())
     
 
