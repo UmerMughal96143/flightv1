@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import PdfDocument from "../components/PdfDocument";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import QRCode  from 'qrcode.react'
 
 const BookingCOmplete = () => {
   const ref = React.createRef();
   const { postedData } = useSelector((state) => state.Form);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,9 +22,7 @@ const BookingCOmplete = () => {
 
   let appointmentDateFromDb = postedData?.savedform?.appointmentDate.split(" ");
 
-
-  let appointmentLocation = JSON.parse(localStorage.getItem('clinetAddress'))
-
+  let appointmentLocation = JSON.parse(localStorage.getItem("clinetAddress"));
 
   return (
     <div>
@@ -120,8 +120,6 @@ const BookingCOmplete = () => {
                         {postedData?.savedform?.address2}{" "}
                         {postedData?.savedform?.city}{" "}
                         {postedData?.savedform?.postCode} */}
-
-
                         {appointmentLocation.address1}{" "}
                         {appointmentLocation.address2}{" "}
                         {appointmentLocation.city}{" "}
@@ -156,6 +154,7 @@ const BookingCOmplete = () => {
                             will not be able to issue your test results without
                             taking photo ID
                           </p>
+                          <QRCode value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`} />
                         </div>
                       </div>
                     );

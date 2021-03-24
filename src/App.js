@@ -13,6 +13,7 @@ import Suggestions from "./screens/Suggestions";
 import TermsConditions from "./screens/TermsConditions";
 import TestLocation from "./screens/TestLocation";
 import UserDetail from "./screens/UserDetail";
+import Qrcode from "./screens/Qrcode";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/termsconditions" component={TermsConditions} />
           <Route path="/testlocation" component={TestLocation} />
           <Route path="/userdetail" component={UserDetail} />
+          <Route path="/qrcode" component={Qrcode} />
         </Switch>
       </Router>
     </>
