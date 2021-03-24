@@ -34,6 +34,11 @@ body .check-input-extra-big{
     display: flex;
     align-items: flex-start;
 }
+.site-container-pdf{
+ 
+    width: 90%;
+    margin: 0 auto;
+}
 .PDF_ICON{
     font-size: 35px;
     color: #ffffff;

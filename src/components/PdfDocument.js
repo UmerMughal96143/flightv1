@@ -1,5 +1,5 @@
 import React from "react";
-import pic from "./avatar.png"
+import pic from "./logo.png";
 import {
   Page,
   Text,
@@ -8,130 +8,117 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
+import { autoDetect } from "@mobiscroll/react";
+
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "white",
-    color: "#1e9190",
-    textAlign: "center",
+    flexDirection: "column"
   },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-  movieContainer: {
-    backgroundColor: "white",
-    textAlign: "center",
-    color: "#1e9190",
-    padding: 5,
-  },
-  movieDetails: {
-    display: "flex",
-    marginLeft: 5,
-  },
-  movieTitle: {
-    fontSize: 15,
-    marginBottom: 10,
-  },
-  movieOverview: {
-    fontSize: 10,
-  },
-
   image: {
-    height: 20,
-    width: 20,
+    width: "50%",
+    padding: 10
   },
-  subtitle: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    width: 150,
+  centerImage: {
     alignItems: "center",
-    marginBottom: 12,
+    flexGrow: 1
   },
-  vote: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  rating: {
-    height: 10,
-    width: 10,
-  },
-  vote_text: {
-    fontSize: 10,
-  },
-  vote_pop: {
-    fontSize: 10,
-    padding: 2,
-    backgroundColor: "#61C74F",
-    color: "#fff",
-  },
-  vote_pop_text: {
-    fontSize: 10,
-    marginLeft: 4,
-  },
-  overviewContainer: {
-    minHeight: 110,
-  },
-  detailsFooter: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  lang: {
-    fontSize: 8,
-    fontWeight: 700,
-  },
-  vote_average: {
-    fontSize: 8,
-    marginLeft: 4,
-    fontWeight: "bold",
-  },
-  PDF_logo: {
-    width: "10%",
-    textAlign: "center",
-    margin: "0 auto",  
-  },
-  PDF_logo_img: {
+  text: {
     width: "100%",
-    margin: "0 auto",  
+    backgroundColor: "#f0f0f0",
+    paddingHorizontal: 50,
+    paddingVertical: 30,
+    color: "#212121"
   }
 });
 
 const PdfDocument = ({ peoples }) => {
   return (
     <Document>
-      <Page style={styles.page}>
-        <View style={styles.PDF_logo}> 
-        <Image style={styles.PDF_logo_img} object-fit="fill" src={pic} alt="image" />
-        </View>
-        {peoples &&
-          peoples.map((peo) => {
-            return (
-              <View style={styles.movieContainer}>
-                
-                <View style={styles.movieDetails}>
-                  <Text
-                    style={styles.movieTitle}
-                  >{`Person ${peo.firstName} ${peo.lastName}`}</Text>
-                  <View style={styles.subtitle}>
-                    <View style={styles.vote}>
-                      <Text style={styles.vote_text}>Reference ID :</Text>
-                      <Text style={styles.vote_pop}>{peo._id}</Text>
-                      <Text style={styles.vote_text}>
-                        {" "}
-                        Please have you photo ID present at the appointment as
-                        we will be required to take a photo of it. We will not
-                        be able to issue your test results without taking photo
-                        ID
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            );
-          })}
-      </Page>
-    </Document>
+    <Page style={styles.page} size="A4">
+      <View style={styles.centerImage}>
+        <Image style={styles.image} src={pic} />
+      </View>
+      <Text style={styles.text}>
+        PSPDFKit GmbH is the leading cross-platform SDK solution for integrating
+        PDF support on all major platforms: iOS, Android, Windows, macOS, and on
+        Web (both server-based and standalone via WebAssembly).
+      </Text>
+      <Text style={styles.text}>
+        Our solutions enable customers to seamlessly add powerful PDF viewing,
+        editing, annotating, and form filling/signing into their app in under 15
+        minutes, saving months of development time and expense.
+      </Text>
+      <Text style={styles.text}>
+        Our solutions enable customers to seamlessly add powerful PDF viewing,
+        editing, annotating, and form filling/signing into their app in under 15
+        minutes, saving months of development time and expense.
+      </Text>
+      <Text style={styles.text}>
+        Our solutions enable customers to seamlessly add powerful PDF viewing,
+        editing, annotating, and form filling/signing into their app in under 15
+        minutes, saving months of development time and expense.
+      </Text>
+      <Text style={styles.text}>
+        Our solutions enable customers to seamlessly add powerful PDF viewing,
+        editing, annotating, and form filling/signing into their app in under 15
+        minutes, saving months of development time and expense.
+      </Text>
+      <Text style={styles.text}>
+        Our solutions enable customers to seamlessly add powerful PDF viewing,
+        editing, annotating, and form filling/signing into their app in under 15
+        minutes, saving months of development time and expense.
+      </Text>
+      <Text style={styles.text}>
+        Our solutions enable customers to seamlessly add powerful PDF viewing,
+        editing, annotating, and form filling/signing into their app in under 15
+        minutes, saving months of development time and expense.
+      </Text>
+      
+      <Text style={styles.text}>
+        Learn more at
+      </Text>
+    </Page>
+  </Document>
+    // <Document>
+    //   <Page style={StyleSheet.wrapper}>
+    //     {/* <View style={styles.PDF_logo}>
+    //       <Image
+    //         src={pic}
+    //         alt="image"
+    //       />
+    //     </View> */}
+    //     <View>
+    //       <View>
+    //         <View className="main-navbar-1 navbar navbar-expand-lg navbar-light position-relative">
+    //           <Image class="dark-logo" src={pic} alt="image" />
+    //         </View>
+    //       </View>
+    //     </View>
+    //     {peoples &&
+    //       peoples.map((peo) => {
+    //         return (
+    //           <View class="Booking-Complete-person-data-box">
+    //             <View class="Booking-Complete-person-data-box-header">
+    //               <Text class="Booking-person-info">
+    //                 Patient Name :{" "}
+    //                 <Text>
+    //                   {peo.firstName} {peo.lastName}
+    //                 </Text>
+    //               </Text>
+    //               <Text class="Booking-person-identity">
+    //                 Booking Refrence ID: <Text>{peo.referenceId}</Text>
+    //               </Text>
+    //               <Text class="Booking-Texterson-dec">
+    //                 Please have you photo ID present at the appointment as we
+    //                 will be required to take a photo of it. We will not be able
+    //                 to issue your test results without taking photo ID
+    //               </Text>
+    //             </View>
+    //           </View>
+    //         );
+    //       })}
+    //   </Page>
+    // </Document>
   );
 };
 
