@@ -1134,7 +1134,7 @@ body .appointment_summary_wrapper{
 }
 .Booking-person-dec{
     font-family: "Poppins-Regular"; 
-    padding: 10px 20px;
+    padding: 0px 10px;
     font-size: 16px;
 }
 .Booking-person-FAQ{
@@ -1168,6 +1168,11 @@ body .appointment_summary_wrapper{
 .Booking-person-chat-type{
     margin: 28px 0px;
 }
+.Booking-person-detail-box{
+    display: flex;
+    padding: 10px 20px;
+}
+
 .Booking-ml i{
     margin-left: -25px;
 }
@@ -1256,6 +1261,14 @@ body .appointment_summary_wrapper{
         text-decoration: underline;
         text-align: center;
         margin: 8px 0px 32px 0px;
+    }
+    .Booking-person-detail-box{
+        display: block;
+    }
+    .Booking-person-dec{
+        font-family: "Poppins-Regular"; 
+        padding: 10px 0px;
+        font-size: 16px;
     }
 }
 @media screen and (max-width:375px){

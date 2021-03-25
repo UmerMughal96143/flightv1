@@ -148,13 +148,19 @@ const BookingCOmplete = () => {
                           <h4 class="Booking-person-identity">
                             Booking Refrence ID: <span>{peo.referenceId}</span>
                           </h4>
-                          <p class="Booking-person-dec">
-                            Please have you photo ID present at the appointment
-                            as we will be required to take a photo of it. We
-                            will not be able to issue your test results without
-                            taking photo ID
-                          </p>
-                          <QRCode value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`} />
+                          <div>
+                            <div className="Booking-person-detail-box">
+                            <div className="Qr-scanner">
+                              <QRCode value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`} />
+                            </div>
+                              <p class="Booking-person-dec">
+                                Please have you photo ID present at the appointment
+                                as we will be required to take a photo of it. We
+                                will not be able to issue your test results without
+                                taking photo ID
+                              </p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     );
