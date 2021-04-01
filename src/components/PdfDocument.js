@@ -7,8 +7,10 @@ import {
   Document,
   StyleSheet,
   Image,
+  Canvas
 } from "@react-pdf/renderer";
-import { autoDetect } from "@mobiscroll/react";
+import QRCode  from 'qrcode.react'
+
 
 const styles = StyleSheet.create({
   page: {
@@ -29,75 +31,20 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 10,
     color: "#212121"
+  },
+  qrcode: {
+    width: "20%",
+    height : '100px'
   }
 });
 
-const PdfDocument = ({ peoples }) => {
+const PdfDocument = ({ peoples,imageUrls }) => {
+  let canvas = 0 ;
   return (
-  //   <Document>
-  //   <Page style={styles.page} size="A4">
-  //     <View style={styles.centerImage}>
-  //       <Image style={styles.image} src={pic} />
-  //     </View>
-  //     <Text style={styles.text}>
-  //       PSPDFKit GmbH is the leading cross-platform SDK solution for integrating
-  //       PDF support on all major platforms: iOS, Android, Windows, macOS, and on
-  //       Web (both server-based and standalone via WebAssembly).
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Our solutions enable customers to seamlessly add powerful PDF viewing,
-  //       editing, annotating, and form filling/signing into their app in under 15
-  //       minutes, saving months of development time and expense.
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Our solutions enable customers to seamlessly add powerful PDF viewing,
-  //       editing, annotating, and form filling/signing into their app in under 15
-  //       minutes, saving months of development time and expense.
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Our solutions enable customers to seamlessly add powerful PDF viewing,
-  //       editing, annotating, and form filling/signing into their app in under 15
-  //       minutes, saving months of development time and expense.
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Our solutions enable customers to seamlessly add powerful PDF viewing,
-  //       editing, annotating, and form filling/signing into their app in under 15
-  //       minutes, saving months of development time and expense.
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Our solutions enable customers to seamlessly add powerful PDF viewing,
-  //       editing, annotating, and form filling/signing into their app in under 15
-  //       minutes, saving months of development time and expense.
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Our solutions enable customers to seamlessly add powerful PDF viewing,
-  //       editing, annotating, and form filling/signing into their app in under 15
-  //       minutes, saving months of development time and expense.
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Our solutions enable customers to seamlessly add powerful PDF viewing,
-  //       editing, annotating, and form filling/signing into their app in under 15
-  //       minutes, saving months of development time and expense.
-  //     </Text>
-  //     <Text style={styles.text}>
-  //       Learn more at
-  //     </Text>
-  //   </Page>
-  // </Document>
-
     <Document>
       <Page style={StyleSheet.wrapper}>
-        {/* <View style={styles.PDF_logo}>
-          <Image
-            src={pic}
-            alt="image"
-          />
-        </View> */}
         <View>
           <View>
-            {/* <View className="main-navbar-1 navbar navbar-expand-lg navbar-light position-relative">
-              <Image class="dark-logo" src={pic} alt="image" />
-            </View> */}
             <View style={styles.centerImage}>
                 <Image style={styles.image} src={pic} />
             </View>
@@ -117,6 +64,7 @@ const PdfDocument = ({ peoples }) => {
                   <Text style={styles.text}>
                     Booking Refrence ID: <Text>{peo.referenceId}</Text>
                   </Text>
+                      <Image style={styles.qrcode} source={ {uri: imageUrls[canvas++]} } />                
                   <Text style={styles.text}>
                     Please have you photo ID present at the appointment as we
                     will be required to take a photo of it. We will not be able

@@ -1,17 +1,38 @@
-import React, { useEffect } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import PdfDocument from "../components/PdfDocument";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import QRCode  from 'qrcode.react'
+import useDynamicRefs from 'use-dynamic-refs';
+
+
 
 const BookingCOmplete = () => {
-  const ref = React.createRef();
   const { postedData } = useSelector((state) => state.Form);
+  const [base64ImagesURl , setBase64ImagesUrl] = useState([])
+  const [showPdf , setShowPdf] = useState(false)
+  
+
+  let canvasId = 0
 
 
+  
   useEffect(() => {
     window.scrollTo(0, 0);
+    window.addEventListener('load', converBase64);
   }, []);
+
+
+  let base64Images = []
+  const converBase64 = () => {
+    for(var i = 1 ; i <= canvasId ; i++){
+      var canvas = document.getElementById(`canvas-${i}`);
+      var dataURL = canvas.toDataURL();
+      base64Images.push(dataURL)
+      setBase64ImagesUrl(base64Images)
+      
+    }
+  }
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
@@ -23,6 +44,15 @@ const BookingCOmplete = () => {
   let appointmentDateFromDb = postedData?.savedform?.appointmentDate.split(" ");
 
   let appointmentLocation = JSON.parse(localStorage.getItem("clinetAddress"));
+
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPdf(true)
+        
+    },[3000])
+  },[])
 
   return (
     <div>
@@ -40,41 +70,42 @@ const BookingCOmplete = () => {
             <div class="subheading">
               <p>Appointment Confirmation</p>
               <div className="Save-PDF-new-btn">
-                <PDFDownloadLink
-                  document={
-                    <PdfDocument peoples={postedData?.savedform?.peoples} />
-                  }
-                  fileName="flight_details.pdf"
-                  style={{
-                    fontSize: "14px",
-                    padding: "10px 15px",
-                    color: "white",
-                    border: "none",
-                    borderRradius: "6px",
-                    display: "flex",
-                    margin: "0 auto",
-                    cursor: "pointer",
-                    alignItems: "center",
-                    fontFamily: "Poppins-Regular",
-                    justifyContent: "center",
-                    borderRadius: "6px",
-                    backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
-                  }}
-                >
-                  {({ blob, url, loading, error }) =>
-                    loading ? (
-                      "Loading document..."
-                    ) : (
-                      <span className="new-pdf-btn">
-                        <i class="fas fa-file-pdf PDF_ICON"></i> Save booking
-                        confirmation as a PDF
-                      </span>
-                    )
-                  }
-                </PDFDownloadLink>
+                {showPdf && <PDFDownloadLink
+                    document={
+                      <PdfDocument peoples={postedData?.savedform?.peoples} imageUrls={base64ImagesURl} />
+                    }
+                    fileName="flight_details.pdf"
+                    style={{
+                      fontSize: "14px",
+                      padding: "10px 15px",
+                      color: "white",
+                      border: "none",
+                      borderRradius: "6px",
+                      display: "flex",
+                      margin: "0 auto",
+                      cursor: "pointer",
+                      alignItems: "center",
+                      fontFamily: "Poppins-Regular",
+                      justifyContent: "center",
+                      borderRadius: "6px",
+                      backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
+                    }}
+                  >
+                    {({ blob, url, loading, error }) =>
+                      loading ? (
+                        "Loading document..."
+                      ) : (
+                        <span className="new-pdf-btn">
+                          <i class="fas fa-file-pdf PDF_ICON"></i> Save booking
+                          confirmation as a PDF
+                        </span>
+                      )
+                    }
+                  </PDFDownloadLink>}
+              
               </div>
             </div>
-            <div class="Booking-Complete-Inner-wrapper" id="capture" ref={ref}>
+            <div class="Booking-Complete-Inner-wrapper" id="capture">
               <div class="Booking-Complete-details">
                 <div class="person-info">
                   <h3 class="person-heading">Your appointment details</h3>
@@ -151,7 +182,7 @@ const BookingCOmplete = () => {
                           <div>
                             <div className="Booking-person-detail-box">
                             <div className="Qr-scanner">
-                              <QRCode value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`} />
+                              <QRCode value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`} id={`canvas-${canvasId = canvasId + 1}`}/>
                             </div>
                               <p class="Booking-person-dec">
                                 Please have you photo ID present at the appointment
@@ -165,40 +196,6 @@ const BookingCOmplete = () => {
                       </div>
                     );
                   })}
-              </div>
-              <div className="Save-PDF-new-btn">
-                <PDFDownloadLink
-                  document={
-                    <PdfDocument peoples={postedData?.savedform?.peoples} />
-                  }
-                  fileName="flight_details.pdf"
-                  style={{
-                    fontSize: "14px",
-                    padding: "18px 15px",
-                    color: "white",
-                    border: "none",
-                    borderRradius: "6px",
-                    display: "flex",
-                    margin: "0 auto",
-                    cursor: "pointer",
-                    alignItems: "center",
-                    fontFamily: "Poppins-Regular",
-                    justifyContent: "center",
-                    borderRadius: "6px",
-                    backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
-                  }}
-                >
-                  {({ blob, url, loading, error }) =>
-                    loading ? (
-                      "Loading document..."
-                    ) : (
-                      <span className="new-pdf-btn">
-                        <i class="fas fa-file-pdf PDF_ICON"></i> Save booking
-                        confirmation as a PDF
-                      </span>
-                    )
-                  }
-                </PDFDownloadLink>
               </div>
               <div class="Booking-person-FAQ">
                 <h4 class="Booking-person-question-heading">
