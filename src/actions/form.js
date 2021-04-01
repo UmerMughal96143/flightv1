@@ -106,9 +106,9 @@ export const setAppointmentDate = (data) => async (dispatch) => {
 export const postAllFormsData = (data , history) => async (dispatch) => {
     
   try {
-    // const res =  await axios.post('http://localhost:3008/flight/api/v1/form' , data)
     dispatch({ type: "SET_LOADING"});
-
+    
+    // const res =  await axios.post('http://localhost:3008/flight/api/v1/form' , data)
     const res =  await axios.post('https://flightackened.herokuapp.com/flight/api/v1/form' , data)
     dispatch({ type: "POST_FORM_DATA_SUCCESS", payload: res.data });
     localStorage.setItem('postedData' , JSON.stringify(res.data))
@@ -117,5 +117,17 @@ export const postAllFormsData = (data , history) => async (dispatch) => {
     localStorage.removeItem("peoples")
     localStorage.removeItem("numberOfUsers")
     localStorage.removeItem("form")
+  } catch (error) {}
+};
+
+
+
+export const setStatusOfApplication = (number) => async (dispatch) => {
+    
+  try {
+    dispatch({ type: "SET_LOADING"});
+    
+    const res =  await axios.post(`https://flightackened.herokuapp.com/flight/api/v1/form/status?id=${number}` , )
+    
   } catch (error) {}
 };

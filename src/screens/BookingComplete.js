@@ -10,6 +10,7 @@ import useDynamicRefs from 'use-dynamic-refs';
 const BookingCOmplete = () => {
   const { postedData } = useSelector((state) => state.Form);
   const [base64ImagesURl , setBase64ImagesUrl] = useState([])
+  console.log("🚀 ~ file: BookingComplete.js ~ line 13 ~ BookingCOmplete ~ base64ImagesURl", base64ImagesURl)
   const [showPdf , setShowPdf] = useState(false)
   
 
@@ -19,12 +20,13 @@ const BookingCOmplete = () => {
   
   useEffect(() => {
     window.scrollTo(0, 0);
-    window.addEventListener('load', converBase64);
+    converBase64()
   }, []);
 
 
   let base64Images = []
   const converBase64 = () => {
+    console.log('convertBase64 Happens')
     for(var i = 1 ; i <= canvasId ; i++){
       var canvas = document.getElementById(`canvas-${i}`);
       var dataURL = canvas.toDataURL();
