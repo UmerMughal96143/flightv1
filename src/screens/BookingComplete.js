@@ -52,9 +52,15 @@ const BookingCOmplete = () => {
   useEffect(() => {
     setTimeout(() => {
       setShowPdf(true)
-        
     },[3000])
   },[])
+
+
+
+
+
+
+
 
   return (
     <div>
