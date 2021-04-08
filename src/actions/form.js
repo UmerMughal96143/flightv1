@@ -86,7 +86,10 @@ export const postAllFormsData = (data, history) => async (dispatch) => {
     //   "http://localhost:3008/flight/api/v1/form",
     //   data
     // );
-    const res =  await axios.post('https://flightackened.herokuapp.com/flight/api/v1/form' , data)
+    const res = await axios.post(
+      "https://flightackened.herokuapp.com/flight/api/v1/form",
+      data
+    );
     dispatch({ type: "POST_FORM_DATA_SUCCESS", payload: res.data });
     localStorage.setItem("postedData", JSON.stringify(res.data));
     history.push("/bookingcomplete");
@@ -104,5 +107,54 @@ export const setStatusOfApplication = (number) => async (dispatch) => {
     const res = await axios.post(
       `https://flightackened.herokuapp.com/flight/api/v1/form/status?id=${number}`
     );
+  } catch (error) {}
+};
+
+export const emerchantPay = (data) => async (dispatch,getState) => {
+console.log("🚀 ~ file: form.js ~ line 114 ~ emerchantPay ~ data", data)
+  try {
+    const config = {
+      headers: { "Content-Type": "text/xml" },
+    };
+    let xmlData = `<wpf_payment>
+    <transaction_id>a13123231</transaction_id>
+    <usage>usage</usage>
+    <description>description</description>
+    <notification_url>http://example.com/genesis.php</notification_url>
+    <return_success_url>http://localhost:3000/paymentdetails</return_success_url>
+    <return_failure_url>http://localhost:3000/paymentdetails</return_failure_url>
+    <return_cancel_url>http://localhost:3000/paymentdetails</return_cancel_url>
+    <amount>1000000</amount>
+    <currency>GBP</currency>
+    <customer_email>new_email@example.com</customer_email>
+    <customer_phone>1234567890</customer_phone>
+    <billing_address>
+    <first_name>FirstName</first_name>
+    <last_name>LastName</last_name>
+    <address1>14 HIGH ROAD</address1>
+    <zip_code>RM6 6PR</zip_code>
+    <city>LONDON</city>
+    <state/>
+    <country>GB</country>
+    </billing_address>
+    <transaction_types>
+    <transaction_type name="authorize3d"/>
+    </transaction_types>
+   </wpf_payment>`;
+
+
+    axios.post("/en/wpf",xmlData,{
+      headers : {
+        'Content-Type': 'text/xml',
+        'Access-Control-Allow-Origin' : '*',
+      },
+      auth: {
+        username: 'afec0aff1e20c8950568e32771412e9757640721',
+        password: 'c23d19d0180b179d2d6d6509d1e8c0c03778902d'
+      }
+    });
+
+    var state = getState()
+    console.log("🚀 ~ file: form.js ~ line 146 ~ emerchantPay ~ state", state)
   } catch (error) {}
 };

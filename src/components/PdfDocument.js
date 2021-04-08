@@ -7,22 +7,21 @@ import {
   Document,
   StyleSheet,
   Image,
-  Canvas
+  Canvas,
 } from "@react-pdf/renderer";
-import QRCode  from 'qrcode.react'
-
+import QRCode from "qrcode.react";
 
 const styles = StyleSheet.create({
   page: {
-    flexDirection: "column"
+    flexDirection: "column",
   },
   image: {
     width: "50%",
-    padding: 10
+    padding: 10,
   },
   centerImage: {
     alignItems: "center",
-    flexGrow: 1
+    flexGrow: 1,
   },
   text: {
     width: "100%",
@@ -30,23 +29,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     paddingVertical: 10,
     fontSize: 10,
-    color: "#212121"
+    color: "#212121",
   },
   qrcode: {
     width: "20%",
-    height : '100px'
-  }
+    height: "100px",
+    textAlign: "center",
+  },
 });
 
-const PdfDocument = ({ peoples,imageUrls }) => {
-  let canvas = 0 ;
+const PdfDocument = ({ peoples, imageUrls }) => {
+  let canvas = 0;
   return (
     <Document>
       <Page style={StyleSheet.wrapper}>
         <View>
           <View>
             <View style={styles.centerImage}>
-                <Image style={styles.image} src={pic} />
+              <Image style={styles.image} src={pic} />
             </View>
           </View>
         </View>
@@ -64,7 +64,10 @@ const PdfDocument = ({ peoples,imageUrls }) => {
                   <Text style={styles.text}>
                     Booking Refrence ID: <Text>{peo.referenceId}</Text>
                   </Text>
-                      <Image style={styles.qrcode} source={ {uri: imageUrls[canvas++]} } />                
+                  <Image
+                    style={styles.qrcode}
+                    source={{ uri: imageUrls[canvas++] }}
+                  />
                   <Text style={styles.text}>
                     Please have you photo ID present at the appointment as we
                     will be required to take a photo of it. We will not be able

@@ -2,39 +2,32 @@ import React, { createRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import PdfDocument from "../components/PdfDocument";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import QRCode  from 'qrcode.react'
-import useDynamicRefs from 'use-dynamic-refs';
-
-
+import QRCode from "qrcode.react";
+import useDynamicRefs from "use-dynamic-refs";
+import { emerchantPay } from "../actions/form";
 
 const BookingCOmplete = () => {
   const { postedData } = useSelector((state) => state.Form);
-  const [base64ImagesURl , setBase64ImagesUrl] = useState([])
-  console.log("🚀 ~ file: BookingComplete.js ~ line 13 ~ BookingCOmplete ~ base64ImagesURl", base64ImagesURl)
-  const [showPdf , setShowPdf] = useState(false)
-  
+  const [base64ImagesURl, setBase64ImagesUrl] = useState([]);
+  const [showPdf, setShowPdf] = useState(false);
 
-  let canvasId = 0
+  let canvasId = 0;
 
-
-  
   useEffect(() => {
     window.scrollTo(0, 0);
-    converBase64()
+    converBase64();
   }, []);
 
-
-  let base64Images = []
+  let base64Images = [];
   const converBase64 = () => {
-    console.log('convertBase64 Happens')
-    for(var i = 1 ; i <= canvasId ; i++){
+    console.log("convertBase64 Happens");
+    for (var i = 1; i <= canvasId; i++) {
       var canvas = document.getElementById(`canvas-${i}`);
       var dataURL = canvas.toDataURL();
-      base64Images.push(dataURL)
-      setBase64ImagesUrl(base64Images)
-      
+      base64Images.push(dataURL);
+      setBase64ImagesUrl(base64Images);
     }
-  }
+  };
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
@@ -47,20 +40,11 @@ const BookingCOmplete = () => {
 
   let appointmentLocation = JSON.parse(localStorage.getItem("clinetAddress"));
 
-
-
   useEffect(() => {
     setTimeout(() => {
-      setShowPdf(true)
-    },[3000])
-  },[])
-
-
-
-
-
-
-
+      setShowPdf(true);
+    }, [3000]);
+  }, []);
 
   return (
     <div>
@@ -78,9 +62,13 @@ const BookingCOmplete = () => {
             <div class="subheading">
               <p>Appointment Confirmation</p>
               <div className="Save-PDF-new-btn">
-                {showPdf && <PDFDownloadLink
+                {showPdf ? (
+                  <PDFDownloadLink
                     document={
-                      <PdfDocument peoples={postedData?.savedform?.peoples} imageUrls={base64ImagesURl} />
+                      <PdfDocument
+                        peoples={postedData?.savedform?.peoples}
+                        imageUrls={base64ImagesURl}
+                      />
                     }
                     fileName="flight_details.pdf"
                     style={{
@@ -96,7 +84,8 @@ const BookingCOmplete = () => {
                       fontFamily: "Poppins-Regular",
                       justifyContent: "center",
                       borderRadius: "6px",
-                      backgroundImage: "linear-gradient(45deg, #018195, #7CC1B1)",
+                      backgroundImage:
+                        "linear-gradient(45deg, #018195, #7CC1B1)",
                     }}
                   >
                     {({ blob, url, loading, error }) =>
@@ -109,8 +98,12 @@ const BookingCOmplete = () => {
                         </span>
                       )
                     }
-                  </PDFDownloadLink>}
-              
+                  </PDFDownloadLink>
+                ) : (
+                  <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                )}
               </div>
             </div>
             <div class="Booking-Complete-Inner-wrapper" id="capture">
@@ -189,14 +182,17 @@ const BookingCOmplete = () => {
                           </h4>
                           <div>
                             <div className="Booking-person-detail-box">
-                            <div className="Qr-scanner">
-                              <QRCode value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`} id={`canvas-${canvasId = canvasId + 1}`}/>
-                            </div>
+                              <div className="Qr-scanner">
+                                <QRCode
+                                  value={`https://master.dptkbhd952i0u.amplifyapp.com/qrcode?id=${peo.referenceId}`}
+                                  id={`canvas-${(canvasId = canvasId + 1)}`}
+                                />
+                              </div>
                               <p class="Booking-person-dec">
-                                Please have you photo ID present at the appointment
-                                as we will be required to take a photo of it. We
-                                will not be able to issue your test results without
-                                taking photo ID
+                                Please have you photo ID present at the
+                                appointment as we will be required to take a
+                                photo of it. We will not be able to issue your
+                                test results without taking photo ID
                               </p>
                             </div>
                           </div>

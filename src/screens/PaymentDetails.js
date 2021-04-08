@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { paymentDetails, postAllFormsData } from "../actions/form";
+import { emerchantPay, paymentDetails, postAllFormsData } from "../actions/form";
 import { errorNotification } from "../utils/notification";
 import { Link, Redirect } from "react-router-dom";
 import Countdown, { formatTimeDelta, zeroPad } from "react-countdown";
@@ -44,11 +44,13 @@ const PaymentDetails = ({ history }) => {
     }
     let paymentData = {
       cardNumber,
-
       cardHolderName,
       cvv,
     };
     paymentData.expiryDate = `${expiryMonth} / ${expiryYear}`;
+
+    dispatch(emerchantPay(paymentData))
+    return
     dispatch(paymentDetails(paymentData));
     let formData = {
       peoplesData,
@@ -264,8 +266,6 @@ const PaymentDetails = ({ history }) => {
                   {loading  ? <div class="spinner-border text-info" role="status">
                     <span class="sr-only">Loading...</span>
                   </div> : 'Complete Payment'}
-                  
-                  
                 </button>
               </div>
             </div>
