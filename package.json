@@ -20,6 +20,7 @@
     "final-form": "^4.20.2",
     "formik": "^2.2.6",
     "he": "^1.2.0",
+    "http-proxy-middleware": "^0.19.1",
     "jquery": "^3.6.0",
     "moment-range": "^4.0.2",
     "qrcode.react": "^1.0.1",
@@ -50,7 +51,7 @@
     "web-vitals": "^0.2.4",
     "yup": "^0.32.9"
   },
-  "proxy": "https://wpf.emerchantpay.net",
+  "proxy": "https://staging.wpf.emerchantpay.net",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

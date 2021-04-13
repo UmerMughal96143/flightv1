@@ -115,70 +115,14 @@ export const setStatusOfApplication = (number) => async (dispatch) => {
 export const emerchantPay = (data,history) => async (dispatch, getState) => {
   console.log("🚀 ~ file: form.js ~ line 114 ~ emerchantPay ~ data", data);
   try {
-    const config = {
-      headers: { "Content-Type": "text/xml" },
-    };
+    
+    const res = await axios.post(
+      `http://localhost:3008/flight/api/v1/form/pay`
+    );
+    console.log("🚀 ~ file: form.js ~ line 122 ~ emerchantPay ~ res", res)
 
-    let xmlData = `<wpf_payment>
-    <transaction_id>${Math.floor(Math.random() * 1000000000000)}</transaction_id>
-    <usage>usage</usage>
-    <description>description</description>
-    <notification_url>http://example.com/genesis.php</notification_url>
-    <return_success_url>http://localhost:3000/paymentdetails</return_success_url>
-    <return_failure_url>http://localhost:3000/paymentdetails</return_failure_url>
-    <return_cancel_url>http://localhost:3000/paymentdetails</return_cancel_url>
-    <amount>1000000</amount>
-    <currency>GBP</currency>
-    <customer_email>new_email@example.com</customer_email>
-    <customer_phone>1234567890</customer_phone>
-    <billing_address>
-    <first_name>FirstName</first_name>
-    <last_name>LastName</last_name>
-    <address1>14 HIGH ROAD</address1>
-    <zip_code>RM6 6PR</zip_code>
-    <city>LONDON</city>
-    <state/>
-    <country>GB</country>
-    </billing_address>
-    <transaction_types>
-    <transaction_type name="authorize3d"/>
-    </transaction_types>
-   </wpf_payment>`;
-
-    let result = await axios.post("/en/wpf", xmlData, {
-      headers: {
-        "Content-Type": "text/xml",
-      },
-      auth: {
-        username: "afec0aff1e20c8950568e32771412e9757640721",
-        password: "c23d19d0180b179d2d6d6509d1e8c0c03778902d",
-      },
-    });
-
-    var options = {
-      attributeNamePrefix: "@_",
-      attrNodeName: "attr", //default is 'false'
-      textNodeName: "#text",
-      ignoreAttributes: true,
-      ignoreNameSpace: false,
-      allowBooleanAttributes: false,
-      parseNodeValue: true,
-      parseAttributeValue: false,
-      trimValues: true,
-      cdataTagName: "__cdata", //default is 'false'
-      cdataPositionChar: "\\c",
-      parseTrueNumberOnly: false,
-      arrayMode: false, //"strict"
-      attrValueProcessor: (val, attrName) =>
-        he.decode(val, { isAttributeValue: true }), //default is a=>a
-      tagValueProcessor: (val, tagName) => he.decode(val), //default is a=>a
-      stopNodes: ["parse-me-as-string"],
-    };
-
-    var jsonObj = parser.parse(result.data, options, true);
-
-    if (jsonObj.wpf_payment.status !== "error") {
-      dispatch({ type: "Payment_API_SUCCESS", payload: jsonObj.wpf_payment });
+    if (res.data.payment.status !== "error") {
+      dispatch({ type: "Payment_API_SUCCESS", payload: res.data.payment});
       history.push('/qrcode')
     }
 
