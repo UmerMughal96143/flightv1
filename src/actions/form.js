@@ -145,7 +145,7 @@ export const emerchantPay = (data,history) => async (dispatch, getState) => {
     </transaction_types>
    </wpf_payment>`;
 
-    let result = await axios.post("/en/wpf", xmlData, {
+    let result = await axios.post("https://cors-anywhere.herokuapp.com/https://staging.wpf.emerchantpay.net/en/wpf", xmlData, {
       headers: {
         "Content-Type": "text/xml",
         "Access-Control-Allow-Origin": "*",
