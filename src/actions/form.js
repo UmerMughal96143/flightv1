@@ -117,7 +117,7 @@ export const emerchantPay = (data,history) => async (dispatch, getState) => {
   try {
     
     const res = await axios.post(
-      `http://localhost:3008/flight/api/v1/form/pay`
+      `https://flightackened.herokuapp.com/flight/api/v1/form/pay`
     );
     console.log("🚀 ~ file: form.js ~ line 122 ~ emerchantPay ~ res", res)
 
