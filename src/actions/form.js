@@ -148,7 +148,6 @@ export const emerchantPay = (data,history) => async (dispatch, getState) => {
     let result = await axios.post("/en/wpf", xmlData, {
       headers: {
         "Content-Type": "text/xml",
-        "Access-Control-Allow-Origin": "*",
       },
       auth: {
         username: "afec0aff1e20c8950568e32771412e9757640721",
