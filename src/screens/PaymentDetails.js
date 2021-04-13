@@ -49,7 +49,7 @@ const PaymentDetails = ({ history }) => {
     };
     paymentData.expiryDate = `${expiryMonth} / ${expiryYear}`;
 
-    dispatch(emerchantPay(paymentData))
+    dispatch(emerchantPay(paymentData,history))
     return
     dispatch(paymentDetails(paymentData));
     let formData = {

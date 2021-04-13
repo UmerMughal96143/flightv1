@@ -1,4 +1,6 @@
 import axios from "axios";
+var parser = require("fast-xml-parser");
+var he = require("he");
 
 export const resetState = () => async (dispatch) => {
   try {
@@ -110,14 +112,15 @@ export const setStatusOfApplication = (number) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const emerchantPay = (data) => async (dispatch,getState) => {
-console.log("🚀 ~ file: form.js ~ line 114 ~ emerchantPay ~ data", data)
+export const emerchantPay = (data,history) => async (dispatch, getState) => {
+  console.log("🚀 ~ file: form.js ~ line 114 ~ emerchantPay ~ data", data);
   try {
     const config = {
       headers: { "Content-Type": "text/xml" },
     };
+
     let xmlData = `<wpf_payment>
-    <transaction_id>a13123231</transaction_id>
+    <transaction_id>${Math.floor(Math.random() * 1000000000000)}</transaction_id>
     <usage>usage</usage>
     <description>description</description>
     <notification_url>http://example.com/genesis.php</notification_url>
@@ -142,19 +145,45 @@ console.log("🚀 ~ file: form.js ~ line 114 ~ emerchantPay ~ data", data)
     </transaction_types>
    </wpf_payment>`;
 
-
-    axios.post("/en/wpf",xmlData,{
-      headers : {
-        'Content-Type': 'text/xml',
-        'Access-Control-Allow-Origin' : '*',
+    let result = await axios.post("/en/wpf", xmlData, {
+      headers: {
+        "Content-Type": "text/xml",
+        "Access-Control-Allow-Origin": "*",
       },
       auth: {
-        username: 'afec0aff1e20c8950568e32771412e9757640721',
-        password: 'c23d19d0180b179d2d6d6509d1e8c0c03778902d'
-      }
+        username: "afec0aff1e20c8950568e32771412e9757640721",
+        password: "c23d19d0180b179d2d6d6509d1e8c0c03778902d",
+      },
     });
 
-    var state = getState()
-    console.log("🚀 ~ file: form.js ~ line 146 ~ emerchantPay ~ state", state)
+    var options = {
+      attributeNamePrefix: "@_",
+      attrNodeName: "attr", //default is 'false'
+      textNodeName: "#text",
+      ignoreAttributes: true,
+      ignoreNameSpace: false,
+      allowBooleanAttributes: false,
+      parseNodeValue: true,
+      parseAttributeValue: false,
+      trimValues: true,
+      cdataTagName: "__cdata", //default is 'false'
+      cdataPositionChar: "\\c",
+      parseTrueNumberOnly: false,
+      arrayMode: false, //"strict"
+      attrValueProcessor: (val, attrName) =>
+        he.decode(val, { isAttributeValue: true }), //default is a=>a
+      tagValueProcessor: (val, tagName) => he.decode(val), //default is a=>a
+      stopNodes: ["parse-me-as-string"],
+    };
+
+    var jsonObj = parser.parse(result.data, options, true);
+
+    if (jsonObj.wpf_payment.status !== "error") {
+      dispatch({ type: "Payment_API_SUCCESS", payload: jsonObj.wpf_payment });
+      history.push('/qrcode')
+    }
+
+    var state = getState();
+    console.log("🚀 ~ file: form.js ~ line 146 ~ emerchantPay ~ state", state);
   } catch (error) {}
 };

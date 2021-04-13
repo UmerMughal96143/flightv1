@@ -17,6 +17,7 @@ const iniitialState = {
   appointmentDate: localStorage.getItem("appointmentDate")
     ? localStorage.getItem("appointmentDate")
     : null,
+    paymentApiData : null
 };
 
 export const Form = (state = iniitialState, action) => {
@@ -149,6 +150,12 @@ export const Form = (state = iniitialState, action) => {
       totalPrice:  null,
       appointmentDate: null,
       
+      }
+
+      case 'Payment_API_SUCCESS' : 
+      return {
+        ...state,
+        paymentApiData : action.payload
       }
     default:
       return {
