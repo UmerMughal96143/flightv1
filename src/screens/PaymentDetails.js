@@ -5,6 +5,7 @@ import { errorNotification } from "../utils/notification";
 import { Link, Redirect } from "react-router-dom";
 import Countdown, { formatTimeDelta, zeroPad } from "react-countdown";
 
+
 let monthArray = [];
 for (let i = 1; i <= 12; i++) {
   monthArray.push(i);
@@ -35,31 +36,23 @@ const PaymentDetails = ({ history }) => {
   const onFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const {paymentApiData} = useSelector((s) => s.Form)
+  useEffect(() => {
+
+    dispatch(emerchantPay())
+  },[])
 
   const paymentHandler = (e) => {
-    e.preventDefault();
-    if (!cardNumber || !expiryMonth || !expiryYear || !cardHolderName || !cvv) {
-      errorNotification("Fill Required Fields");
-      return;
-    }
-    let paymentData = {
-      cardNumber,
-      cardHolderName,
-      cvv,
-    };
-    paymentData.expiryDate = `${expiryMonth} / ${expiryYear}`;
-
-    dispatch(emerchantPay(paymentData,history))
-    return
-    dispatch(paymentDetails(paymentData));
-    let formData = {
-      peoplesData,
-      data,
-      paymentData,
-      appointmentDate: appointmentDate,
-      amountPaid: totalPrice,
-    };
-    dispatch(postAllFormsData(formData, history));
+   
+    // dispatch(paymentDetails(paymentData));
+    // let formData = {
+    //   peoplesData,
+    //   data,
+    //   paymentData,
+    //   appointmentDate: appointmentDate,
+    //   amountPaid: totalPrice,
+    // };
+    // dispatch(postAllFormsData(formData, history));
     // history.push("/bookingcomplete");
   };
 
@@ -100,7 +93,7 @@ const PaymentDetails = ({ history }) => {
       <div className="wrapper">
         <div class="site-container paymentdetails-wrapper">
           <section>
-            <div class="Payment-Details-wrapper">
+            {/* <div class="Payment-Details-wrapper">
               <p class="Payment-Details-heading">
                 Your appointment has been temporarily secured for the following
                 <br />
@@ -166,7 +159,7 @@ const PaymentDetails = ({ history }) => {
                           />
                         </span> */}
                     {/* </div> */}
-                    <div className="form-row departure-date-box">
+                    {/* <div className="form-row departure-date-box">
                       <div className="form-group">
                         <div className="month-select">
                           <select
@@ -246,7 +239,8 @@ const PaymentDetails = ({ history }) => {
                   </div>
                 </form>
               </div>
-            </div>
+            </div> */}
+            <iframe src={paymentApiData?.redirect_url}></iframe>          
           </section>
         </div>
       </div>

@@ -17,14 +17,7 @@ const Qrcode = ({location}) => {
     },[])
     return (
         <div>
-            <iframe src={paymentApiData.redirect_url}></iframe>
-            <Iframe url={paymentApiData.redirect_url}
-        width="450px"
-        height="450px"
-        id="myId"
-        className="myClassname"
-        display="initial"
-        position="relative"/>
+          Qrcode scanned Successfully
         </div>
     )
 }
