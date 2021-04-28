@@ -1378,8 +1378,12 @@ body .appointment_summary_wrapper{
     color: gray !important;
 }
 /* Payment Form */
+body .paymentdetails-wrapper {
+    width: 1200px;
+}
 .paymentdetails-wrapper iframe{
 	height:1500px;
+    width: 100%;
 }
 .paymentdetails-wrapper iframe body {
  	 background-color: white;
