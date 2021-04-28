@@ -1374,9 +1374,110 @@ body .appointment_summary_wrapper{
     color: white !important;
     opacity: 1 !important;
 }
-
-
 .disable-color{
     color: gray !important;
 }
+/* Payment Form */
+.paymentdetails-wrapper iframe{
+	height:1500px;
+}
+.paymentdetails-wrapper iframe body {
+ 	 background-color: white;
+	 color: #0592a5;
+}
+.language-selector{
+	background: white;
+	top: 0px;
+}
+.payment-form, .payment-form-timeout {
+    background: white;
+    border: 1px solid #0592a5;
+    border-bottom: 0px;
+}
+.payment-description .amount {
+    background: white;
+    color: #0592a5;
+}
+.bank-codes, .payment-method-categories, .payment-types, .transaction-types {
+    background: white;
+    color: #0592a5;
+}
+.bank-codes input[type=radio]:checked+label, .payment-method-categories input[type=radio]:checked+label, .payment-types input[type=radio]:checked+label, .tokens-container input[type=radio]:checked+label, .transaction-types input[type=radio]:checked+label {
+    border: 3px solid #0592a5;
+}
+.bank-codes input[type=radio]:checked+label span, .payment-method-categories input[type=radio]:checked+label span, .payment-types input[type=radio]:checked+label span, .tokens-container input[type=radio]:checked+label span, .transaction-types input[type=radio]:checked+label span {
+    bottom: 5px;
+    color: #0592a5;
+}
+#transaction-types-form-container {
+    background: white;
+}
+.payment-form-timeout h4, .payment-form h4 {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.2em;
+    margin: 20px 0 0;
+    color: #0592a5;
+}
+.jp-card .jp-card-front, .jp-card .jp-card-back{
+    background: #8dccbe;
+}
+.fake-input, input {
+-moz-appearance: none;
+    -webkit-appearance: none;
+    background: white;
+    border: 1px solid #0592a5;
+    border-radius: 2px;
+    color: #0592a5;
+    font-weight: 300;
+    line-height: 21px;
+    padding: 10px;
+    width: 100%;
+}
+.fixed-expiration-date input, .wpf_form_expiration_date select {
+    float: left;
+    line-height: 21px;
+    width: 48%;
+    margin: 0 3px;
+}
+.payment-form-footer {
+    background: white;
+    border-radius: 0 0 2px 2px;
+    box-sizing: border-box;
+    float: right;
+    padding: 10px 50px;
+    position: relative;
+    width: 620px;
+    z-index: 2;
+    color: #0592a5;
+    border: 1px solid #0592a5;
+    border-top: 0px;
+}
+a.cancel, a.payment-description-link {
+    color: #0592a5;
+    font-size: 14px;
+    font-weight: unset;
+    text-decoration: underline;
+}
+.submit, .submit-later {
+    border: 0;
+    border-radius: 2px;
+    color: white;
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    height: 50px;
+    margin: 30px auto;
+    padding: 0;
+    position: relative;
+    transition: all .3s;
+    width: 60%;
+    z-index: 2;
+    background-image: linear-gradient(45deg, #018195, #7CC1B1);
+}
+.submit-later:hover, .submit:hover {
+    background-image: linear-gradient(45deg, #018195, #7CC1B1);
+    color: white;
+}
 
+/* Payment Form */
