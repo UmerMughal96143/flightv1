@@ -849,9 +849,6 @@ body .check-box-input {
 }
 /* Term and Condition */
 /* Payment Details */
-body .paymentdetails-wrapper{
-    margin-top: 35px;
-}
 .Payment-Details-heading{
     font-family: "Poppins-Regular";
     font-size: 16px;
@@ -1379,7 +1376,7 @@ body .appointment_summary_wrapper{
 }
 /* Payment Form */
 body .paymentdetails-wrapper {
-    width: 1200px;
+    max-width: 1200px;
 }
 .paymentdetails-wrapper iframe{
 	height:1500px;
