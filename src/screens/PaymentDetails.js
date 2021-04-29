@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { emerchantPay, paymentDetails, postAllFormsData } from "../actions/form";
+import {
+  emerchantPay,
+  paymentDetails,
+  postAllFormsData,
+} from "../actions/form";
 import { errorNotification } from "../utils/notification";
 import { Link, Redirect } from "react-router-dom";
 import Countdown, { formatTimeDelta, zeroPad } from "react-countdown";
-
 
 let monthArray = [];
 for (let i = 1; i <= 12; i++) {
@@ -19,31 +22,29 @@ for (let i = 1; i <= 12; i++) {
 
 const PaymentDetails = ({ history }) => {
   const dispatch = useDispatch();
-  const { peoplesData, data, totalPrice, appointmentDate ,loading} = useSelector(
-    (state) => state.Form
-  );
+  const {
+    peoplesData,
+    data,
+    totalPrice,
+    appointmentDate,
+    loading,
+  } = useSelector((state) => state.Form);
 
-
- 
-  const {paymentApiData} = useSelector((s) => s.Form)
+  const { paymentApiData } = useSelector((s) => s.Form);
   useEffect(() => {
-
     let formData = {
       amountPaid: totalPrice,
-    }
-    dispatch(emerchantPay(formData))
-  },[])
+      email: peoplesData[0].email,
+      mobile: peoplesData[0].mobile,
+    };
+    dispatch(emerchantPay(formData));
+  }, []);
 
-  const paymentHandler = (e) => {
-   
-   
-  };
+  const paymentHandler = (e) => {};
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
- 
 
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
@@ -107,7 +108,7 @@ const PaymentDetails = ({ history }) => {
                   <div className="form-group">
                     <p>Expiry Date*</p>
                     {/* <div class="expiration"> */}
-                    {/* <span class="expiration-input-wrapper">
+            {/* <span class="expiration-input-wrapper">
                           <input
                             type="text"
                             name="expiryMonth"
@@ -134,8 +135,8 @@ const PaymentDetails = ({ history }) => {
 
                           />
                         </span> */}
-                    {/* </div> */}
-                    {/* <div className="form-row departure-date-box">
+            {/* </div> */}
+            {/* <div className="form-row departure-date-box">
                       <div className="form-group">
                         <div className="month-select">
                           <select
@@ -216,7 +217,7 @@ const PaymentDetails = ({ history }) => {
                 </form>
               </div>
             </div> */}
-            <iframe src={paymentApiData?.redirect_url}></iframe>          
+            <iframe src={paymentApiData?.redirect_url}></iframe>
           </section>
         </div>
       </div>
@@ -233,9 +234,13 @@ const PaymentDetails = ({ history }) => {
               </div>
               <div class="accept-turm-condition col-md-8 col-6 footer-btn pl-0 m-auto">
                 <button class="Submit-to-checkout" onClick={paymentHandler}>
-                  {loading  ? <div class="spinner-border text-info" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div> : 'Complete Payment'}
+                  {loading ? (
+                    <div class="spinner-border text-info" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  ) : (
+                    "Complete Payment"
+                  )}
                 </button>
               </div>
             </div>
