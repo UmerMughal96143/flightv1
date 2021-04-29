@@ -6,7 +6,7 @@ import {
   postAllFormsData,
 } from "../actions/form";
 
-const PaymentSuccess = (history) => {
+const PaymentSuccess = ({history}) => {
   const {
     peoplesData,
     data,

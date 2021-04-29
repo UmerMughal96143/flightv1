@@ -121,7 +121,6 @@ export const emerchantPay = (data,history) => async (dispatch, getState) => {
 
     if (res.data.payment.status !== "error") {
       dispatch({ type: "Payment_API_SUCCESS", payload: res.data.payment});
-      history.push('/qrcode')
     }
 
     var state = getState();
