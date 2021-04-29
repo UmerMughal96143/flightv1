@@ -14,6 +14,8 @@ import TermsConditions from "./screens/TermsConditions";
 import TestLocation from "./screens/TestLocation";
 import UserDetail from "./screens/UserDetail";
 import Qrcode from "./screens/Qrcode";
+import PaymentSuccess from "./screens/PaymentSuccess";
+import PaymentFailure from "./screens/PaymentFailure";
 
 const App = () => {
   return (
@@ -33,6 +35,8 @@ const App = () => {
           <Route path="/testlocation" component={TestLocation} />
           <Route path="/userdetail" component={UserDetail} />
           <Route path="/qrcode" component={Qrcode} />
+          <Route path="/paymentsuccess" component={PaymentSuccess} />
+          <Route path="/paymentfail" component={PaymentFailure} />
         </Switch>
       </Router>
     </>

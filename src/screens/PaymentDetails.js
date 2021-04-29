@@ -22,20 +22,9 @@ const PaymentDetails = ({ history }) => {
   const { peoplesData, data, totalPrice, appointmentDate ,loading} = useSelector(
     (state) => state.Form
   );
-  const [formData, setFormData] = useState({
-    cardNumber: "",
-    cardHolderName: "",
-    cvv: "",
-  });
 
-  const [expiryYear, setExpiryYear] = useState("");
-  const [expiryMonth, setExpiryMonth] = useState("");
 
-  const { cardNumber, cardHolderName, cvv } = formData;
-
-  const onFormChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+ 
   const {paymentApiData} = useSelector((s) => s.Form)
   useEffect(() => {
 
@@ -44,28 +33,14 @@ const PaymentDetails = ({ history }) => {
 
   const paymentHandler = (e) => {
    
-    // dispatch(paymentDetails(paymentData));
-    // let formData = {
-    //   peoplesData,
-    //   data,
-    //   paymentData,
-    //   appointmentDate: appointmentDate,
-    //   amountPaid: totalPrice,
-    // };
-    // dispatch(postAllFormsData(formData, history));
-    // history.push("/bookingcomplete");
+   
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = mm + "/" + dd + "/" + yyyy;
+ 
 
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
@@ -80,8 +55,6 @@ const PaymentDetails = ({ history }) => {
       );
     }
   };
-
-  let appointmentDateFromDb = appointmentDate?.split(" ");
 
   return (
     <div>
