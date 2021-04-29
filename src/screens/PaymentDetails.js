@@ -37,7 +37,7 @@ const PaymentDetails = ({ history }) => {
       email: peoplesData[0].email,
       mobile: peoplesData[0].mobile,
     };
-    dispatch(emerchantPay(formData,history));
+    dispatch(emerchantPay(formData));
   }, []);
 
   const paymentHandler = (e) => {};

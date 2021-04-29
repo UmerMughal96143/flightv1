@@ -112,7 +112,7 @@ export const setStatusOfApplication = (number) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const emerchantPay = (data,history) => async (dispatch, getState) => {
+export const emerchantPay = (data) => async (dispatch, getState) => {
   try {
     
     const res = await axios.post(
