@@ -28,7 +28,10 @@ const PaymentDetails = ({ history }) => {
   const {paymentApiData} = useSelector((s) => s.Form)
   useEffect(() => {
 
-    dispatch(emerchantPay())
+    let formData = {
+      amountPaid: totalPrice,
+    }
+    dispatch(emerchantPay(formData))
   },[])
 
   const paymentHandler = (e) => {
