@@ -281,9 +281,10 @@ const PeopleBooking = (props) => {
                 {peoplesData[0] && !editMan && (
                   <div class="people-booking-copy-dedail-person">
                     <div className="site-container">
-                      <label>
+                      <label className="person-person">
                         <input
                           type="checkbox"
+                          className="form-check-input"
                           onChange={(e) => setCheckBoxStatus(e.target.checked)}
                           checked={checkboxStatus}
                         />
