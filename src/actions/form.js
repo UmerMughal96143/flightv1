@@ -116,9 +116,8 @@ export const stripePayment = (data) => async (dispatch, getState) => {
   try {
     
     const res = await axios.post(
-      `http://localhost:3008/flight/api/v1/pay`,data
+      `https://flightackened.herokuapp.com/flight/api/v1/pay`,data
     );
-    console.log("🚀 ~ file: form.js ~ line 121 ~ stripePayment ~ res", res)
 
     // if (res.data.payment.status !== "error") {
     //   dispatch({ type: "Payment_API_SUCCESS", payload: res.data.payment});
