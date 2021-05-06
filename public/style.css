@@ -588,6 +588,9 @@ form .form-group .col-md-12{
 }
 /* Flight Time */
 /* people-booking */
+.person-person{
+    margin-left: 20px;
+}
 .people-booking-copy-dedail-person h3{
     font-family: "Poppins-Bold";
     font-size: 16px;
