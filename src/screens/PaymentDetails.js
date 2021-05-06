@@ -239,7 +239,7 @@ const PaymentDetails = ({ history }) => {
                       <span class="sr-only">Loading...</span>
                     </div>
                   ) : (
-                    "Complete Payment"
+                    "  "
                   )}
                 </button>
               </div>
