@@ -20,7 +20,6 @@ const BookingCOmplete = () => {
 
   let base64Images = [];
   const converBase64 = () => {
-    console.log("convertBase64 Happens");
     for (var i = 1; i <= canvasId; i++) {
       var canvas = document.getElementById(`canvas-${i}`);
       var dataURL = canvas.toDataURL();

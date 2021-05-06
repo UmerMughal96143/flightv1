@@ -23,7 +23,6 @@ const iniitialState = {
 export const Form = (state = iniitialState, action) => {
   switch (action.type) {
     case "BOOK_COVID_TEST":
-      console.log(action.payload);
       let arr = [];
       arr.push(action.payload);
       localStorage.setItem("form", JSON.stringify(arr));

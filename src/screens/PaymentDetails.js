@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { postAllFormsData } from "../actions/form";
+
 import Stripe from "../components/Stripe";
 
 let monthArray = [];
@@ -24,7 +26,17 @@ const PaymentDetails = ({ history }) => {
   } = useSelector((state) => state.Form);
 
   const { paymentApiData } = useSelector((s) => s.Form);
- 
+  useEffect(() => {
+    if (paymentApiData?.id) {
+      let formData = {
+        peoplesData,
+        data,
+        appointmentDate: appointmentDate,
+        amountPaid: totalPrice,
+      };
+      dispatch(postAllFormsData(formData, history));
+    }
+  }, []);
 
   const paymentHandler = (e) => {};
 
@@ -32,11 +44,9 @@ const PaymentDetails = ({ history }) => {
     window.scrollTo(0, 0);
   }, []);
 
-
-
   return (
     <div>
-      <Stripe/>
+      <Stripe />
     </div>
   );
 };

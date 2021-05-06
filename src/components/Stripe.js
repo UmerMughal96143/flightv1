@@ -3,8 +3,9 @@ import {loadStripe} from '@stripe/stripe-js';
 import {CardElement, Elements, useElements, useStripe} from '@stripe/react-stripe-js';
 import { useDispatch, useSelector } from 'react-redux';
 import {stripePayment} from '../actions/form'
+import { withRouter } from 'react-router';
     
-const Stripe = () => {
+const Stripe = withRouter(({history}) => {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch()
@@ -39,7 +40,7 @@ const Stripe = () => {
           id,
           totalPrice
       }
-      dispatch(stripePayment(data))
+      dispatch(stripePayment(data,history))
       
     }
   };
@@ -67,7 +68,7 @@ const Stripe = () => {
       </button>
     </form>
   );
-};
+});
 
 
 export default Stripe

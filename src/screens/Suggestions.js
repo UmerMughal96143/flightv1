@@ -33,7 +33,6 @@ const Suggestions = ({ history }) => {
   );
 
   const [startDate, setStartDate] = useState("");
-  console.log("🚀 ~ file: Suggestions.js ~ line 36 ~ Suggestions ~ startDate", startDate)
 
   useEffect(() => {
 
@@ -157,7 +156,6 @@ for(let i=1; i <71; i++){
     if (isTimeBt12pm12am) {
       const getdate = () => {
         var date = new Date(startDate);
-        console.log(startDate,"asdasdasd")
         var newdate = new Date(date);
 
         newdate.setDate(newdate.getDate() - 2);
