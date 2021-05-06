@@ -112,18 +112,19 @@ export const setStatusOfApplication = (number) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const emerchantPay = (data) => async (dispatch, getState) => {
+export const stripePayment = (data) => async (dispatch, getState) => {
   try {
     
     const res = await axios.post(
-      `https://flightackened.herokuapp.com/flight/api/v1/form/pay`,data
+      `http://localhost:3008/flight/api/v1/pay`,data
     );
+    console.log("🚀 ~ file: form.js ~ line 121 ~ stripePayment ~ res", res)
 
-    if (res.data.payment.status !== "error") {
-      dispatch({ type: "Payment_API_SUCCESS", payload: res.data.payment});
-    }
+    // if (res.data.payment.status !== "error") {
+    //   dispatch({ type: "Payment_API_SUCCESS", payload: res.data.payment});
+    // }
 
-    var state = getState();
-    console.log("🚀 ~ file: form.js ~ line 146 ~ emerchantPay ~ state", state);
+    // var state = getState();
+    // console.log("🚀 ~ file: form.js ~ line 146 ~ emerchantPay ~ state", state);
   } catch (error) {}
 };

@@ -16,29 +16,36 @@ import UserDetail from "./screens/UserDetail";
 import Qrcode from "./screens/Qrcode";
 import PaymentSuccess from "./screens/PaymentSuccess";
 import PaymentFailure from "./screens/PaymentFailure";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 const App = () => {
+  const stripePromise = loadStripe(
+    "pk_test_51IoCHMIvpnJMlGBHevlzUYO0InHZllF897pAB8fZjTw7o2ahVokoqlk7tVopEHiBVaB57dGEZD7mw5hg9qUEIaFz00bcbU3YC0"
+  );
   return (
     <>
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route path="/appointmentsummary" component={AppointmentSummary} />
-          <Route path="/bookingcomplete" component={BookingCOmplete} />
-          <Route path="/flighttime" component={FlightTime} />
-          <Route path="/appointment" component={Appointment} />
-          <Route path="/paymentdetails" component={PaymentDetails} />
-          <Route path="/peoplebooking" component={PeopleBooking} />
-          <Route path="/suggestions" component={Suggestions} />
-          <Route path="/termsconditions" component={TermsConditions} />
-          <Route path="/testlocation" component={TestLocation} />
-          <Route path="/userdetail" component={UserDetail} />
-          <Route path="/qrcode" component={Qrcode} />
-          <Route path="/paymentsuccess" component={PaymentSuccess} />
-          <Route path="/paymentfail" component={PaymentFailure} />
-        </Switch>
-      </Router>
+      <Elements stripe={stripePromise}>
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route path="/appointmentsummary" component={AppointmentSummary} />
+            <Route path="/bookingcomplete" component={BookingCOmplete} />
+            <Route path="/flighttime" component={FlightTime} />
+            <Route path="/appointment" component={Appointment} />
+            <Route path="/paymentdetails" component={PaymentDetails} />
+            <Route path="/peoplebooking" component={PeopleBooking} />
+            <Route path="/suggestions" component={Suggestions} />
+            <Route path="/termsconditions" component={TermsConditions} />
+            <Route path="/testlocation" component={TestLocation} />
+            <Route path="/userdetail" component={UserDetail} />
+            <Route path="/qrcode" component={Qrcode} />
+            <Route path="/paymentsuccess" component={PaymentSuccess} />
+            <Route path="/paymentfail" component={PaymentFailure} />
+          </Switch>
+        </Router>
+      </Elements>
     </>
   );
 };
