@@ -18,7 +18,7 @@ const Stripe = withRouter(({ history }) => {
   const elements = useElements();
   const dispatch = useDispatch();
   const { totalPrice } = useSelector((s) => s.Form);
-  const [loader,setloader] = useState(false)
+  const [loader, setloader] = useState(false);
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
@@ -33,7 +33,7 @@ const Stripe = withRouter(({ history }) => {
     // to find your CardElement because there can only ever be one of
     // each type of element.
     const cardElement = elements.getElement(CardElement);
-    setloader(true)
+    setloader(true);
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -42,6 +42,7 @@ const Stripe = withRouter(({ history }) => {
 
     if (error) {
       console.log("[error]", error);
+      setloader(false);
     } else {
       const { id } = paymentMethod;
       const data = {
