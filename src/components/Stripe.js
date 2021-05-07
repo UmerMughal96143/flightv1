@@ -1,16 +1,24 @@
-import React from 'react';
-import {loadStripe} from '@stripe/stripe-js';
-import {CardElement, Elements, useElements, useStripe} from '@stripe/react-stripe-js';
-import { useDispatch, useSelector } from 'react-redux';
-import {stripePayment} from '../actions/form'
-import { withRouter } from 'react-router';
-    
-const Stripe = withRouter(({history}) => {
+import React, { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { useDispatch, useSelector } from "react-redux";
+import { stripePayment } from "../actions/form";
+import { withRouter } from "react-router";
+
+import "./style.css";
+import { Link } from "react-router-dom";
+
+const Stripe = withRouter(({ history }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const dispatch = useDispatch()
-  const {totalPrice} = useSelector((s) => s.Form)
-
+  const dispatch = useDispatch();
+  const { totalPrice } = useSelector((s) => s.Form);
+  const [loader,setloader] = useState(false)
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
@@ -25,50 +33,74 @@ const Stripe = withRouter(({history}) => {
     // to find your CardElement because there can only ever be one of
     // each type of element.
     const cardElement = elements.getElement(CardElement);
-
+    setloader(true)
     // Use your card Element with other Stripe.js APIs
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: 'card',
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
       card: cardElement,
     });
 
     if (error) {
-      console.log('[error]', error);
+      console.log("[error]", error);
     } else {
-      const {id} = paymentMethod;
+      const { id } = paymentMethod;
       const data = {
-          id,
-          totalPrice
-      }
-      dispatch(stripePayment(data,history))
-      
+        id,
+        totalPrice,
+      };
+      dispatch(stripePayment(data, history));
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: '16px',
-              color: '#424770',
-              '::placeholder': {
-                color: '#aab7c4',
+    <>
+      <div className="stripe-form">
+        <form className="stripe-main-form" onSubmit={handleSubmit}>
+          <CardElement
+            className="payment-form"
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
+                },
               },
-            },
-            invalid: {
-              color: '#9e2146',
-            },
-          },
-        }}
-      />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
-    </form>
+            }}
+          />
+          <footer>
+            <div className="stripe-form-buttons">
+              <div className="accept-turm-condition-stripe">
+                {loader ? (
+                  <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                ) : (
+                  <button
+                    className="Complete-Button"
+                    type="submit"
+                    disabled={!stripe}
+                  >
+                    Complete Payment
+                  </button>
+                )}
+              </div>
+              <div className="back-btn-div-stripe">
+                <Link to="/appointmentsummary">
+                  <button>Back</button>
+                </Link>
+              </div>
+            </div>
+          </footer>
+        </form>
+      </div>
+    </>
   );
 });
 
-
-export default Stripe
+export default Stripe;
