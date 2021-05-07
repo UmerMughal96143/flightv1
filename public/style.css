@@ -1484,4 +1484,8 @@ a.cancel, a.payment-description-link {
     color: white;
 }
 
+.form-check-label{
+    color: black;
+}
+
 /* Payment Form */

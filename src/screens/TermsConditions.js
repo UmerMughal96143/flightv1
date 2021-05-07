@@ -50,7 +50,7 @@ const TermsConditions = ({history}) => {
               <div class="Terms-Conditions-points">
                 <p>
                   <i class="fas fa-eye"></i>I have provided accurate information
-                  in this booking for every person in my party,and understand that
+                  in this booking for every person in my party, and understand that
                   inaccurate information will invalidate any Fit to Fly
                   certificate.
                 </p>
