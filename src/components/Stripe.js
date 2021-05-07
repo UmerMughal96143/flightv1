@@ -60,6 +60,7 @@ const Stripe = withRouter(({ history }) => {
           <CardElement
             className="payment-form"
             options={{
+              hidePostalCode: true,
               style: {
                 base: {
                   fontSize: "16px",

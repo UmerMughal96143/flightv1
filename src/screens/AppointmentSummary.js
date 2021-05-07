@@ -13,7 +13,9 @@ import SecondModal from "../components/SecondModal";
 import { date } from "yup/lib/locale";
 
 const AppointmentSummary = ({ history }) => {
-  const { peoplesData, data ,appointmentDate} = useSelector((state) => state.Form);
+  const { peoplesData, data, appointmentDate } = useSelector(
+    (state) => state.Form
+  );
   const [condition1, setCondition1] = useState(false);
   const [condition2, setCondition2] = useState(false);
   const [modal, setModal] = useState(false);
@@ -185,8 +187,7 @@ const AppointmentSummary = ({ history }) => {
         <div class="breaking-news-box">
           <h4 class="breaking-news">PCR Fit to Fly</h4>
           <p class="breaking-news-dec">
-            You are booking for {peoplesData?.length} people{" "}
-            <br />
+            You are booking for {peoplesData?.length} people <br />
             between {appointmentDate}
           </p>
         </div>
@@ -205,7 +206,9 @@ const AppointmentSummary = ({ history }) => {
                   return (
                     <div class="person-details">
                       <div class="person-info">
-                        <h3 class="person-heading">Patient Name : {data.firstName}{" "} {data.lastName} </h3>
+                        <h3 class="person-heading">
+                          Patient Name : {data.firstName} {data.lastName}{" "}
+                        </h3>
                         <div class="Person-details-name">
                           <p>
                             {data.firstName} {data.lastName} - PCR Fit to Fly
@@ -346,10 +349,10 @@ const AppointmentSummary = ({ history }) => {
                 </button>
               </div>
               <div class="back-btn-div col-md-4 col-6 footer-btn pr-0 m-auto">
-                <Link to='/termsconditions'>
-                <button type="submit" class="Back-btn">
-                  Back
-                </button>
+                <Link to="/termsconditions">
+                  <button type="submit" class="Back-btn">
+                    Back
+                  </button>
                 </Link>
               </div>
             </div>
