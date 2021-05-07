@@ -346,9 +346,11 @@ const AppointmentSummary = ({ history }) => {
                 </button>
               </div>
               <div class="back-btn-div col-md-4 col-6 footer-btn pr-0 m-auto">
+                <Link to='/termsconditions'>
                 <button type="submit" class="Back-btn">
                   Back
                 </button>
+                </Link>
               </div>
             </div>
           </div>

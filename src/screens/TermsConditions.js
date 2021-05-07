@@ -108,9 +108,11 @@ const TermsConditions = ({history}) => {
                     </button>
                 </div>
                 <div class="back-btn-div col-md-3 col-12 pr-0">
+                  <Link to='/peoplebooking'>
                   <button type="submit" class="Back-btn terms">
                     Back
                   </button>
+                  </Link>
                 </div>
                 </div>
               </div>
