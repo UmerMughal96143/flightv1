@@ -102,7 +102,7 @@ const PaymentDetails = ({ history }) => {
           </section>
         </div>
       </div>
-      <Stripe />
+      <Stripe pageType="myFlight"/>
     </div>
   );
 };

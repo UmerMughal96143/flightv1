@@ -18,11 +18,10 @@ import PaymentSuccess from "./screens/PaymentSuccess";
 import PaymentFailure from "./screens/PaymentFailure";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import PaymentAtechy from "./screens/atechy/PaymentAtechy";
 
 const App = () => {
-  const stripePromise = loadStripe(
-    "pk_test_51IoCHMIvpnJMlGBHevlzUYO0InHZllF897pAB8fZjTw7o2ahVokoqlk7tVopEHiBVaB57dGEZD7mw5hg9qUEIaFz00bcbU3YC0"
-  );
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
   return (
     <>
       <Elements stripe={stripePromise}>
@@ -43,6 +42,7 @@ const App = () => {
             <Route path="/qrcode" component={Qrcode} />
             <Route path="/paymentsuccess" component={PaymentSuccess} />
             <Route path="/paymentfail" component={PaymentFailure} />
+            <Route path="/atechypay" component={PaymentAtechy} />
           </Switch>
         </Router>
       </Elements>

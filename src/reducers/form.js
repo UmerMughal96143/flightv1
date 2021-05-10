@@ -17,7 +17,9 @@ const iniitialState = {
   appointmentDate: localStorage.getItem("appointmentDate")
     ? localStorage.getItem("appointmentDate")
     : null,
-    paymentApiData : null
+  paymentApiData: null,
+  loading: false,
+  atechyPaymentStatus: false,
 };
 
 export const Form = (state = iniitialState, action) => {
@@ -58,11 +60,16 @@ export const Form = (state = iniitialState, action) => {
         ...state,
       };
     case "PEOPLE_BOOKING":
-      let dob = action.payload.day + " - " + action.payload.month + " - " +  action.payload.year 
-      delete action.payload.day ;
-      delete action.payload.month ;
-      delete action.payload.year ;
-      action.payload.dob = dob
+      let dob =
+        action.payload.day +
+        " - " +
+        action.payload.month +
+        " - " +
+        action.payload.year;
+      delete action.payload.day;
+      delete action.payload.month;
+      delete action.payload.year;
+      action.payload.dob = dob;
       localStorage.setItem(
         "peoples",
         JSON.stringify([...state.peoplesData, action.payload])
@@ -118,13 +125,13 @@ export const Form = (state = iniitialState, action) => {
       return {
         ...state,
         postedData: action.payload,
-        loading : false
+        loading: false,
       };
-      case 'SET_LOADING' : 
-      return{
+    case "SET_LOADING":
+      return {
         ...state,
-        loading : true
-      }
+        loading: true,
+      };
     case "TOTAL_PRICE":
       localStorage.setItem("price", action.payload);
       return {
@@ -138,24 +145,35 @@ export const Form = (state = iniitialState, action) => {
         appointmentDate: action.payload,
       };
 
-      case "RESET_STATE" : 
-      return{
+    case "RESET_STATE":
+      return {
         data: [],
-      loading: false,
-      peoplesData:  [],
-      editMan: null,
-      postedData: null,
-      personForRemove: null,
-      totalPrice:  null,
-      appointmentDate: null,
-      
-      }
+        loading: false,
+        peoplesData: [],
+        editMan: null,
+        postedData: null,
+        personForRemove: null,
+        totalPrice: null,
+        appointmentDate: null,
+      };
 
-      case 'Payment_API_SUCCESS' : 
+    case "Payment_API_SUCCESS":
       return {
         ...state,
-        paymentApiData : action.payload
-      }
+        paymentApiData: action.payload,
+      };
+
+    case "SET_PAYMENT_LOADING":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "ATECHY_PAYMENT_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        atechyPaymentStatus: true,
+      };
     default:
       return {
         ...state,

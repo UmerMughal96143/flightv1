@@ -112,19 +112,36 @@ export const setStatusOfApplication = (number) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const stripePayment = (data,history) => async (dispatch, getState) => {
+export const stripePayment = (data, history) => async (dispatch, getState) => {
   try {
-    
+    dispatch({ type: "SET_PAYMENT_LOADING" });
+
     const res = await axios.post(
-      `https://flightackened.herokuapp.com/flight/api/v1/pay`,data
+      `https://flightackened.herokuapp.com/flight/api/v1/pay`,
+      data
     );
-    console.log("🚀 ~ file: form.js ~ line 121 ~ stripePayment ~ res", res)
 
     if (res.status == 200) {
-      dispatch({ type: "Payment_API_SUCCESS", payload: res.data.response});
-      history.push('/paymentsuccess')
+      dispatch({ type: "Payment_API_SUCCESS", payload: res.data.response });
+      history.push("/paymentsuccess");
     }
-
-  
   } catch (error) {}
+};
+
+export const atechyPayment = (data, history) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: "SET_PAYMENT_LOADING" });
+
+    const res = await axios.post(
+      `https://flightackened.herokuapp.com/flight/api/v1/atechypay`,
+      data
+    );
+
+    if (res.status == 200) {
+      dispatch({ type: "ATECHY_PAYMENT_SUCCESS" });
+    }
+  } catch (error) {
+    console.log("🚀 ~ file: form.js ~ line 152 ~ atechyPayment ~ error", error);
+    alert("Payment Fail");
+  }
 };

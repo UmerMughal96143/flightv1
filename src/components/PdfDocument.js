@@ -9,7 +9,6 @@ import {
   Image,
   Canvas,
 } from "@react-pdf/renderer";
-import QRCode from "qrcode.react";
 
 const styles = StyleSheet.create({
   page: {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   CardElement,
@@ -7,19 +7,25 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { stripePayment } from "../actions/form";
+import { atechyPayment, stripePayment } from "../actions/form";
 import { withRouter } from "react-router";
 
 import "./style.css";
 import { Link } from "react-router-dom";
 
-const Stripe = withRouter(({ history }) => {
+const Stripe = withRouter(({ history, pageType }) => {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
-  const { totalPrice } = useSelector((s) => s.Form);
+  const {
+    totalPrice,
+    paymentApiData,
+    loading,
+    atechyPaymentStatus,
+  } = useSelector((s) => s.Form);
   const [loader, setloader] = useState(false);
-  const handleSubmit = async (event) => {
+
+  const handleSubmit = async (event, pageType) => {
     // Block native form submission.
     event.preventDefault();
 
@@ -43,20 +49,36 @@ const Stripe = withRouter(({ history }) => {
     if (error) {
       console.log("[error]", error);
       setloader(false);
-    } else {
+    } else if (pageType == "myFlight") {
       const { id } = paymentMethod;
       const data = {
         id,
         totalPrice,
       };
       dispatch(stripePayment(data, history));
+    } else {
+      const { id } = paymentMethod;
+      let data = {
+        id,
+      };
+      dispatch(atechyPayment(data));
+      //Atechy COde
     }
   };
+
+  useEffect(() => {
+
+    if(atechyPaymentStatus){
+      setloader(false)
+      alert('Success')
+    }
+
+  },[atechyPaymentStatus])
 
   return (
     <>
       <div className="stripe-form">
-        <form className="stripe-main-form" onSubmit={handleSubmit}>
+        <form className="stripe-main-form">
           <CardElement
             className="payment-form"
             options={{
@@ -78,7 +100,22 @@ const Stripe = withRouter(({ history }) => {
           <footer>
             <div className="stripe-form-buttons">
               <div className="accept-turm-condition-stripe">
-                {loader ? (
+                {pageType == "Atechy" ? (
+                  loading || loader ? (
+                    <div class="spinner-border text-info" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  ) : (
+                    <button
+                      className="Complete-Button"
+                      type="submit"
+                      disabled={!stripe}
+                      onClick={(e) => handleSubmit(e, pageType)}
+                    >
+                      Artechy Complete Payment
+                    </button>
+                  )
+                ) : loader ? (
                   <div class="spinner-border text-info" role="status">
                     <span class="sr-only">Loading...</span>
                   </div>
@@ -87,16 +124,49 @@ const Stripe = withRouter(({ history }) => {
                     className="Complete-Button"
                     type="submit"
                     disabled={!stripe}
+                    onClick={(e) => handleSubmit(e, pageType)}
                   >
                     Complete Payment
                   </button>
                 )}
+                {/* {loading ? (
+                  <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                ) : (
+                  <button
+                    className="Complete-Button"
+                    type="submit"
+                    disabled={!stripe}
+                    onClick={(e) => handleSubmit(e, pageType)}
+                  >
+                    Complete Payment
+                  </button>
+                )} */}
+
+                {/* {loader ? (
+                  <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                ) : (
+                  <button
+                    className="Complete-Button"
+                    type="submit"
+                    disabled={!stripe}
+                    onClick={(e) => handleSubmit(e, pageType)}
+                  >
+                    Complete Payment
+                  </button>
+                )} */}
               </div>
-              <div className="back-btn-div-stripe">
-                <Link to="/appointmentsummary">
-                  <button>Back</button>
-                </Link>
-              </div>
+
+              {pageType == "myFlight" && (
+                <div className="back-btn-div-stripe">
+                  <Link to="/appointmentsummary">
+                    <button>Back</button>
+                  </Link>
+                </div>
+              )}
             </div>
           </footer>
         </form>
