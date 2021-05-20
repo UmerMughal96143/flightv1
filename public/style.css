@@ -1487,5 +1487,60 @@ a.cancel, a.payment-description-link {
 .form-check-label{
     color: black;
 }
-
 /* Payment Form */
+/* Atechy */
+.Atechy-heading-box{
+    background-color: #0071BC;
+    padding: 25px 0px;
+    color: white;
+    text-align: center;
+}
+.Atechy-heading-box h3 {
+    margin-bottom: 0px;
+    font-family: "Poppins-Bold";
+    font-size: 18px;
+}
+.Atechy-Payment-box{
+    margin: 40px 0px 30px 0px;
+    text-align: center;
+}
+.atechypay-navbar{
+    height: 45px;
+}
+.atechypay-navbar a{
+    height: 100%;
+}
+.atechypay-logo{
+    height: 100%;
+    width: 100%;
+}
+.Atechypay{
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    /* padding: 10px 0px; */
+    background-color: #0071BC;
+    margin: 9px 0px;
+    text-transform: capitalize;
+    font-weight: inherit;
+    padding: 10px 0px;
+}
+.Atechy-payment-heading{
+    color: #0071BC;  
+}
+.atechy-pay .StripeElement, .StripeElementIdeal {
+    display: block;
+    border: 1px solid #0071BC !important;
+    margin: 10px 0 20px 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 14px;
+    box-shadow: rgb(50 50 93 / 15%) 0px 1px 3px, rgb(0 0 0 / 2%) 0px 1px 0px;
+    border-radius: 4px;
+    background: white;
+}
+.Atechy-Payment-box .Atechy-payment-heading span{
+    color: black;
+}
+/* Atechy */

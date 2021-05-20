@@ -78,7 +78,7 @@ const Stripe = withRouter(({ history, pageType }) => {
   return (
     <>
       <div className="stripe-form">
-        <form className="stripe-main-form">
+        <form className="stripe-main-form atechy-pay">
           <CardElement
             className="payment-form"
             options={{
@@ -107,12 +107,12 @@ const Stripe = withRouter(({ history, pageType }) => {
                     </div>
                   ) : (
                     <button
-                      className="Complete-Button"
+                      className="Atechypay"
                       type="submit"
                       disabled={!stripe}
                       onClick={(e) => handleSubmit(e, pageType)}
                     >
-                      Artechy Complete Payment
+                      Atechy Complete Payment
                     </button>
                   )
                 ) : loader ? (
