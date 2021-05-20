@@ -20,6 +20,8 @@ const iniitialState = {
   paymentApiData: null,
   loading: false,
   atechyPaymentStatus: false,
+  atechySuccessUrl: null,
+  atechyFailUrl: null,
 };
 
 export const Form = (state = iniitialState, action) => {
@@ -173,6 +175,18 @@ export const Form = (state = iniitialState, action) => {
         ...state,
         loading: false,
         atechyPaymentStatus: true,
+        atechySuccessUrl:
+          "https://atechyhealth.com/sdfbhytfrcvbghtfrd/deposit-success/",
+        atechyFailUrl: null,
+      };
+    case "ATECHY_PAYMENT_FAIL":
+      return {
+        ...state,
+        loading: false,
+        atechyPaymentStatus: false,
+        atechyFailUrl:
+          "https://atechyhealth.com/sdfbhytfrcvbghtfrd/deposit-failed/",
+        atechySuccessUrl: null,
       };
     default:
       return {

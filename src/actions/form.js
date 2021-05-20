@@ -133,7 +133,7 @@ export const atechyPayment = (data, history) => async (dispatch, getState) => {
     dispatch({ type: "SET_PAYMENT_LOADING" });
 
     const res = await axios.post(
-      `https://flightackened.herokuapp.com/flight/api/v1/atechypay`,
+      `http://localhost:3008/flight/api/v1/atechypay`,
       data
     );
 
@@ -142,6 +142,6 @@ export const atechyPayment = (data, history) => async (dispatch, getState) => {
     }
   } catch (error) {
     console.log("🚀 ~ file: form.js ~ line 152 ~ atechyPayment ~ error", error);
-    alert("Payment Fail");
+    dispatch({ type: "ATECHY_PAYMENT_FAIL" });
   }
 };

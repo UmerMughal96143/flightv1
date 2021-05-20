@@ -22,6 +22,8 @@ const Stripe = withRouter(({ history, pageType }) => {
     paymentApiData,
     loading,
     atechyPaymentStatus,
+    atechySuccessUrl,
+    atechyFailUrl,
   } = useSelector((s) => s.Form);
   const [loader, setloader] = useState(false);
 
@@ -67,13 +69,12 @@ const Stripe = withRouter(({ history, pageType }) => {
   };
 
   useEffect(() => {
-
-    if(atechyPaymentStatus){
-      setloader(false)
-      alert('Success')
+    if (atechySuccessUrl) {
+      setloader(false);
+      history.push('/')
+    } else {
     }
-
-  },[atechyPaymentStatus])
+  }, [atechySuccessUrl]);
 
   return (
     <>
