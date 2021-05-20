@@ -13,7 +13,7 @@ import { withRouter } from "react-router";
 import "./style.css";
 import { Link } from "react-router-dom";
 
-const Stripe = withRouter(({ history, pageType }) => {
+const Stripe = withRouter(({ history, pageType, reference_id }) => {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
@@ -62,6 +62,7 @@ const Stripe = withRouter(({ history, pageType }) => {
       const { id } = paymentMethod;
       let data = {
         id,
+        reference_id,
       };
       dispatch(atechyPayment(data));
       //Atechy COde
@@ -114,7 +115,7 @@ const Stripe = withRouter(({ history, pageType }) => {
                       disabled={!stripe}
                       onClick={(e) => handleSubmit(e, pageType)}
                     >
-                      Atechy Complete Payment
+                      Complete Payment
                     </button>
                   )
                 ) : loader ? (
