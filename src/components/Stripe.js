@@ -71,10 +71,11 @@ const Stripe = withRouter(({ history, pageType }) => {
   useEffect(() => {
     if (atechySuccessUrl) {
       setloader(false);
-      history.push('/')
-    } else {
+      window.open(atechySuccessUrl, "_self");
+    } else if (atechyFailUrl) {
+      window.open(atechyFailUrl, "_self");
     }
-  }, [atechySuccessUrl]);
+  }, [atechySuccessUrl, atechyFailUrl]);
 
   return (
     <>

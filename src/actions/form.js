@@ -133,7 +133,7 @@ export const atechyPayment = (data, history) => async (dispatch, getState) => {
     dispatch({ type: "SET_PAYMENT_LOADING" });
 
     const res = await axios.post(
-      `http://localhost:3008/flight/api/v1/atechypay`,
+      `https://flightackened.herokuapp.com/flight/api/v1/atechypay`,
       data
     );
 
