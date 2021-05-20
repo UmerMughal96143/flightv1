@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 const Header = ({ history }) => {
-  return (
+    return (
     <>
       {history.location.pathname == "/" ? (
         <header>
@@ -22,7 +22,19 @@ const Header = ({ history }) => {
             </Link>
           </nav>
         </header>
-      ) : (
+      ) : history.location.pathname == "/atechypay" ?  (
+        <header>
+          <nav className="atechypay-navbar main-navbar-1 navbar navbar-expand-lg navbar-light position-relative">
+            <Link
+              to="/"
+              className="navbar-brand main-logo white-logo"
+              onClick={() => window.location.reload()}
+            >
+              <img class="atechypay-logo" src="asstes/image/atechy-logo.svg" alt="" />
+            </Link>
+          </nav>
+        </header>
+      ): (
         <header>
           <nav className="main-navbar-1 navbar navbar-expand-lg navbar-light position-relative">
             <Link
@@ -31,6 +43,7 @@ const Header = ({ history }) => {
               onClick={() => window.location.reload()}
             >
               <img class="dark-logo" src="asstes/image/dark-logo.svg" alt="" />
+              <img class="dark-logo" src="asstes/image/atechy-logo.svg" alt="" />
             </Link>
           </nav>
         </header>
